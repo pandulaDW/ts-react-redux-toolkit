@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { TextInput } from "evergreen-ui";
 
 import { RootState } from "../redux/_store";
 import { increment, decrement, incrementByAmount } from "../redux/counter";
@@ -29,7 +30,7 @@ const Counter = () => {
           Increment
           <br /> Amount
         </p>
-        <input type="text" value={incAmount} onChange={handleInputChange} />
+        <TextInput value={incAmount} onChange={handleInputChange} />
       </div>
       <div className={styles.buttons}>
         <button onClick={handleIncrement}>Increment</button>

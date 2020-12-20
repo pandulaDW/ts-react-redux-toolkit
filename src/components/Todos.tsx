@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/_store";
+import { TextInput } from "evergreen-ui";
 
+import { RootState } from "../redux/_store";
 import { addTodo } from "../redux/todos";
 import styles from "../styles/todos.module.scss";
 import Todo from "./Todo";
@@ -24,14 +25,13 @@ const Todos = () => {
       <h1>Todos</h1>
       <div className={styles.input}>
         <p>Todo</p>
-        <input
-          type="text"
+        <TextInput
           value={todo}
-          onChange={handleInputChange}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") handleAddTodo();
-          }}
           placeholder="Add Todo..."
+          onChange={handleInputChange}
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (event.key === "Enter") handleAddTodo();
+          }}
         />
         <button onClick={handleAddTodo}>+</button>
       </div>
