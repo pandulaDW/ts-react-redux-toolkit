@@ -1,13 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import styles from "../styles/todos.module.scss";
-import { showAll, showCompleted, showPending } from "../redux/todos";
-
-enum visibleType {
-  show_all = "show_all",
-  show_completed = "show_completed",
-  show_pending = "show_pending",
-}
+import {
+  visibleType,
+  showAll,
+  showCompleted,
+  showPending,
+} from "../redux/todos";
 
 const RadioButtons = () => {
   const dispatch = useDispatch();
