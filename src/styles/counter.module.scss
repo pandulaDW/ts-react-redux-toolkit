@@ -1,15 +1,15 @@
 @import "./theme";
-@import "./buttons.module.scss";
+@import "./typography";
+@import "./buttons";
 
 .container {
+  width: 30%;
   padding: 50px;
   display: flex;
   flex-direction: column;
 
   h1 {
-    font-size: 30px;
-    font-weight: 300;
-    color: $color-grey-6;
+    @include heading-primary-1;
     margin-bottom: 20px;
 
     span {
@@ -19,24 +19,34 @@
 }
 
 .input {
-  width: 15%;
+  width: 60%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  color: $color-grey-7;
 
   p {
     font-size: 12px;
+  }
+
+  input[type="text"] {
+    padding: 4px;
+    color: $color-grey-7;
   }
 }
 
 .buttons {
   display: flex;
-  width: 22%;
+  width: 92%;
   justify-content: space-between;
 
   button {
     @include buttonGeneral;
-    background-color: $color-blue-5;
+    background-color: $color-indigo-6;
+  }
+
+  button:hover {
+    background-color: $color-indigo-7;
   }
 }

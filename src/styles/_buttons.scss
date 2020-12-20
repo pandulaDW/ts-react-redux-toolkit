@@ -2,10 +2,12 @@
 
 @mixin buttonGeneral {
   border: none;
-  padding: 10px;
+  padding: 8px 10px;
   border-radius: 2px;
   font-family: $font-primary;
-  color: $color-grey-8;
+  color: white;
   cursor: pointer;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.2px;
+  transition: all 0.3s;
 }
