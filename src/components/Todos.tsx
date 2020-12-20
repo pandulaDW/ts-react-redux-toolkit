@@ -5,6 +5,7 @@ import { RootState } from "../redux/_store";
 import { addTodo } from "../redux/todos";
 import styles from "../styles/todos.module.scss";
 import Todo from "./Todo";
+import RadioButtons from "./RadioButtons";
 
 const Todos = () => {
   const dispatch = useDispatch();
@@ -32,25 +33,7 @@ const Todos = () => {
         />
         <button onClick={handleAddTodo}>+</button>
       </div>
-      <div className={styles.radioButtons}>
-        <label className="radio">
-          <input
-            type="radio"
-            name="visibility"
-            value="show_all"
-            defaultChecked
-          />
-          &nbsp;All
-        </label>
-        <label className="radio">
-          <input type="radio" name="visibility" value="show_completed" />
-          &nbsp;Completed
-        </label>
-        <label className="radio">
-          <input type="radio" name="visibility" value="show_pending" />
-          &nbsp;Pending
-        </label>
-      </div>
+      <RadioButtons />
       {todos.map((todo) => (
         <Todo todo={todo} key={todo.id} />
       ))}
