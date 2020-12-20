@@ -11,13 +11,12 @@ enum visibleType {
 
 const RadioButtons = () => {
   const dispatch = useDispatch();
-  const [visibility, setVisibility] = React.useState(visibleType.show_all);
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setVisibility(e.target.value as visibleType);
-    if (visibility === visibleType.show_all) dispatch(showAll());
-    if (visibility === visibleType.show_completed) dispatch(showCompleted());
-    if (visibility === visibleType.show_pending) dispatch(showPending());
+    const value = e.target.value as visibleType;
+    if (value === visibleType.show_all) dispatch(showAll());
+    if (value === visibleType.show_completed) dispatch(showCompleted());
+    if (value === visibleType.show_pending) dispatch(showPending());
   };
 
   return (

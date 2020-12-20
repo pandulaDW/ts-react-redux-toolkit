@@ -26,8 +26,10 @@ export const showPending = createAction("todos/showPending");
 const todoReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addTodo, (state, action) => {
+      const id = state.todos.length + 1;
       const text = action.payload;
-      state.todos.push({ id: state.todos.length + 1, text, completed: false });
+      state.todos.push({ id, text, completed: false });
+      state.visibleTodos.push(id);
     })
     .addCase(toggleTodo, (state, action) => {
       const todo = state.todos.find((todo) => todo.id === action.payload);
@@ -35,6 +37,16 @@ const todoReducer = createReducer(initialState, (builder) => {
     })
     .addCase(showAll, (state) => {
       state.visibleTodos = state.todos.map((todo) => todo.id);
+    })
+    .addCase(showCompleted, (state) => {
+      state.visibleTodos = state.todos
+        .filter((todo) => todo.completed)
+        .map((todo) => todo.id);
+    })
+    .addCase(showPending, (state) => {
+      state.visibleTodos = state.todos
+        .filter((todo) => !todo.completed)
+        .map((todo) => todo.id);
     })
     .addDefaultCase((state) => state);
 });

@@ -9,7 +9,9 @@ import RadioButtons from "./RadioButtons";
 
 const Todos = () => {
   const dispatch = useDispatch();
-  const { todos } = useSelector((state: RootState) => state.todos);
+  const { todos, visibleTodos } = useSelector(
+    (state: RootState) => state.todos
+  );
 
   const [todo, setTodo] = React.useState("");
 
@@ -34,9 +36,11 @@ const Todos = () => {
         <button onClick={handleAddTodo}>+</button>
       </div>
       <RadioButtons />
-      {todos.map((todo) => (
-        <Todo todo={todo} key={todo.id} />
-      ))}
+      {todos
+        .filter((todo) => visibleTodos.includes(todo.id))
+        .map((todo) => (
+          <Todo todo={todo} key={todo.id} />
+        ))}
     </div>
   );
 };
