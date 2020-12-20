@@ -32,6 +32,25 @@ const Todos = () => {
         />
         <button onClick={handleAddTodo}>+</button>
       </div>
+      <div className={styles.radioButtons}>
+        <label className="radio">
+          <input
+            type="radio"
+            name="visibility"
+            value="show_all"
+            defaultChecked
+          />
+          &nbsp;All
+        </label>
+        <label className="radio">
+          <input type="radio" name="visibility" value="show_completed" />
+          &nbsp;Completed
+        </label>
+        <label className="radio">
+          <input type="radio" name="visibility" value="show_pending" />
+          &nbsp;Pending
+        </label>
+      </div>
       {todos.map((todo) => (
         <Todo todo={todo} key={todo.id} />
       ))}
