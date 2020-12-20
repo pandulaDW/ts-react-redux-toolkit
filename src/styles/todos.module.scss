@@ -66,4 +66,12 @@
   margin-left: auto;
   font-size: 20px;
   cursor: pointer;
+
+  &.done {
+    color: green;
+  }
+
+  &.pending {
+    color: brown;
+  }
 }
