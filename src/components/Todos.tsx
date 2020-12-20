@@ -12,7 +12,7 @@ const Todos = () => {
 
   const [todo, setTodo] = React.useState("");
 
-  const handleAddTodo = () => todo && dispatch(addTodo(todo));
+  const handleAddTodo = () => todo.trim() && dispatch(addTodo(todo));
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setTodo(e.target.value);
 
