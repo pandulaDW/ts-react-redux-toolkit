@@ -12,12 +12,7 @@ interface TodoState {
 }
 
 // Initial State
-const initialState: TodoState = {
-  todos: [
-    { id: 1, text: "Dummy", completed: false },
-    { id: 2, text: "Dummy2", completed: true },
-  ],
-};
+const initialState: TodoState = { todos: [] };
 
 // Action creators
 export const addTodo = createAction<Todo["text"]>("todos/addTodo");
