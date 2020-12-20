@@ -7,7 +7,6 @@ interface Props {}
 const App: React.FC<Props> = () => {
   return (
     <div className={styles.App}>
-      <h2>Working fine</h2>
       <Counter />
     </div>
   );

@@ -1,8 +1,7 @@
 @import "./theme";
 
 .App {
-  h2 {
-    font-size: 30px;
-    color: $color-grey-6;
-  }
+  height: 100vh;
+  width: 100vw;
+  background-color: $color-grey-2;
 }
