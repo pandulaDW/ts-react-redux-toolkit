@@ -1,6 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { Radio } from "evergreen-ui";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/_store";
 import styles from "../styles/todos.module.scss";
+
 import {
   visibleType,
   showAll,
@@ -10,6 +13,7 @@ import {
 
 const RadioButtons = () => {
   const dispatch = useDispatch();
+  const { visibility } = useSelector((state: RootState) => state.todos);
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value as visibleType;
@@ -20,34 +24,27 @@ const RadioButtons = () => {
 
   return (
     <div className={styles.radioButtons}>
-      <label className="radio">
-        <input
-          type="radio"
-          name="visibility"
-          onChange={handleRadioChange}
-          value={visibleType.show_all}
-          defaultChecked
-        />
-        &nbsp;All
-      </label>
-      <label className="radio">
-        <input
-          type="radio"
-          name="visibility"
-          onChange={handleRadioChange}
-          value={visibleType.show_completed}
-        />
-        &nbsp;Completed
-      </label>
-      <label className="radio">
-        <input
-          type="radio"
-          name="visibility"
-          value={visibleType.show_pending}
-          onChange={handleRadioChange}
-        />
-        &nbsp;Pending
-      </label>
+      <Radio
+        name="visible"
+        label="All"
+        checked={visibility === visibleType.show_all}
+        value={visibleType.show_all}
+        onChange={handleRadioChange}
+      />
+      <Radio
+        name="visible"
+        label="Completed"
+        checked={visibility === visibleType.show_completed}
+        value={visibleType.show_completed}
+        onChange={handleRadioChange}
+      />
+      <Radio
+        name="visible"
+        label="Pending"
+        checked={visibility === visibleType.show_pending}
+        value={visibleType.show_pending}
+        onChange={handleRadioChange}
+      />
     </div>
   );
 };

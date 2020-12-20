@@ -41,20 +41,10 @@
 }
 
 .radioButtons {
-  width: 65%;
   display: flex;
-  align-items: center;
+  width: 58%;
+  flex-direction: row;
   justify-content: space-between;
-  color: $color-grey-6;
-  margin-bottom: 20px;
-
-  label {
-    transition: all 0.2s;
-  }
-
-  label:hover {
-    color: $color-grey-7;
-  }
 }
 
 .todoContainer {
