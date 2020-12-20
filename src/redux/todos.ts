@@ -1,7 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 // Type definitions
-interface Todo {
+export interface Todo {
   id: number;
   text: string;
   completed: boolean;
@@ -12,18 +12,23 @@ interface TodoState {
 }
 
 // Initial State
-const initialState: TodoState = { todos: [] };
+const initialState: TodoState = {
+  todos: [
+    { id: 1, text: "Dummy", completed: false },
+    { id: 2, text: "Dummy2", completed: true },
+  ],
+};
 
 // Action creators
-export const addTodo = createAction<Todo>("todos/addTodo");
+export const addTodo = createAction<Todo["text"]>("todos/addTodo");
 export const toggleTodo = createAction<number>("todos/toggleTodo");
 
 // Reducer
 const todoReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addTodo, (state, action) => {
-      const { id, text } = action.payload;
-      state.todos.push({ id, text, completed: false });
+      const text = action.payload;
+      state.todos.push({ id: state.todos.length + 1, text, completed: false });
     })
     .addCase(toggleTodo, (state, action) => {
       const todo = state.todos.find((todo) => todo.id === action.payload);
