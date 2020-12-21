@@ -23,7 +23,7 @@ body {
   width: 100vw;
   display: grid;
   grid-template-rows: 12% 88%;
-  grid-template-columns: 10% 90%;
+  grid-template-columns: 12% 88%;
 }
 
 .Header {
@@ -33,4 +33,9 @@ body {
   background-color: $color-grey-2;
   display: flex;
   justify-content: center;
+}
+
+.Sidebar {
+  grid-row: 2/ -1;
+  grid-column: 1/ 1;
 }
