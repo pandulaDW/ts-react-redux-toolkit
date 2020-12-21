@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TextInput } from "evergreen-ui";
+import axios from "axios";
+import { TextInput, Spinner } from "evergreen-ui";
 
 import { RootState } from "../redux/_store";
-import { addTodo } from "../redux/todos";
+import { addTodo, Todo as TodoType } from "../redux/todos";
 import styles from "../styles/todos.module.scss";
 import Todo from "./Todo";
 import RadioButtons from "./RadioButtons";
@@ -13,8 +14,27 @@ const Todos = () => {
   const { todos, visibleTodos } = useSelector(
     (state: RootState) => state.todos
   );
+  const [todo, setTodo] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [todo, setTodo] = React.useState("");
+  useEffect(() => {
+    setLoading(true);
+
+    const fetchInitData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/todos");
+        const todos = response.data as TodoType[];
+        todos.forEach((todo) => dispatch(addTodo(todo.text)));
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+
+    const id = setTimeout(() => fetchInitData(), 1000);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line
+  }, []);
 
   const handleAddTodo = () => todo.trim() && dispatch(addTodo(todo));
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -36,11 +56,18 @@ const Todos = () => {
         <button onClick={handleAddTodo}>+</button>
       </div>
       <RadioButtons />
-      {todos
-        .filter((todo) => visibleTodos.includes(todo.id))
-        .map((todo) => (
-          <Todo todo={todo} key={todo.id} />
-        ))}
+      {loading ? (
+        <Spinner
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          size={24}
+        />
+      ) : (
+        todos
+          .filter((todo) => visibleTodos.includes(todo.id))
+          .map((todo) => <Todo todo={todo} key={todo.id} />)
+      )}
     </div>
   );
 };
