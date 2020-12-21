@@ -1,15 +1,12 @@
 import React from "react";
-import Counter from "./components/Counter";
-import Todos from "./components/Todos";
-import styles from "./styles/app.module.scss";
+import Header from "./components/Header";
 
-interface Props {}
-
-const App: React.FC<Props> = () => {
+const App = () => {
   return (
-    <div className={styles.App}>
-      <Counter />
-      <Todos />
+    <div className="App">
+      <div className="Header">
+        <Header />
+      </div>
     </div>
   );
 };

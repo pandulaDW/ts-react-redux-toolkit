@@ -1,0 +1,43 @@
+@import "./theme";
+
+.container {
+  display: flex;
+  background-color: $color-grey-2;
+  padding: 1rem 2rem;
+  align-items: center;
+}
+
+.glief_logo,
+.lsegLogo {
+  height: 4rem;
+  width: auto;
+}
+
+.glief_logo {
+  margin-right: 2rem;
+}
+
+.lsegLogo {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-size: 2rem;
+
+    span {
+      font-weight: 400;
+    }
+  }
+
+  h4 {
+    align-self: flex-end;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: -9px;
+  }
+}

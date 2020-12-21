@@ -1,6 +1,12 @@
 {
     "typescript.tsdk": "node_modules\\typescript\\lib",
     "cSpell.words": [
-        "reduxjs"
+        "dqtool",
+        "elfcode",
+        "glief",
+        "onholdtext",
+        "ralist",
+        "reduxjs",
+        "validationdocs"
     ]
 }
