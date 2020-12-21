@@ -1,40 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { TextInput, Spinner } from "evergreen-ui";
+import { TextInput, Spinner, toaster } from "evergreen-ui";
 
 import { RootState } from "../redux/_store";
-import { addTodo, Todo as TodoType } from "../redux/todos";
+import { addTodo, fetchInitData } from "../redux/todos";
 import styles from "../styles/todos.module.scss";
 import Todo from "./Todo";
 import RadioButtons from "./RadioButtons";
 
 const Todos = () => {
   const dispatch = useDispatch();
-  const { todos, visibleTodos } = useSelector(
+  const { todos, visibleTodos, loading, fetchError } = useSelector(
     (state: RootState) => state.todos
   );
   const [todo, setTodo] = useState("");
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-
-    const fetchInitData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/todos");
-        const todos = response.data as TodoType[];
-        todos.forEach((todo) => dispatch(addTodo(todo.text)));
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    };
-
-    const id = setTimeout(() => fetchInitData(), 1000);
-    return () => clearTimeout(id);
+    if (fetchError) {
+      return toaster.danger("Error fetching initial data", {
+        duration: 4,
+      });
+    }
+    dispatch(fetchInitData());
     // eslint-disable-next-line
-  }, []);
+  }, [fetchError]);
 
   const handleAddTodo = () => todo.trim() && dispatch(addTodo(todo));
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
