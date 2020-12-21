@@ -2,14 +2,14 @@
 
 .container {
   display: flex;
-  background-color: $color-grey-2;
-  padding: 1rem 2rem;
   align-items: center;
+  width: 94%;
+  height: 100%;
 }
 
 .glief_logo,
 .lsegLogo {
-  height: 4rem;
+  height: 5.3rem;
   width: auto;
 }
 
@@ -27,7 +27,8 @@
   flex-direction: column;
 
   h1 {
-    font-size: 2rem;
+    font-size: 2.7rem;
+    color: $color-grey-6;
 
     span {
       font-weight: 400;
@@ -36,8 +37,9 @@
 
   h4 {
     align-self: flex-end;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 400;
     margin-top: -9px;
+    color: $color-grey-6;
   }
 }

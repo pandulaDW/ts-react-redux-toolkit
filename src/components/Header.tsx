@@ -27,8 +27,8 @@ const Header = () => {
   ];
 
   let location = useLocation();
-
-  const headerObj = titleMap.find((el) => location.pathname.includes(el.route));
+  console.log(location.pathname);
+  const headerObj = titleMap.find((el) => location.pathname === el.route);
 
   return (
     <div className={styles.container}>
