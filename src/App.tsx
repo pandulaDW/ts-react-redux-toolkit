@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./components/Common/Header";
 import ScrapeMain from "./components/Scrape/ScrapeMain";
 import Sidebar from "./components/Common/Sidebar";
+import routes from "./routes";
 
 const App = () => {
   return (
@@ -15,7 +16,9 @@ const App = () => {
           <Sidebar />
         </div>
         <div className="Main">
-          <ScrapeMain />
+          <Route path={routes.scrape} exact>
+            <ScrapeMain />
+          </Route>
         </div>
       </div>
     </BrowserRouter>

@@ -7,6 +7,7 @@
   width: 100%;
 }
 
+// Header content -------------------------------------
 .header {
   display: flex;
   align-items: center;
@@ -47,10 +48,10 @@
     &-updateTime {
       margin-right: 1.6rem;
       margin-left: 2.6rem;
-      letter-spacing: 0.5px;
 
       p:first-child {
         font-size: 1rem;
+        letter-spacing: 0.5px;
         font-weight: 400;
         color: $color-grey-6;
         font-family: $font-secondary;
