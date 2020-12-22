@@ -3,7 +3,6 @@
 
 // Main content -------------------------------------
 .content {
-  padding: 1.5rem 2rem;
   height: 100%;
   width: 100%;
 }
@@ -11,7 +10,9 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 10%;
+  padding: 1.5rem 2rem;
 
   &__left {
     display: flex;
@@ -34,6 +35,32 @@
           margin-left: 5px;
           color: $color-grey-6;
         }
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    &-updateTime {
+      margin-right: 1.6rem;
+      margin-left: 2.6rem;
+      letter-spacing: 0.5px;
+
+      p:first-child {
+        font-size: 1rem;
+        font-weight: 400;
+        color: $color-grey-6;
+        font-family: $font-secondary;
+      }
+
+      p:nth-child(2) {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: $color-grey-7;
+        font-family: $font-secondary;
       }
     }
   }

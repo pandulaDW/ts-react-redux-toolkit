@@ -1,6 +1,8 @@
 import React from "react";
-import { SegmentedControl, Switch } from "evergreen-ui";
+import { SegmentedControl, Switch, FilePicker, Select } from "evergreen-ui";
+import Button from "../Common/Button";
 import styles from "../../styles/scrape.module.scss";
+import { convertToDTString } from "../../helpers/utils";
 
 const ScrapeHeader = () => {
   return (
@@ -26,6 +28,26 @@ const ScrapeHeader = () => {
             <p>Table View</p>
           </div>
         </div>
+      </div>
+      <div className={styles.header__right}>
+        <Select>
+          <option value="all" selected>
+            All RAs
+          </option>
+          <option value="foo">Foo</option>
+          <option value="bar">Bar</option>
+        </Select>
+        <div className={styles["header__right-updateTime"]}>
+          <p>Last Updated Time:</p>
+          <p>{convertToDTString(new Date())}</p>
+        </div>
+        <FilePicker
+          multiple={false}
+          width={250}
+          placeholder="Select the file here!"
+          marginRight="1.5rem"
+        />
+        <Button text="Upload" type="Animated" />
       </div>
     </div>
   );

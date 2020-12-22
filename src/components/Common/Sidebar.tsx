@@ -4,7 +4,7 @@ import { FaFolderOpen, FaCheckDouble, FaChrome } from "react-icons/fa";
 import { RiFileExcel2Line } from "react-icons/ri";
 import { IoMdAnalytics } from "react-icons/io";
 
-import BSLLabsLogo from "../images/BSL_Labs_-_Aug_2019.png";
+import BSLLabsLogo from "../../images/BSL_Labs_-_Aug_2019.png";
 import routes from "../../routes";
 import styles from "../../styles/sidebar.module.scss";
 

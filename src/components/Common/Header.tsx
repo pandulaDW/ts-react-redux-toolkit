@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import gleifLogo from "../images/gleif-logo-full.png";
-import lsegLogo from "../images/LSEG_LOGO_RGB_GWB_0.png";
+import gleifLogo from "../../images/gleif-logo-full.png";
+import lsegLogo from "../../images/LSEG_LOGO_RGB_GWB_0.png";
 import styles from "../../styles/header.module.scss";
 import routes from "../../routes";
 
