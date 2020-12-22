@@ -1,0 +1,40 @@
+// imports -------------
+@import "./theme";
+
+// Main content -------------------------------------
+.content {
+  padding: 1.5rem 2rem;
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 10%;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    &-switch {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin-left: 1.5rem;
+
+      > div {
+        display: flex;
+        align-items: center;
+
+        p {
+          font-size: 1.2rem;
+          margin-left: 5px;
+          color: $color-grey-6;
+        }
+      }
+    }
+  }
+}

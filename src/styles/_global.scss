@@ -37,5 +37,10 @@ body {
 
 .Sidebar {
   grid-row: 2/ -1;
-  grid-column: 1/ 1;
+  grid-column: 1/ 2;
+}
+
+.Main {
+  grid-row: 2/ -1;
+  grid-column: 2/ -1;
 }
