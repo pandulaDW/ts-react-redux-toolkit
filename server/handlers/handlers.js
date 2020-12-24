@@ -19,7 +19,7 @@ const scanParams = {
   ExpressionAttributeNames: { "#tm": "timestamp" },
 };
 
-exports.scanIndexHandler = async (req, res) => {
+exports.scanIndexHandler = async (_, res) => {
   try {
     const scannedData = await promisifyAWSScan(scanParams);
     res.status(200).json(scannedData);
@@ -38,7 +38,7 @@ exports.fetchRequestHandler = async (req, res) => {
   }
 };
 
-exports.scanAndFetchHandler = async (req, res) => {
+exports.scanAndFetchHandler = async (_, res) => {
   try {
     const scannedData = await promisifyAWSScan(scanParams);
     const maxTimestamp = scannedData.Items.reduce(

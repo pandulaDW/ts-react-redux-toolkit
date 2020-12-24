@@ -2,8 +2,12 @@ const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
 const { initDb } = require("./db/initDB");
-const { scanIndexHandler } = require("./handlers/handlers");
-const { fetchRequestHandler } = require("./handlers/fetchHandler");
+const {
+  scanIndexHandler,
+  fetchRequestHandler,
+  scanAndFetchHandler,
+} = require("./handlers/handlers");
+const { testHandler } = require("./handlers/test");
 
 const app = express();
 
@@ -15,10 +19,10 @@ app.use(morgan("dev"));
 // routes
 app.get("/lei/scrape/scanned-index", scanIndexHandler);
 app.get("/lei/scrape/scrape-request", fetchRequestHandler);
-app.get("/lei/scrape/init-data", fetchRequestHandler);
+app.get("/lei/scrape/init-data", scanAndFetchHandler);
+app.get("/test", testHandler);
 
 app.listen(5000, async () => {
-  console.log(__dirname);
-  await initDb();
+  // await initDb();
   console.log("server started listening to requests at port 5000...");
 });
