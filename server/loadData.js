@@ -1,11 +1,11 @@
 const fs = require("fs");
-const { dynamoDb, tableData } = require("./config");
+const { docClient, tableData } = require("./config");
 
 const allItems = JSON.parse(fs.readFileSync("data.json", "utf8"));
 
 const promisfiedPutData = (item) => {
   return new Promise((resolve, reject) => {
-    dynamoDb.put(
+    docClient.put(
       { TableName: tableData.tableName, Item: item },
       function (err, data) {
         if (err) reject(err);
@@ -24,4 +24,5 @@ exports.putAllItems = () => {
       process.exit(1);
     }
   });
+  console.log("Data inserted successfully");
 };

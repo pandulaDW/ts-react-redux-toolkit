@@ -38,7 +38,10 @@ exports.promisfiedCreateTable = () => {
   return new Promise((resolve, reject) => {
     dynamoDb.createTable(tableConfig, (err, data) => {
       if (err) reject(err);
-      else resolve(data);
+      else {
+        console.log("New Table created");
+        resolve(data);
+      }
     });
   });
 };
