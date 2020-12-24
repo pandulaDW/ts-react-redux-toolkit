@@ -135,5 +135,101 @@
     "kfid": "14854738",
     "url": "https://datacvr.virk.dk/data/index.php?enhedstype=virksomhed&id=14854738&soeg=14854738&language=da&q=visenhed",
     "timestamp": 1608701808461
+  },
+  {
+    "address": {
+      "invalid": true,
+      "match": false,
+      "scraped_value": "Shell Centre, London, SE1 7NA",
+      "update": false,
+      "uv_value": null
+    },
+    "company_name": {
+      "invalid": false,
+      "match": true,
+      "scraped_value": "SABAH SHELL PETROLEUM COMPANY LIMITED",
+      "update": false,
+      "uv_value": "SABAH SHELL PETROLEUM COMPANY LIMITED"
+    },
+    "company_status": {
+      "invalid": false,
+      "match": true,
+      "scraped_value": "Active",
+      "update": false,
+      "uv_value": null
+    },
+    "company_type": {
+      "invalid": false,
+      "match": false,
+      "scraped_value": "Private limited Company",
+      "update": false,
+      "uv_value": "H0PO - Private Limited Company"
+    },
+    "pending_updates": {
+      "invalid": true,
+      "match": false,
+      "scraped_value": null,
+      "update": false,
+      "uv_value": null
+    },
+    "previous_name": {
+      "invalid": true,
+      "match": false,
+      "scraped_value": null,
+      "update": false,
+      "uv_value": null
+    },
+    "ra_id": "RA000170",
+    "kfid": "00342234",
+    "url": "https://beta.companieshouse.gov.uk/company/00342234",
+    "timestamp": 1608701808461
+  },
+  {
+    "address": {
+      "invalid": true,
+      "match": false,
+      "scraped_value": "\u00c5rhusvej 115 , 8960 Randers S\u00d8",
+      "update": false,
+      "uv_value": null
+    },
+    "company_name": {
+      "invalid": false,
+      "match": true,
+      "scraped_value": "PEDERSEN & NIELSEN AUTOMOBILFORRETNING A/S",
+      "update": false,
+      "uv_value": "PEDERSEN & NIELSEN AUTOMOBILFORRETNING A/S"
+    },
+    "company_status": {
+      "invalid": false,
+      "match": true,
+      "scraped_value": "Normal",
+      "update": false,
+      "uv_value": null
+    },
+    "company_type": {
+      "invalid": false,
+      "match": false,
+      "scraped_value": "Aktieselskab",
+      "update": false,
+      "uv_value": "ZRPO - Aktieselskab"
+    },
+    "pending_updates": {
+      "invalid": true,
+      "match": false,
+      "scraped_value": null,
+      "update": false,
+      "uv_value": null
+    },
+    "previous_name": {
+      "invalid": true,
+      "match": false,
+      "scraped_value": null,
+      "update": false,
+      "uv_value": null
+    },
+    "ra_id": "RA000170",
+    "kfid": "14854738",
+    "url": "https://datacvr.virk.dk/data/index.php?enhedstype=virksomhed&id=14854738&soeg=14854738&language=da&q=visenhed",
+    "timestamp": 1608701808461
   }
 ]
