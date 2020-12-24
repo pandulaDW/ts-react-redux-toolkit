@@ -1,9 +1,16 @@
+const cors = require("cors");
 const express = require("express");
 const { initDb } = require("./db/initDB");
+const { scanIndexHandler } = require("./handlers/scanHandlers");
 
 const app = express();
 
-app.get("/", (req, res) => res.end("Server working"));
+// middlewares
+app.use(express.json());
+app.use(cors());
+
+// routes
+app.get("/lei/scrape/scanned-index", scanIndexHandler);
 
 app.listen(5000, async () => {
   console.log(__dirname);
