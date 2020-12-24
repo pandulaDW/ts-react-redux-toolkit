@@ -19,6 +19,7 @@
     "cors": "^2.8.5",
     "evergreen-ui": "^5.1.2",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
