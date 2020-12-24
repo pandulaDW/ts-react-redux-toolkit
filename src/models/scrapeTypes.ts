@@ -9,6 +9,8 @@ export type ScrapeDataType = {
 } & {
   kfid: string;
   url: string;
+  RAId: string;
+  company_id: string;
   timestamp: number;
 };
 

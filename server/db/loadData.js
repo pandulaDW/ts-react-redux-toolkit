@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { docClient, tableData } = require("./config");
 
-const filepath = path.join(__dirname, "..", "data.json");
+const filepath = path.join(__dirname, "..", "data", "loadData.json");
 const allItems = JSON.parse(fs.readFileSync(filepath, "utf8"));
 
 const promisfiedPutData = (item) => {
