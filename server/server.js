@@ -23,6 +23,6 @@ app.get("/lei/scrape/init-data", scanAndFetchHandler);
 app.get("/test", testHandler);
 
 app.listen(5000, async () => {
-  // await initDb();
+  await initDb();
   console.log("server started listening to requests at port 5000...");
 });
