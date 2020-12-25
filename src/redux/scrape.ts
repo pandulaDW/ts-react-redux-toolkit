@@ -56,6 +56,7 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.ErrorMsg = null;
       state.ScrapeData = action.payload.Items;
+
       state.fieldList = action.payload.fieldList;
     })
     .addCase(fetchInitData.rejected, (state, action) => {
