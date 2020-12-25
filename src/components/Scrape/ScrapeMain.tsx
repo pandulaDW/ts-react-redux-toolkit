@@ -9,10 +9,12 @@ import { RootState } from "../../redux/_store";
 
 const ScrapeMain = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state: RootState) => state.scrape);
+  const { loading, ScrapeData } = useSelector(
+    (state: RootState) => state.scrape
+  );
 
   useEffect(() => {
-    dispatch(fetchInitData());
+    if (ScrapeData.length === 0) dispatch(fetchInitData());
     // eslint-disable-next-line
   }, []);
 

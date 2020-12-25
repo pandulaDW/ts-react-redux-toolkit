@@ -10,9 +10,10 @@ const ScrapeContent = () => {
 
   return (
     <div className={styles.dataContent}>
-      {ScrapeData.map((el) => (
-        <ScrapeSingleTable key={uuid()} data={el} />
-      ))}
+      {ScrapeData.map((el) => {
+        const key = uuid();
+        return <ScrapeSingleTable key={key} data={el} key_={key} />;
+      })}
     </div>
   );
 };
