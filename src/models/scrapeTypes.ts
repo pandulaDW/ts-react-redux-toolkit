@@ -9,7 +9,6 @@ interface NonCommonFields {
 }
 
 interface AddedFields {
-  collapsed: boolean;
   finished: boolean;
   onProgress: boolean;
 }

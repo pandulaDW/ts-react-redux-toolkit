@@ -1,9 +1,12 @@
-import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from "@reduxjs/toolkit";
 import { ScrapeDataType, ScrapeDataResponseType } from "../models/scrapeTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
 
 // UI type defs -----------------
-type CollapseState = "collapsed" | "expanded";
 type DataView = "single" | "table";
 type FilterState = "all" | "progress" | "finished";
 
@@ -12,7 +15,7 @@ interface ScrapeState {
   ScrapeData: ScrapeDataType[];
   filteredIDs: string[];
   fieldList: string[];
-  collapseState: CollapseState;
+  expand: boolean | undefined;
   dataView: DataView;
   filterState: FilterState;
   loading: boolean;
@@ -24,7 +27,7 @@ const initialState: ScrapeState = {
   ScrapeData: [],
   filteredIDs: [],
   fieldList: [],
-  collapseState: "expanded",
+  expand: undefined,
   dataView: "single",
   filterState: "all",
   loading: false,
@@ -32,6 +35,7 @@ const initialState: ScrapeState = {
 };
 
 // Action creators -------------------
+export const expandAction = createAction("scrape/expand");
 
 // Thunk action creators --------------
 export const fetchInitData = createAsyncThunk(
@@ -62,6 +66,9 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     .addCase(fetchInitData.rejected, (state, action) => {
       state.loading = false;
       state.ErrorMsg = action.payload as string;
+    })
+    .addCase(expandAction, (state) => {
+      state.expand = state.expand === undefined ? false : undefined;
     })
     .addDefaultCase((state) => state);
 });

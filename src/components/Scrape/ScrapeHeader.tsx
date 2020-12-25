@@ -1,10 +1,16 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { SegmentedControl, Switch, FilePicker, Select } from "evergreen-ui";
 import Button from "../Common/Button";
+import { expandAction } from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
+import { RootState } from "../../redux/_store";
 
 const ScrapeHeader = () => {
+  const dispatch = useDispatch();
+  const { expand } = useSelector((state: RootState) => state.scrape);
+
   return (
     <div className={styles.header}>
       <div className={styles.header__left}>
@@ -20,7 +26,11 @@ const ScrapeHeader = () => {
         />
         <div className={styles["header__left-switch"]}>
           <div>
-            <Switch height={20} checked />
+            <Switch
+              height={20}
+              checked={expand === false}
+              onChange={() => dispatch(expandAction())}
+            />
             <p>Collapse</p>
           </div>
           <div>
