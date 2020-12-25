@@ -56,12 +56,12 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.ErrorMsg = null;
       state.ScrapeData = action.payload.Items;
-
+      state.filteredIDs = action.payload.Items.map((item) => item.kfid);
       state.fieldList = action.payload.fieldList;
     })
     .addCase(fetchInitData.rejected, (state, action) => {
       state.loading = false;
-      state.ErrorMsg = action.error.message as string;
+      state.ErrorMsg = action.payload as string;
     })
     .addDefaultCase((state) => state);
 });
