@@ -1,0 +1,111 @@
+@import "./theme";
+
+@mixin generalTable {
+  table {
+    border-collapse: collapse;
+    margin: 2px 0 25px 0;
+    font-size: 1rem;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  }
+
+  thead th {
+    background-color: $color-indigo-10;
+    color: $color-grey-3;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  th,
+  td {
+    padding: 5px 8px;
+  }
+
+  td {
+    color: $color-grey-6;
+    font-weight: 400;
+    font-family: $font-secondary;
+  }
+
+  tr {
+    border-bottom: 1px solid $color-grey-3;
+  }
+
+  tr:nth-of-type(even) {
+    background-color: $color-grey-2;
+  }
+}
+
+.scrapeSingle {
+  display: flex;
+  flex-direction: column;
+
+  &__table {
+    @include generalTable();
+  }
+
+  &__header {
+    display: flex;
+    background-color: $color-grey-3;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+
+    p {
+      color: $color-grey-8;
+      font-weight: 400;
+      font-family: $font-secondary;
+      letter-spacing: 0.4px;
+      font-size: 1.2rem;
+    }
+
+    & > div {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    &-icon {
+      font-size: 1.8rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    &-icon:nth-of-type(1) {
+      color: $color-grey-5;
+    }
+
+    &-icon:nth-of-type(1):hover {
+      color: $color-grey-6;
+    }
+
+    &-icon:nth-of-type(2) {
+      color: $color-green-2;
+      margin-left: 2rem;
+    }
+
+    &-icon:nth-of-type(2):hover {
+      color: $color-green-3;
+    }
+
+    &-icon:nth-of-type(3) {
+      font-size: 2rem;
+      color: $color-red-1;
+      margin-left: 0.5rem;
+    }
+
+    &-icon:nth-of-type(3):hover {
+      color: $color-red-2;
+    }
+
+    &-icon:nth-of-type(4) {
+      font-size: 2.1rem;
+      color: $color-grey-6;
+      margin-left: 2.5rem;
+    }
+
+    &-icon:nth-of-type(4):hover {
+      color: $color-grey-7;
+    }
+  }
+}

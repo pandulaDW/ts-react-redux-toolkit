@@ -31,8 +31,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "SPYNIE KIRK HOUSE QUARRYWOOD ELGIN MORAY UNITED KINGDOM IV30 8XJ",
-      "scraped_address": "Spynie Kirk House, Quarrywood, Elgin, Moray, IV30 8XJ",
+      "uv_value": "SPYNIE KIRK HOUSE QUARRYWOOD ELGIN MORAY UNITED KINGDOM IV30 8XJ",
+      "scraped_value": "Spynie Kirk House, Quarrywood, Elgin, Moray, IV30 8XJ",
       "matched": "SPYNIE KIRK HOUSE - QUARRYWOOD - ELGIN - MORAY - IV30 8XJ",
       "unmatched": "UNITED KINGDOM"
     },
@@ -72,8 +72,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "THE OLD SURGERY 27 VICTORIA EMBANKMENT TRENT BRIDGE NOTTINGHAM NOTTINGHAMSHIRE UNITED KINGDOM NG2 2JY",
-      "scraped_address": "The Old Surgery, 27 Victoria Embankment, Trent Bridge, Nottingham, Nottinghamshire, NG2 2JY",
+      "uv_value": "THE OLD SURGERY 27 VICTORIA EMBANKMENT TRENT BRIDGE NOTTINGHAM NOTTINGHAMSHIRE UNITED KINGDOM NG2 2JY",
+      "scraped_value": "The Old Surgery, 27 Victoria Embankment, Trent Bridge, Nottingham, Nottinghamshire, NG2 2JY",
       "matched": "THE OLD SURGERY - 27 VICTORIA EMBANKMENT - TRENT BRIDGE - NOTTINGHAM - NOTTINGHAMSHIRE - NG2 2JY",
       "unmatched": "UNITED KINGDOM"
     },
@@ -113,8 +113,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "52 HIGH STREET PINNER GREATER LONDON UNITED KINGDOM HA5 5PW",
-      "scraped_address": "52 High Street, Pinner, Middlesex, HA5 5PW",
+      "uv_value": "52 HIGH STREET PINNER GREATER LONDON UNITED KINGDOM HA5 5PW",
+      "scraped_value": "52 High Street, Pinner, Middlesex, HA5 5PW",
       "matched": "52 HIGH STREET - PINNER - HA5 5PW",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -154,8 +154,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "THE PINNACLE 160 MIDSUMMER BOULEVARD MILTON KEYNES BUCKINGHAMSHIRE UNITED KINGDOM MK9 1FF",
-      "scraped_address": "C/O Mazars Llp The Pinnacle, 160 Midsummer Boulevard, Milton Keynes, Buckinghamshire, United Kingdom, MK9 1FF",
+      "uv_value": "THE PINNACLE 160 MIDSUMMER BOULEVARD MILTON KEYNES BUCKINGHAMSHIRE UNITED KINGDOM MK9 1FF",
+      "scraped_value": "C/O Mazars Llp The Pinnacle, 160 Midsummer Boulevard, Milton Keynes, Buckinghamshire, United Kingdom, MK9 1FF",
       "matched": "160 MIDSUMMER BOULEVARD - MILTON KEYNES - BUCKINGHAMSHIRE - UNITED KINGDOM - MK9 1FF",
       "unmatched": "THE PINNACLE"
     },
@@ -195,8 +195,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "2 CLARIDGE COURT LOWER KINGS ROAD BERKAMSTEAD HERTFORDSHIRE UNITED KINGDOM HP4 2AF",
-      "scraped_address": "2 Claridge Court, Lower Kings Road, Berkhamsted, Hertfordshire, United Kingdom, HP4 2AF",
+      "uv_value": "2 CLARIDGE COURT LOWER KINGS ROAD BERKAMSTEAD HERTFORDSHIRE UNITED KINGDOM HP4 2AF",
+      "scraped_value": "2 Claridge Court, Lower Kings Road, Berkhamsted, Hertfordshire, United Kingdom, HP4 2AF",
       "matched": "2 CLARIDGE COURT - LOWER KINGS ROAD - HERTFORDSHIRE - UNITED KINGDOM - HP4 2AF",
       "unmatched": "BERKAMSTEAD"
     },
@@ -236,8 +236,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "43 PORTLAND PLACE LONDON GREATER LONDON UNITED KINGDOM W1B 1QH",
-      "scraped_address": "43 Portland Place, London, England, W1B 1QH",
+      "uv_value": "43 PORTLAND PLACE LONDON GREATER LONDON UNITED KINGDOM W1B 1QH",
+      "scraped_value": "43 Portland Place, London, England, W1B 1QH",
       "matched": "43 PORTLAND PLACE - LONDON - W1B 1QH",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -277,8 +277,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "SWIFT HOUSE GROUND FLOOR 18 HOFFMANNS WAY CHELMSFORD ESSEX UNITED KINGDOM CM1 1GU",
-      "scraped_address": "Swift House, Ground Floor 18 Hoffmanns Way, Chelmsford, Essex, United Kingdom, CM1 1GU",
+      "uv_value": "SWIFT HOUSE GROUND FLOOR 18 HOFFMANNS WAY CHELMSFORD ESSEX UNITED KINGDOM CM1 1GU",
+      "scraped_value": "Swift House, Ground Floor 18 Hoffmanns Way, Chelmsford, Essex, United Kingdom, CM1 1GU",
       "matched": "SWIFT HOUSE - GROUND FLOOR 18 HOFFMANNS WAY - CHELMSFORD - ESSEX - UNITED KINGDOM - CM1 1GU",
       "unmatched": ""
     },
@@ -318,8 +318,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "71 HIGHFIELD GARDENS LONDON GREATER LONDON UNITED KINGDOM NW11 9HA",
-      "scraped_address": "71 Highfield Gardens, London, England, NW11 9HA",
+      "uv_value": "71 HIGHFIELD GARDENS LONDON GREATER LONDON UNITED KINGDOM NW11 9HA",
+      "scraped_value": "71 Highfield Gardens, London, England, NW11 9HA",
       "matched": "71 HIGHFIELD GARDENS - LONDON - NW11 9HA",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -359,8 +359,8 @@
       "invalid": false
     },
     "address": {
-      "uv_address": "THE BROADGATE TOWER  8TH FLOOR 20 PRIMROSE STREET LONDON GREATER LONDON UNITED KINGDOM EC2A 2EW",
-      "scraped_address": "The Broadgate Tower, 8th Floor, 20 Primrose Street, London, England, EC2A 2EW",
+      "uv_value": "THE BROADGATE TOWER  8TH FLOOR 20 PRIMROSE STREET LONDON GREATER LONDON UNITED KINGDOM EC2A 2EW",
+      "scraped_value": "The Broadgate Tower, 8th Floor, 20 Primrose Street, London, England, EC2A 2EW",
       "matched": "THE BROADGATE TOWER - 8TH FLOOR - 20 PRIMROSE STREET - LONDON - EC2A 2EW",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -400,8 +400,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "17-18 OLD BOND STREET LONDON GREATER LONDON UNITED KINGDOM W1S 4PT",
-      "scraped_address": "17-18 Old Bond Street, London, England, W1S 4PT",
+      "uv_value": "17-18 OLD BOND STREET LONDON GREATER LONDON UNITED KINGDOM W1S 4PT",
+      "scraped_value": "17-18 Old Bond Street, London, England, W1S 4PT",
       "matched": "17-18 OLD BOND STREET - LONDON - W1S 4PT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -441,8 +441,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "3-4 BOWER TERRACE TONBRIDGE ROAD MAIDSTONE KENT UNITED KINGDOM ME16 8RY",
-      "scraped_address": "3-4 Bower Terrace, Tonbridge Road, Maidstone, Kent, ME16 8RY",
+      "uv_value": "3-4 BOWER TERRACE TONBRIDGE ROAD MAIDSTONE KENT UNITED KINGDOM ME16 8RY",
+      "scraped_value": "3-4 Bower Terrace, Tonbridge Road, Maidstone, Kent, ME16 8RY",
       "matched": "3-4 BOWER TERRACE - TONBRIDGE ROAD - MAIDSTONE - KENT - ME16 8RY",
       "unmatched": "UNITED KINGDOM"
     },
@@ -482,8 +482,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "CHAPEL HOUSE 1 BOROUGH ROAD ALTRINCHAM GREATER MANCHESTER UNITED KINGDOM WA15 9RA",
-      "scraped_address": "Chapel House, 1 Borough Road, Altrincham, Cheshire, England, WA15 9RA",
+      "uv_value": "CHAPEL HOUSE 1 BOROUGH ROAD ALTRINCHAM GREATER MANCHESTER UNITED KINGDOM WA15 9RA",
+      "scraped_value": "Chapel House, 1 Borough Road, Altrincham, Cheshire, England, WA15 9RA",
       "matched": "CHAPEL HOUSE - 1 BOROUGH ROAD - ALTRINCHAM - WA15 9RA",
       "unmatched": "GREATER MANCHESTER - UNITED KINGDOM"
     },

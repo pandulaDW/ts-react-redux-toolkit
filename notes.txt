@@ -1,0 +1,2 @@
+Keep kfid as "kfid"
+address keep as "uv_value" and "scraped_value" as opposed to "uv_address"
