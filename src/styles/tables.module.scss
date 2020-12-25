@@ -92,6 +92,10 @@
       font-size: 2rem;
       color: $color-red-1;
       margin-left: 0.5rem;
+
+      & + div {
+        margin-left: 2.5rem;
+      }
     }
 
     &-icon:nth-of-type(3):hover {
@@ -101,7 +105,6 @@
     &-icon:nth-of-type(4) {
       font-size: 2.1rem;
       color: $color-grey-6;
-      margin-left: 2.5rem;
     }
 
     &-icon:nth-of-type(4):hover {

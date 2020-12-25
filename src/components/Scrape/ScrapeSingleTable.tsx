@@ -33,7 +33,7 @@ const ScrapeSingleTable: React.FC<Props> = ({ data }) => {
             <FaCheckCircle className={styles["scrapeSingle__header-icon"]} />
             <IoMdAlert className={styles["scrapeSingle__header-icon"]} />
             <AccordionItemHeading>
-              <AccordionItemButton>
+              <AccordionItemButton style={{ display: "flex" }}>
                 <MdFormatIndentDecrease
                   className={styles["scrapeSingle__header-icon"]}
                   onClick={() => setLocalExpand(!localExpand)}
