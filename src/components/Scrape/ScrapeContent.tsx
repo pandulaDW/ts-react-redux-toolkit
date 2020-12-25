@@ -7,16 +7,10 @@ import ScrapeSingleTable from "./ScrapeSingleTable";
 import styles from "../../styles/scrape.module.scss";
 
 const ScrapeContent = () => {
-  const { ScrapeData, filteredIDs } = useSelector(
-    (state: RootState) => state.scrape
-  );
+  const { ScrapeData } = useSelector((state: RootState) => state.scrape);
 
   return (
-    <Accordion
-      allowMultipleExpanded
-      allowZeroExpanded
-      preExpanded={filteredIDs}
-    >
+    <Accordion allowMultipleExpanded allowZeroExpanded>
       <div className={styles.dataContent}>
         {ScrapeData.map((el) => {
           return <ScrapeSingleTable key={uuid()} data={el} />;

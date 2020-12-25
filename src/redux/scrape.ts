@@ -15,7 +15,7 @@ interface ScrapeState {
   ScrapeData: ScrapeDataType[];
   filteredIDs: string[];
   fieldList: string[];
-  expand: boolean | undefined;
+  expand: boolean;
   dataView: DataView;
   filterState: FilterState;
   loading: boolean;
@@ -27,7 +27,7 @@ const initialState: ScrapeState = {
   ScrapeData: [],
   filteredIDs: [],
   fieldList: [],
-  expand: undefined,
+  expand: true,
   dataView: "single",
   filterState: "all",
   loading: false,
@@ -68,7 +68,7 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       state.ErrorMsg = action.payload as string;
     })
     .addCase(expandAction, (state) => {
-      state.expand = state.expand === undefined ? false : undefined;
+      state.expand = !state.expand;
     })
     .addDefaultCase((state) => state);
 });

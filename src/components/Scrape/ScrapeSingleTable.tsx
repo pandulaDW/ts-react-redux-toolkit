@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { FaCheckCircle, FaGlobe } from "react-icons/fa";
@@ -21,10 +21,11 @@ interface Props {
 
 const ScrapeSingleTable: React.FC<Props> = ({ data }) => {
   const { fieldList, expand } = useSelector((state: RootState) => state.scrape);
+  const [localExpand, setLocalExpand] = useState(expand);
 
   return (
     <div className={styles.scrapeSingle}>
-      <AccordionItem uuid={data.kfid} dangerouslySetExpanded={expand}>
+      <AccordionItem uuid={data.kfid} dangerouslySetExpanded={localExpand}>
         <div className={styles.scrapeSingle__header}>
           <p>{`KeyID - ${data.kfid} | CompanyID - ${data.company_id} | RaID - ${data.RAId}`}</p>
           <div>
@@ -35,6 +36,7 @@ const ScrapeSingleTable: React.FC<Props> = ({ data }) => {
               <AccordionItemButton>
                 <MdFormatIndentDecrease
                   className={styles["scrapeSingle__header-icon"]}
+                  onClick={() => setLocalExpand(!localExpand)}
                 />
               </AccordionItemButton>
             </AccordionItemHeading>

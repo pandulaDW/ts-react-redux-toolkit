@@ -28,7 +28,7 @@ const ScrapeHeader = () => {
           <div>
             <Switch
               height={20}
-              checked={expand === false}
+              checked={!expand}
               onChange={() => dispatch(expandAction())}
             />
             <p>Collapse</p>
