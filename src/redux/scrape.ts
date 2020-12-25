@@ -27,7 +27,7 @@ const initialState: ScrapeState = {
   collapseState: "expanded",
   dataView: "single",
   filterState: "all",
-  loading: true,
+  loading: false,
   ErrorMsg: null,
 };
 

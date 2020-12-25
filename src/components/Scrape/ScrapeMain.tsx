@@ -12,7 +12,7 @@ const ScrapeMain = () => {
   const { loading } = useSelector((state: RootState) => state.scrape);
 
   useEffect(() => {
-    // dispatch(fetchInitData());
+    dispatch(fetchInitData());
     // eslint-disable-next-line
   }, []);
 
