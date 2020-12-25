@@ -1,6 +1,15 @@
 const { tableData } = require("../db/config");
 const { promisifyAWSScan, promisifyAWSQuery } = require("./promisfiedFuncs");
 
+const fieldList = [
+  "entity_number",
+  "company_name",
+  "company_status",
+  "company_type",
+  "previous_name",
+  "address",
+];
+
 const queryParams = (receivedTimestamp) => ({
   TableName: tableData.tableName,
   KeyConditionExpression: "#tm = :receivedTimestamp",
@@ -46,6 +55,7 @@ exports.scanAndFetchHandler = async (_, res) => {
       0
     );
     const data = await promisifyAWSQuery(queryParams(maxTimestamp));
+    data["fieldList"] = fieldList;
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json(err);

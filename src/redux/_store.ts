@@ -1,10 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import countReducer from "./counter";
-import todoReducer from "./todos";
+import scrapeReducer from "./scrape";
 
 const rootReducer = combineReducers({
-  counter: countReducer,
-  todos: todoReducer,
+  scrape: scrapeReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
