@@ -3,26 +3,12 @@ import {
   createAsyncThunk,
   createReducer,
 } from "@reduxjs/toolkit";
-import { ScrapeDataType, ScrapeDataResponseType } from "../models/scrapeTypes";
+import {
+  ScrapeDataResponseType,
+  FilterState,
+  ScrapeState,
+} from "../models/scrapeTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
-
-// UI type defs -----------------
-type DataView = "single" | "table";
-type FilterState = "all" | "progress" | "finished";
-
-// state definition --------------
-interface ScrapeState {
-  ScrapeData: ScrapeDataType[];
-  filteredByView: string[];
-  filteredByRA: string[];
-  uniqueRAs: string[];
-  fieldList: string[];
-  expand: boolean;
-  dataView: DataView;
-  filterState: FilterState;
-  loading: boolean;
-  ErrorMsg: string | null;
-}
 
 // initial state --------------
 const initialState: ScrapeState = {
@@ -33,7 +19,7 @@ const initialState: ScrapeState = {
   fieldList: [],
   expand: true,
   dataView: "single",
-  filterState: "all",
+  filterState: FilterState.all,
   loading: false,
   ErrorMsg: null,
 };
@@ -43,6 +29,9 @@ export const expandAction = createAction("scrape/expand");
 export const selectRaAction = createAction<string>("scrape/selectRA");
 export const setLocalFinished = createAction<string>("scrape/setLocalFinish");
 export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
+export const setFilterState = createAction<FilterState>(
+  "scrape/setFilterState"
+);
 
 // Thunk action creators -------------------------------
 export const fetchInitData = createAsyncThunk(
@@ -105,6 +94,20 @@ const scrapeReducer = createReducer(initialState, (builder) => {
         item.finished = false;
         item.onProgress = !item.onProgress;
       }
+    })
+    .addCase(setFilterState, (state, action) => {
+      const filterState = action.payload;
+      state.filterState = filterState;
+      if (filterState === FilterState.all)
+        state.filteredByView = state.ScrapeData.map((el) => el.kfid);
+      if (filterState === FilterState.finished)
+        state.filteredByView = state.ScrapeData.filter((el) => el.finished).map(
+          (el) => el.kfid
+        );
+      if (filterState === FilterState.progress)
+        state.filteredByView = state.ScrapeData.filter(
+          (el) => el.onProgress
+        ).map((el) => el.kfid);
     })
     .addDefaultCase((state) => state);
 });

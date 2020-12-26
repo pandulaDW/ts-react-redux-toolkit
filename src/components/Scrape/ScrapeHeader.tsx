@@ -2,14 +2,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SegmentedControl, Switch, FilePicker, Select } from "evergreen-ui";
 import Button from "../Common/Button";
-import { expandAction, selectRaAction } from "../../redux/scrape";
+import {
+  expandAction,
+  selectRaAction,
+  setFilterState,
+} from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
 import { RootState } from "../../redux/_store";
+import { FilterState } from "../../models/scrapeTypes";
 
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
-  const { expand, uniqueRAs } = useSelector((state: RootState) => state.scrape);
+  const { expand, uniqueRAs, filterState } = useSelector(
+    (state: RootState) => state.scrape
+  );
 
   return (
     <div className={styles.header}>
@@ -17,12 +24,12 @@ const ScrapeHeader = () => {
         <SegmentedControl
           width={240}
           options={[
-            { label: "All", value: "all" },
-            { label: "Finished", value: "finished" },
-            { label: "On Progress", value: "on-progress" },
+            { label: "All", value: FilterState.all },
+            { label: "Finished", value: FilterState.finished },
+            { label: "On Progress", value: FilterState.progress },
           ]}
-          value="all"
-          onChange={(value) => console.log(value)}
+          value={filterState}
+          onChange={(value) => dispatch(setFilterState(value as FilterState))}
         />
         <div className={styles["header__left-switch"]}>
           <div>

@@ -29,3 +29,26 @@ export interface ScrapeDataResponseType {
   ScannedCount: number;
   fieldList: string[];
 }
+
+// state definition --------------
+export interface ScrapeState {
+  ScrapeData: ScrapeDataType[];
+  filteredByView: string[];
+  filteredByRA: string[];
+  uniqueRAs: string[];
+  fieldList: string[];
+  expand: boolean;
+  dataView: DataView;
+  filterState: FilterState;
+  loading: boolean;
+  ErrorMsg: string | null;
+}
+
+// UI type defs -----------------
+type DataView = "single" | "table";
+
+export enum FilterState {
+  all = "all",
+  progress = "progress",
+  finished = "finished",
+}
