@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { FaCheckCircle, FaGlobe } from "react-icons/fa";
 import { IoMdAlert } from "react-icons/io";
@@ -10,7 +10,9 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
+import cx from "classnames";
 import { RootState } from "../../redux/_store";
+import { setLocalFinished, setLocalProgress } from "../../redux/scrape";
 import { ScrapeDataType } from "../../models/scrapeTypes";
 import { capitalize } from "../../helpers/utils";
 import styles from "../../styles/tables.module.scss";
@@ -20,18 +22,29 @@ interface Props {
 }
 
 const ScrapeSingleTable: React.FC<Props> = ({ data }) => {
+  const dispatch = useDispatch();
   const { fieldList, expand } = useSelector((state: RootState) => state.scrape);
   const [localExpand, setLocalExpand] = useState(expand);
+  const headerClass = cx(styles.scrapeSingle__header, {
+    [styles.finished]: data.finished,
+    [styles.progress]: data.onProgress,
+  });
 
   return (
     <div className={styles.scrapeSingle}>
       <AccordionItem uuid={data.kfid} dangerouslySetExpanded={localExpand}>
-        <div className={styles.scrapeSingle__header}>
+        <div className={headerClass}>
           <p>{`KeyID - ${data.kfid} | CompanyID - ${data.company_id} | RaID - ${data.RAId}`}</p>
           <div>
             <FaGlobe className={styles["scrapeSingle__header-icon"]} />
-            <FaCheckCircle className={styles["scrapeSingle__header-icon"]} />
-            <IoMdAlert className={styles["scrapeSingle__header-icon"]} />
+            <FaCheckCircle
+              className={styles["scrapeSingle__header-icon"]}
+              onClick={() => dispatch(setLocalFinished(data.kfid))}
+            />
+            <IoMdAlert
+              className={styles["scrapeSingle__header-icon"]}
+              onClick={() => dispatch(setLocalProgress(data.kfid))}
+            />
             <AccordionItemHeading>
               <AccordionItemButton style={{ display: "flex" }}>
                 <MdFormatIndentDecrease

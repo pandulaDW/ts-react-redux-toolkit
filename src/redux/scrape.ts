@@ -41,6 +41,8 @@ const initialState: ScrapeState = {
 // Action creators -----------------------------------
 export const expandAction = createAction("scrape/expand");
 export const selectRaAction = createAction<string>("scrape/selectRA");
+export const setLocalFinished = createAction<string>("scrape/setLocalFinish");
+export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
 
 // Thunk action creators -------------------------------
 export const fetchInitData = createAsyncThunk(
@@ -65,6 +67,10 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.ErrorMsg = null;
       const { Items } = action.payload;
+      Items.forEach((item) => {
+        item.finished = false;
+        item.onProgress = false;
+      });
       state.ScrapeData = Items;
       state.filteredByView = Items.map((item) => item.kfid);
       state.filteredByRA = Items.map((item) => item.kfid);
@@ -85,6 +91,20 @@ const scrapeReducer = createReducer(initialState, (builder) => {
         state.filteredByRA = state.ScrapeData.filter(
           (el) => el.RAId === action.payload
         ).map((el) => el.kfid);
+    })
+    .addCase(setLocalFinished, (state, action) => {
+      const item = state.ScrapeData.find((el) => el.kfid === action.payload);
+      if (item) {
+        item.onProgress = false;
+        item.finished = !item.finished;
+      }
+    })
+    .addCase(setLocalProgress, (state, action) => {
+      const item = state.ScrapeData.find((el) => el.kfid === action.payload);
+      if (item) {
+        item.finished = false;
+        item.onProgress = !item.onProgress;
+      }
     })
     .addDefaultCase((state) => state);
 });

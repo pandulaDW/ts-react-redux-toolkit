@@ -51,6 +51,24 @@
     padding: 0.5rem 1rem;
     border-radius: 2px;
 
+    &.finished {
+      background-color: $color-green-2;
+
+      p,
+      svg {
+        color: white;
+      }
+    }
+
+    &.progress {
+      background-color: $color-red-1;
+
+      p,
+      svg {
+        color: white;
+      }
+    }
+
     p {
       color: $color-grey-8;
       font-weight: 400;
@@ -89,7 +107,7 @@
     }
 
     &-icon:nth-of-type(3) {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: $color-red-1;
       margin-left: 0.5rem;
 
