@@ -2,14 +2,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SegmentedControl, Switch, FilePicker, Select } from "evergreen-ui";
 import Button from "../Common/Button";
-import { expandAction } from "../../redux/scrape";
+import { expandAction, selectRaAction } from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
 import { RootState } from "../../redux/_store";
 
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
-  const { expand } = useSelector((state: RootState) => state.scrape);
+  const { expand, uniqueRAs } = useSelector((state: RootState) => state.scrape);
 
   return (
     <div className={styles.header}>
@@ -40,12 +40,13 @@ const ScrapeHeader = () => {
         </div>
       </div>
       <div className={styles.header__right}>
-        <Select>
+        <Select onChange={(e) => dispatch(selectRaAction(e.target.value))}>
           <option value="all" selected>
             All RAs
           </option>
-          <option value="foo">Foo</option>
-          <option value="bar">Bar</option>
+          {uniqueRAs.map((ra) => (
+            <option value={ra}>{ra}</option>
+          ))}
         </Select>
         <div className={styles["header__right-updateTime"]}>
           <p>Last Updated Time:</p>

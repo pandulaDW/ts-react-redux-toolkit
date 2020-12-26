@@ -13,7 +13,9 @@ type FilterState = "all" | "progress" | "finished";
 // state definition --------------
 interface ScrapeState {
   ScrapeData: ScrapeDataType[];
-  filteredIDs: string[];
+  filteredByView: string[];
+  filteredByRA: string[];
+  uniqueRAs: string[];
   fieldList: string[];
   expand: boolean;
   dataView: DataView;
@@ -25,7 +27,9 @@ interface ScrapeState {
 // initial state --------------
 const initialState: ScrapeState = {
   ScrapeData: [],
-  filteredIDs: [],
+  filteredByView: [],
+  filteredByRA: [],
+  uniqueRAs: [],
   fieldList: [],
   expand: true,
   dataView: "single",
@@ -34,10 +38,11 @@ const initialState: ScrapeState = {
   ErrorMsg: null,
 };
 
-// Action creators -------------------
+// Action creators -----------------------------------
 export const expandAction = createAction("scrape/expand");
+export const selectRaAction = createAction<string>("scrape/selectRA");
 
-// Thunk action creators --------------
+// Thunk action creators -------------------------------
 export const fetchInitData = createAsyncThunk(
   "scrape/fetchInitData",
   async (arg, thunkAPI) => {
@@ -50,7 +55,7 @@ export const fetchInitData = createAsyncThunk(
   }
 );
 
-// Reducer ----------------
+// Reducer -------------------------------------------
 const scrapeReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchInitData.pending, (state) => {
@@ -59,9 +64,12 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     .addCase(fetchInitData.fulfilled, (state, action) => {
       state.loading = false;
       state.ErrorMsg = null;
-      state.ScrapeData = action.payload.Items;
-      state.filteredIDs = action.payload.Items.map((item) => item.kfid);
+      const { Items } = action.payload;
+      state.ScrapeData = Items;
+      state.filteredByView = Items.map((item) => item.kfid);
+      state.filteredByRA = Items.map((item) => item.kfid);
       state.fieldList = action.payload.fieldList;
+      state.uniqueRAs = Array.from(new Set(Items.map((item) => item.RAId)));
     })
     .addCase(fetchInitData.rejected, (state, action) => {
       state.loading = false;
@@ -69,6 +77,14 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     })
     .addCase(expandAction, (state) => {
       state.expand = !state.expand;
+    })
+    .addCase(selectRaAction, (state, action) => {
+      if (action.payload === "all")
+        state.filteredByRA = state.ScrapeData.map((el) => el.kfid);
+      else
+        state.filteredByRA = state.ScrapeData.filter(
+          (el) => el.RAId === action.payload
+        ).map((el) => el.kfid);
     })
     .addDefaultCase((state) => state);
 });
