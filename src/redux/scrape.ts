@@ -13,6 +13,7 @@ import { fetchInitCall } from "../helpers/apiCalls";
 // initial state --------------
 const initialState: ScrapeState = {
   ScrapeData: [],
+  timestamp: 0,
   filteredByView: [],
   filteredByRA: [],
   uniqueRAs: [],
@@ -61,6 +62,7 @@ const scrapeReducer = createReducer(initialState, (builder) => {
         item.onProgress = false;
       });
       state.ScrapeData = Items;
+      state.timestamp = Items[0]["timestamp"];
       state.filteredByView = Items.map((item) => item.kfid);
       state.filteredByRA = Items.map((item) => item.kfid);
       state.fieldList = action.payload.fieldList;

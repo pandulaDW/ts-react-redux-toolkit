@@ -33,6 +33,7 @@ export interface ScrapeDataResponseType {
 // state definition --------------
 export interface ScrapeState {
   ScrapeData: ScrapeDataType[];
+  timestamp: ScrapeDataType["timestamp"];
   filteredByView: string[];
   filteredByRA: string[];
   uniqueRAs: string[];

@@ -14,7 +14,7 @@ import { FilterState } from "../../models/scrapeTypes";
 
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
-  const { expand, uniqueRAs, filterState } = useSelector(
+  const { expand, uniqueRAs, filterState, timestamp } = useSelector(
     (state: RootState) => state.scrape
   );
 
@@ -48,16 +48,16 @@ const ScrapeHeader = () => {
       </div>
       <div className={styles.header__right}>
         <Select onChange={(e) => dispatch(selectRaAction(e.target.value))}>
-          <option value="all" selected>
-            All RAs
-          </option>
-          {uniqueRAs.map((ra) => (
-            <option value={ra}>{ra}</option>
+          <option value="all">All RAs</option>
+          {uniqueRAs.map((ra, id) => (
+            <option value={ra} key={id}>
+              {ra}
+            </option>
           ))}
         </Select>
         <div className={styles["header__right-updateTime"]}>
           <p>Last Updated Time:</p>
-          <p>{convertToDTString(new Date())}</p>
+          <p>{convertToDTString(timestamp)}</p>
         </div>
         <FilePicker
           multiple={false}

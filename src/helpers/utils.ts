@@ -1,5 +1,5 @@
-export const convertToDTString = (d: Date) => {
-  return d.toDateString() + " " + d.toLocaleTimeString();
+export const convertToDTString = (d: number) => {
+  return new Date(d).toDateString() + " " + new Date(d).toLocaleTimeString();
 };
 
 export const capitalize = (s: String) => {
