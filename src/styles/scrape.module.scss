@@ -75,3 +75,8 @@
   row-gap: 2rem;
   padding: 1rem 4rem;
 }
+
+// Full table container ---------------------
+.tableContainer {
+  grid-column: 1/ -1;
+}

@@ -1,11 +1,13 @@
+interface FieldProperties {
+  invalid: boolean;
+  match: boolean;
+  update: boolean;
+  uv_value: string;
+  scraped_value: string;
+}
+
 interface NonCommonFields {
-  [key: string]: {
-    invalid: boolean;
-    match: boolean;
-    update: boolean;
-    uv_value: string;
-    scraped_value: string;
-  };
+  [key: string]: FieldProperties;
 }
 
 interface AddedFields {
