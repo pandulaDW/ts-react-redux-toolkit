@@ -7,6 +7,7 @@ import {
   ScrapeDataResponseType,
   FilterState,
   ScrapeState,
+  DataView,
 } from "../models/scrapeTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
 
@@ -19,7 +20,7 @@ const initialState: ScrapeState = {
   uniqueRAs: [],
   fieldList: [],
   expand: true,
-  dataView: "single",
+  dataView: DataView.single,
   filterState: FilterState.all,
   loading: false,
   ErrorMsg: null,
@@ -27,6 +28,7 @@ const initialState: ScrapeState = {
 
 // Action creators -----------------------------------
 export const expandAction = createAction("scrape/expand");
+export const setDataView = createAction("scrape/setDataView");
 export const selectRaAction = createAction<string>("scrape/selectRA");
 export const setLocalFinished = createAction<string>("scrape/setLocalFinish");
 export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
@@ -110,6 +112,10 @@ const scrapeReducer = createReducer(initialState, (builder) => {
         state.filteredByView = state.ScrapeData.filter(
           (el) => el.onProgress
         ).map((el) => el.kfid);
+    })
+    .addCase(setDataView, (state) => {
+      state.dataView =
+        state.dataView === DataView.single ? DataView.table : DataView.single;
     })
     .addDefaultCase((state) => state);
 });

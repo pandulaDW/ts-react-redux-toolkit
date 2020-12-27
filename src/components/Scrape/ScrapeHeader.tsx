@@ -6,15 +6,16 @@ import {
   expandAction,
   selectRaAction,
   setFilterState,
+  setDataView,
 } from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
 import { RootState } from "../../redux/_store";
-import { FilterState } from "../../models/scrapeTypes";
+import { FilterState, DataView } from "../../models/scrapeTypes";
 
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
-  const { expand, uniqueRAs, filterState, timestamp } = useSelector(
+  const { expand, uniqueRAs, filterState, timestamp, dataView } = useSelector(
     (state: RootState) => state.scrape
   );
 
@@ -36,12 +37,17 @@ const ScrapeHeader = () => {
             <Switch
               height={20}
               checked={!expand}
+              disabled={dataView === DataView.table}
               onChange={() => dispatch(expandAction())}
             />
             <p>Collapse</p>
           </div>
           <div>
-            <Switch height={20} />
+            <Switch
+              height={20}
+              checked={dataView === DataView.table}
+              onChange={() => dispatch(setDataView())}
+            />
             <p>Table View</p>
           </div>
         </div>

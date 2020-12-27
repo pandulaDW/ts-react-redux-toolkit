@@ -46,7 +46,10 @@ export interface ScrapeState {
 }
 
 // UI type defs -----------------
-type DataView = "single" | "table";
+export enum DataView {
+  single = "single",
+  table = "table",
+}
 
 export enum FilterState {
   all = "all",
