@@ -19,20 +19,16 @@ const ScrapeContent = () => {
     filteredIDs.includes(data.kfid)
   );
 
-  return (
-    <div className={styles.dataContent}>
-      {dataView === DataView.single ? (
-        filteredData.map((el) => {
-          return (
-            <Accordion allowMultipleExpanded allowZeroExpanded>
-              <ScrapeSingleTable key={uuid()} data={el} />
-            </Accordion>
-          );
-        })
-      ) : (
-        <ScrapeFullTable data={filteredData} />
-      )}
-    </div>
+  return dataView === DataView.single ? (
+    <Accordion allowMultipleExpanded allowZeroExpanded>
+      <div className={styles.dataContent}>
+        {filteredData.map((el) => (
+          <ScrapeSingleTable key={uuid()} data={el} />
+        ))}
+      </div>
+    </Accordion>
+  ) : (
+    <ScrapeFullTable data={filteredData} />
   );
 };
 
