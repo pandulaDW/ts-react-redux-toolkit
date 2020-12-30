@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { ScrapeDataType } from "../../models/scrapeTypes";
 import { RootState } from "../../redux/_store";
 import styles from "../../styles/scrape.module.scss";
-import FlexTable from "../Common/FlexTable";
-import { Column } from "../../models/flexTable";
+import FlexTable from "../FlexTable/FlexTable";
+import { Column, TableData } from "../../models/flexTable";
 
 interface Props {
   data: ScrapeDataType[];
@@ -26,9 +26,22 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
     })),
   ];
 
+  const assembledData: TableData = data.map((item) => {
+    const row = [
+      item.kfid,
+      item.RAId,
+      ...fieldList.map((field) => (item[field] ? item[field].uv_value : "")),
+      ...fieldList.map((field) =>
+        item[field] ? item[field].scraped_value : ""
+      ),
+    ];
+
+    return row;
+  });
+
   return (
     <div className={styles.tableContainer}>
-      <FlexTable columns={columns} />
+      <FlexTable columns={columns} data={assembledData} />
     </div>
   );
 };

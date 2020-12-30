@@ -61,7 +61,9 @@
     ]
   },
   "devDependencies": {
+    "@types/faker": "^5.1.5",
     "concurrently": "^5.3.0",
+    "faker": "^5.1.0",
     "json-server": "^0.16.3"
   }
 }

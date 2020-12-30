@@ -32,8 +32,15 @@
     overflow-y: auto;
 
     &-row {
-      height: 100px;
-      background-color: yellowgreen;
+      display: flex;
+      justify-content: stretch;
+
+      &-cell {
+        background-color: $color-grey-5;
+        border-right: 1px solid white;
+        color: white;
+        padding: 0.5rem 2rem;
+      }
     }
   }
 }
