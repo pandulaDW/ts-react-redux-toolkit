@@ -10,21 +10,26 @@ interface Props {
 
 const FlexTable: React.FC<Props> = () => {
   const columns = genColumns();
-  const data = genData();
-
-  console.log(data);
+  const data = genData(30);
 
   return (
-    <div className={styles.table}>
-      <div className={styles.table__header}></div>
+    <div
+      className={styles.table}
+      style={{ width: `${columns.length * 300}px` }}
+    >
+      <div className={styles.table__header}>
+        {columns.map((col) => (
+          <div className={styles["table__header-headerCell"]}>{col}</div>
+        ))}
+      </div>
       <div className={styles.table__body}>
-        <div className={styles["table__body-row"]}>section 2</div>
-        <div className={styles["table__body-row"]}>section 3</div>
-        <div className={styles["table__body-row"]}>section 4</div>
-        <div className={styles["table__body-row"]}>section 5</div>
-        <div className={styles["table__body-row"]}>section 5</div>
-        <div className={styles["table__body-row"]}>section 5</div>
-        <div className={styles["table__body-row"]}>section 5</div>
+        {data.map((row) => (
+          <div className={styles["table__body-row"]}>
+            {row.map((col) => (
+              <div className={styles["table__body-row-cell"]}>{col}</div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );

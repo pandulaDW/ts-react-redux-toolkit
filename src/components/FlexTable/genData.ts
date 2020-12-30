@@ -4,19 +4,26 @@ export const genColumns = (): string[] => {
   return [
     "companyName",
     "companySuffix",
+    "catchPhrase",
     "catchPhraseDescriptor",
     "catchPhraseNoun",
   ];
 };
 
-export const genData = (): string[][] => {
-  const data: string[][] = new Array(10).fill([]);
-  data.forEach((row) => {
-    row[0] = faker.company.companyName();
-    row[1] = faker.company.companySuffix();
-    row[2] = faker.company.catchPhraseDescriptor();
-    row[3] = faker.company.catchPhraseNoun();
-  });
+const genCompanyData = () => {
+  return [
+    faker.company.companyName(),
+    faker.company.companySuffix(),
+    faker.company.catchPhrase(),
+    faker.company.catchPhraseDescriptor(),
+    faker.company.catchPhraseNoun(),
+  ];
+};
 
+export const genData = (rowNum: number): string[][] => {
+  const data: string[][] = [];
+  for (let index = 0; index < rowNum; index++) {
+    data.push(genCompanyData());
+  }
   return data;
 };
