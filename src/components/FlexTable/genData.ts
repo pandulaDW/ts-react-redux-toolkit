@@ -2,11 +2,11 @@ import faker from "faker";
 
 export const genColumns = (): string[] => {
   return [
-    "companyName",
-    "companySuffix",
-    "catchPhrase",
-    "catchPhraseDescriptor",
-    "catchPhraseNoun",
+    "CompanyName",
+    "CompanySuffix",
+    "CatchPhrase",
+    "CatchPhraseDescriptor",
+    "CatchPhraseNoun",
   ];
 };
 
