@@ -11,9 +11,39 @@ interface Props {
 }
 
 const ScrapeFullTable: React.FC<Props> = ({ data }) => {
+  const { fieldList } = useSelector((state: RootState) => state.scrape);
+
+  const columns: Column[] = [
+    { colName: "KFID", colWidth: 100 },
+    { colName: "RA_ID", colWidth: 100 },
+    ...fieldList.flatMap((field) => {
+      return [
+        { colName: field, colWidth: 200 },
+        { colName: `scraped ${field}`, colWidth: 200 },
+      ];
+    }),
+  ];
+
+  const arrangeData = (): TableData => {
+    let arrangedData: TableData = {
+      KFID: data.map((item) => item.kfid),
+      RA_ID: data.map((item) => item.kfid),
+    };
+
+    fieldList.forEach((field) => {
+      arrangedData = {
+        ...arrangedData,
+        [field]: data.map((item) => item[field]?.uv_value),
+        [`scraped ${field}`]: data.map((item) => item[field]?.scraped_value),
+      };
+    });
+
+    return arrangedData;
+  };
+
   return (
     <div className={styles.tableContainer}>
-      <FlexTable />
+      <FlexTable columns={columns} data={arrangeData()} rowNum={data.length} />
     </div>
   );
 };

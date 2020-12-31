@@ -28,17 +28,15 @@ export class FakeData {
 
   private genCompanyData(): Cell[][] {
     return [
-      new Array(this.rowNum).fill("").map((el) => faker.company.companyName()),
+      new Array(this.rowNum).fill("").map(() => faker.company.companyName()),
+      new Array(this.rowNum).fill("").map(() => faker.company.companySuffix()),
+      new Array(this.rowNum).fill("").map(() => faker.company.catchPhrase()),
       new Array(this.rowNum)
         .fill("")
-        .map((el) => faker.company.companySuffix()),
-      new Array(this.rowNum).fill("").map((el) => faker.company.catchPhrase()),
+        .map(() => faker.company.catchPhraseDescriptor()),
       new Array(this.rowNum)
         .fill("")
-        .map((el) => faker.company.catchPhraseDescriptor()),
-      new Array(this.rowNum)
-        .fill("")
-        .map((el) => faker.company.catchPhraseNoun()),
+        .map(() => faker.company.catchPhraseNoun()),
     ];
   }
 
