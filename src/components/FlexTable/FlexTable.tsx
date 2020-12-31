@@ -1,25 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
 import { v4 as uuid } from "uuid";
-import { Column, TableData } from "../../models/flexTable";
+// import { Column, TableData } from "../../models/flexTable";
 import styles from "../../styles/flexTable.module.scss";
-import { genColumns, genData } from "./genData";
+import { FakeData } from "./genData";
 import { calcHeaderWidth, computedStyles, calcTableWidth } from "./helpers";
+import { range } from "../../helpers/utils";
 
-interface Props {
-  columns: Column[];
-  data: TableData;
-}
+// interface Props {
+//   columns: Column[];
+//   data: TableData;
+// }
 
-const FlexTable: React.FC<Props> = () => {
+const FlexTable = () => {
   const [, setRefChange] = useState(false);
-  const columns = genColumns();
-  const data = genData(30);
   const tableRef = useRef<HTMLDivElement>(null);
-  const tableWidth = calcTableWidth(columns);
 
   useEffect(() => {
     setRefChange(true);
   }, [tableRef]);
+
+  const fakeData = new FakeData(30);
+  const columns = fakeData.genColumns();
+  const data = fakeData.genData();
+  const tableWidth = calcTableWidth(columns);
 
   return (
     <div className={styles.table} style={computedStyles(tableWidth)}>
@@ -35,19 +38,15 @@ const FlexTable: React.FC<Props> = () => {
         ))}
       </div>
       <div className={styles.table__body} ref={tableRef}>
-        {data.map((row) => (
+        {range(fakeData.rowNum).map((index) => (
           <div className={styles["table__body-row"]} key={uuid()}>
-            {row.map((col, idx) => (
+            {columns.map((col) => (
               <div
                 key={uuid()}
                 className={styles["table__body-row-cell"]}
-                style={
-                  idx === 0
-                    ? computedStyles(calcHeaderWidth(tableRef, 100))
-                    : computedStyles(calcHeaderWidth(tableRef, 300))
-                }
+                style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
               >
-                {col}
+                {data[col.colName] ? data[col.colName][index] : ""}
               </div>
             ))}
           </div>

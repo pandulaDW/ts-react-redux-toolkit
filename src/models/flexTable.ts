@@ -3,8 +3,8 @@ export interface Column {
   colWidth: number;
 }
 
-type CellData = string | number | boolean;
+export type Cell = string | number | boolean;
 
-type RowData = CellData[];
-
-export type TableData = RowData[];
+export interface TableData {
+  [key: string]: Cell[];
+}
