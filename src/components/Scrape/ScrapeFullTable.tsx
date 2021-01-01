@@ -16,7 +16,7 @@ const arrangeData = (
 ): TableData => {
   let arrangedData: TableData = {
     KFID: data.map((item) => item.kfid),
-    RA_ID: data.map((item) => item.kfid),
+    RA_ID: data.map((item) => item.RAId),
   };
 
   fieldList.forEach((field) => {
@@ -44,10 +44,13 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
     }),
   ];
 
+  const selectColumns = ["KFID", "RA_ID", "company_name"];
+
   return (
     <div className={styles.tableContainer}>
       <FlexTable
         columns={columns}
+        selectColumns={selectColumns}
         data={arrangeData(data, fieldList)}
         rowNum={data.length}
       />

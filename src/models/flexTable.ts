@@ -3,7 +3,7 @@ export interface Column {
   colWidth: number;
 }
 
-export type Cell = string | number | boolean;
+export type Cell = string;
 
 export interface TableData {
   [key: string]: Cell[];

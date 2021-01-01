@@ -7,6 +7,7 @@ import {
   ScrapeDataResponseType,
   FilterState,
   ScrapeState,
+  FilterTableCol,
   DataView,
 } from "../models/scrapeTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
@@ -19,6 +20,7 @@ const initialState: ScrapeState = {
   filteredByRA: [],
   uniqueRAs: [],
   fieldList: [],
+  filterTableCol: { column: "", indices: [] },
   expand: true,
   dataView: DataView.single,
   filterState: FilterState.all,
@@ -34,6 +36,9 @@ export const setLocalFinished = createAction<string>("scrape/setLocalFinish");
 export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
 export const setFilterState = createAction<FilterState>(
   "scrape/setFilterState"
+);
+export const setFilterTableCol = createAction<FilterTableCol>(
+  "scrape/filterTable"
 );
 
 // Thunk action creators -------------------------------
@@ -116,6 +121,9 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     .addCase(setDataView, (state) => {
       state.dataView =
         state.dataView === DataView.single ? DataView.table : DataView.single;
+    })
+    .addCase(setFilterTableCol, (state, action) => {
+      state.filterTableCol = { ...action.payload };
     })
     .addDefaultCase((state) => state);
 });

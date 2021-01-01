@@ -8,11 +8,13 @@ import FlexHeader from "./FlexHeader";
 
 interface Props {
   columns: Column[];
+  selectColumns: string[];
   data: TableData;
   rowNum: number;
 }
 
-const FlexTable: React.FC<Props> = ({ columns, data, rowNum }) => {
+const FlexTable: React.FC<Props> = (props) => {
+  const { columns, data, rowNum, selectColumns } = props;
   const [, setRefChange] = useState(false);
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -24,7 +26,12 @@ const FlexTable: React.FC<Props> = ({ columns, data, rowNum }) => {
 
   return (
     <div className={styles.table} style={computedStyles(tableWidth)}>
-      <FlexHeader columns={columns} tableRef={tableRef} />
+      <FlexHeader
+        columns={columns}
+        data={data}
+        tableRef={tableRef}
+        selectColumns={selectColumns}
+      />
       <div className={styles.table__body} ref={tableRef}>
         {range(rowNum).map((index) => (
           <div className={styles["table__body-row"]} key={uuid()}>

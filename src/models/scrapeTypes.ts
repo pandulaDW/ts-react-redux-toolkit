@@ -33,6 +33,11 @@ export interface ScrapeDataResponseType {
 }
 
 // state definition --------------
+export interface FilterTableCol {
+  column: string;
+  indices: number[];
+}
+
 export interface ScrapeState {
   ScrapeData: ScrapeDataType[];
   timestamp: ScrapeDataType["timestamp"];
@@ -43,6 +48,7 @@ export interface ScrapeState {
   expand: boolean;
   dataView: DataView;
   filterState: FilterState;
+  filterTableCol: FilterTableCol;
   loading: boolean;
   ErrorMsg: string | null;
 }

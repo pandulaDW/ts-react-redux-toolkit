@@ -27,6 +27,13 @@
     &-headerCell:not(:last-child) {
       border-right: 1px solid $color-grey-4;
     }
+
+    &-selectInput {
+      display: flex;
+      justify-content: center;
+      padding: 5px 0px;
+      border-right: 1px solid $color-grey-3;
+    }
   }
 
   &__body {

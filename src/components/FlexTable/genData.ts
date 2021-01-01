@@ -41,7 +41,9 @@ export class FakeData {
   }
 
   genData(): TableData {
-    const indices: TableData = { Index: range(this.rowNum + 1, 1) };
+    const indices: TableData = {
+      Index: range(this.rowNum + 1, 1).map((el) => String(el)),
+    };
     const allData = this.genCompanyData();
     let data: TableData = { ...indices };
 
