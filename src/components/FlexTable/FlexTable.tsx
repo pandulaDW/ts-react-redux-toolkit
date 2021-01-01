@@ -4,6 +4,7 @@ import { Column, TableData } from "../../models/flexTable";
 import styles from "../../styles/flexTable.module.scss";
 import { calcHeaderWidth, computedStyles, calcTableWidth } from "./helpers";
 import { range } from "../../helpers/utils";
+import FlexHeader from "./FlexHeader";
 
 interface Props {
   columns: Column[];
@@ -23,17 +24,7 @@ const FlexTable: React.FC<Props> = ({ columns, data, rowNum }) => {
 
   return (
     <div className={styles.table} style={computedStyles(tableWidth)}>
-      <div className={styles.table__header}>
-        {columns.map((col) => (
-          <div
-            className={styles["table__header-headerCell"]}
-            key={uuid()}
-            style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
-          >
-            {col.colName}
-          </div>
-        ))}
-      </div>
+      <FlexHeader columns={columns} tableRef={tableRef} />
       <div className={styles.table__body} ref={tableRef}>
         {range(rowNum).map((index) => (
           <div className={styles["table__body-row"]} key={uuid()}>

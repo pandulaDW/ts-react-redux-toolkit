@@ -10,6 +10,26 @@ interface Props {
   data: ScrapeDataType[];
 }
 
+const arrangeData = (
+  data: ScrapeDataType[],
+  fieldList: string[]
+): TableData => {
+  let arrangedData: TableData = {
+    KFID: data.map((item) => item.kfid),
+    RA_ID: data.map((item) => item.kfid),
+  };
+
+  fieldList.forEach((field) => {
+    arrangedData = {
+      ...arrangedData,
+      [field]: data.map((item) => item[field]?.uv_value),
+      [`scraped ${field}`]: data.map((item) => item[field]?.scraped_value),
+    };
+  });
+
+  return arrangedData;
+};
+
 const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   const { fieldList } = useSelector((state: RootState) => state.scrape);
 
@@ -24,26 +44,13 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
     }),
   ];
 
-  const arrangeData = (): TableData => {
-    let arrangedData: TableData = {
-      KFID: data.map((item) => item.kfid),
-      RA_ID: data.map((item) => item.kfid),
-    };
-
-    fieldList.forEach((field) => {
-      arrangedData = {
-        ...arrangedData,
-        [field]: data.map((item) => item[field]?.uv_value),
-        [`scraped ${field}`]: data.map((item) => item[field]?.scraped_value),
-      };
-    });
-
-    return arrangedData;
-  };
-
   return (
     <div className={styles.tableContainer}>
-      <FlexTable columns={columns} data={arrangeData()} rowNum={data.length} />
+      <FlexTable
+        columns={columns}
+        data={arrangeData(data, fieldList)}
+        rowNum={data.length}
+      />
     </div>
   );
 };
