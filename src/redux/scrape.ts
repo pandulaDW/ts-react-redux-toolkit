@@ -7,9 +7,9 @@ import {
   ScrapeDataResponseType,
   FilterState,
   ScrapeState,
-  FilterTableCol,
   DataView,
 } from "../models/scrapeTypes";
+import { FilterTableCols } from "../models/flexTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
 
 // initial state --------------
@@ -20,7 +20,7 @@ const initialState: ScrapeState = {
   filteredByRA: [],
   uniqueRAs: [],
   fieldList: [],
-  filterTableCol: { column: "", indices: [] },
+  filterTableCols: {},
   expand: true,
   dataView: DataView.single,
   filterState: FilterState.all,
@@ -34,11 +34,11 @@ export const setDataView = createAction("scrape/setDataView");
 export const selectRaAction = createAction<string>("scrape/selectRA");
 export const setLocalFinished = createAction<string>("scrape/setLocalFinish");
 export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
+export const setFilterTableCol = createAction<FilterTableCols>(
+  "scrape/filterTableCols"
+);
 export const setFilterState = createAction<FilterState>(
   "scrape/setFilterState"
-);
-export const setFilterTableCol = createAction<FilterTableCol>(
-  "scrape/filterTable"
 );
 
 // Thunk action creators -------------------------------
@@ -123,7 +123,10 @@ const scrapeReducer = createReducer(initialState, (builder) => {
         state.dataView === DataView.single ? DataView.table : DataView.single;
     })
     .addCase(setFilterTableCol, (state, action) => {
-      state.filterTableCol = { ...action.payload };
+      if (Object.values(action.payload)[0] === undefined)
+        delete state.filterTableCols[Object.keys(action.payload)[0]];
+      else
+        state.filterTableCols = { ...state.filterTableCols, ...action.payload };
     })
     .addDefaultCase((state) => state);
 });

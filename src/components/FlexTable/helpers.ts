@@ -1,4 +1,4 @@
-import { Column } from "../../models/flexTable";
+import { Column } from "../../models/flexTypes";
 
 export const computedStyles = (width: number): { [key: string]: string } => ({
   width: `${width}px`,

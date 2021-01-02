@@ -1,20 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { v4 as uuid } from "uuid";
-import { Column, TableData } from "../../models/flexTable";
+import { TableProps } from "../../models/flexTypes";
 import styles from "../../styles/flexTable.module.scss";
 import { calcHeaderWidth, computedStyles, calcTableWidth } from "./helpers";
 import { range } from "../../helpers/utils";
 import FlexHeader from "./FlexHeader";
 
-interface Props {
-  columns: Column[];
-  selectColumns: string[];
-  data: TableData;
-  rowNum: number;
-}
-
-const FlexTable: React.FC<Props> = (props) => {
+const FlexTable: React.FC<TableProps> = (props) => {
   const { columns, data, rowNum, selectColumns } = props;
+  const { filterTableCols, handleSearch } = props;
   const [, setRefChange] = useState(false);
   const tableRef = useRef<HTMLDivElement>(null);
 

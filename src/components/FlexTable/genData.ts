@@ -1,5 +1,5 @@
 import faker from "faker";
-import { Column, Cell, TableData } from "../../models/flexTable";
+import { Column, Cell, TableData } from "../../models/flexTypes";
 import { range } from "../../helpers/utils";
 
 export class FakeData {
