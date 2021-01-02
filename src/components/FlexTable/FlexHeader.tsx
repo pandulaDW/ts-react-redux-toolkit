@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
+import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { HeaderProps } from "../../models/flexTypes";
 import { calcHeaderWidth, computedStyles } from "./helpers";
 import styles from "../../styles/flexTable.module.scss";
@@ -18,7 +19,11 @@ const FlexHeader: React.FC<HeaderProps> = (props) => {
             key={uuid()}
             style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
           >
-            {col.colName}
+            <p>{col.colName}</p>
+            <div>
+              <FaAngleUp />
+              <FaAngleDown />
+            </div>
           </div>
         ))}
       </div>
