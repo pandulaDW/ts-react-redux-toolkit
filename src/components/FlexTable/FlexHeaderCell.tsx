@@ -1,11 +1,13 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { Column, TableData } from "../../models/flexTypes";
+import {
+  HeaderCellProps,
+  SearchEvent,
+  HandleSearchFunc,
+} from "../../models/flexTypes";
 import styles from "../../styles/flexTable.module.scss";
 import { calcHeaderWidth, computedStyles } from "./helpers";
-import { setFilterTableCol } from "../../redux/scrape";
-import { RootState } from "../../redux/_store";
 
 const createOptions = (data: TableData, col: Column) => {
   return Array.from(new Set(data[col.colName])).map((item) => ({
@@ -14,24 +16,20 @@ const createOptions = (data: TableData, col: Column) => {
   }));
 };
 
-interface Props {
-  data: TableData;
-  col: Column;
-  selectColumns: string[];
-  tableRef: React.RefObject<HTMLDivElement>;
-}
+const handleSearchWrapper = (col: Column, handleSearch: HandleSearchFunc) => {
+  return (event: SearchEvent) => handleSearch(event, col);
+};
 
-const FlexHeaderCell: React.FC<Props> = (props) => {
-  const dispatch = useDispatch();
-  const { filterTableCols } = useSelector((state: RootState) => state.scrape);
+const FlexHeaderCell: React.FC<HeaderCellProps> = (props) => {
   const { data, tableRef, selectColumns, col } = props;
+  const { filterTableCols, handleSearch } = props;
 
   return (
     <div
       className={styles["table__header-selectInput"]}
       style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
     >
-      {selectColumns.includes(col.colName) && (
+      {selectColumns.includes(col.colName) && filterTableCols && handleSearch && (
         <div style={{ width: "90%" }}>
           <Select
             options={createOptions(data, col)}
@@ -45,10 +43,7 @@ const FlexHeaderCell: React.FC<Props> = (props) => {
             }
             isClearable
             isSearchable
-            onChange={(event) => {
-              if (event)
-                dispatch(setFilterTableCol({ [col.colName]: event.value }));
-            }}
+            onChange={(event) => handleSearchWrapper(col, handleSearch)(event)}
           />
         </div>
       )}

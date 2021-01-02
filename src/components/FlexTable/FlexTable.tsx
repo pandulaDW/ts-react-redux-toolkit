@@ -25,6 +25,8 @@ const FlexTable: React.FC<TableProps> = (props) => {
         data={data}
         tableRef={tableRef}
         selectColumns={selectColumns}
+        filterTableCols={filterTableCols}
+        handleSearch={handleSearch}
       />
       <div className={styles.table__body} ref={tableRef}>
         {range(rowNum).map((index) => (

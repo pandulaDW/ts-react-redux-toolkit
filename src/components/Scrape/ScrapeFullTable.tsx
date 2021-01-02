@@ -1,10 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ScrapeDataType } from "../../models/scrapeTypes";
 import { RootState } from "../../redux/_store";
 import styles from "../../styles/scrape.module.scss";
 import FlexTable from "../FlexTable/FlexTable";
-import { Column } from "../../models/flexTypes";
+import { Column, HandleSearchFunc } from "../../models/flexTypes";
+import { setFilterTableCol } from "../../redux/scrape";
 import { arrangeData, createColumns } from "../../helpers/scrape";
 
 interface Props {
@@ -12,10 +13,16 @@ interface Props {
 }
 
 const ScrapeFullTable: React.FC<Props> = ({ data }) => {
-  const { fieldList } = useSelector((state: RootState) => state.scrape);
+  const dispatch = useDispatch();
+  const { fieldList, filterTableCols } = useSelector(
+    (state: RootState) => state.scrape
+  );
 
   const columns: Column[] = createColumns(fieldList);
   const selectColumns = ["KFID", "RA_ID", "company_name"];
+  const handleSearch: HandleSearchFunc = (event, col) => {
+    if (event) dispatch(setFilterTableCol({ [col.colName]: event.value }));
+  };
 
   let arrangedData = arrangeData(data, fieldList);
   // arrangedData = filterTableCol.column
@@ -29,6 +36,8 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
         selectColumns={selectColumns}
         data={arrangedData}
         rowNum={data.length}
+        filterTableCols={filterTableCols}
+        handleSearch={handleSearch}
       />
     </div>
   );

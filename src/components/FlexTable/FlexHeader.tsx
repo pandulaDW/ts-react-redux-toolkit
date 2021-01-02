@@ -5,11 +5,7 @@ import { calcHeaderWidth, computedStyles } from "./helpers";
 import styles from "../../styles/flexTable.module.scss";
 import FlexHeaderCell from "./FlexHeaderCell";
 
-interface Props extends HeaderProps {
-  tableRef: React.RefObject<HTMLDivElement>;
-}
-
-const FlexHeader: React.FC<Props> = (props) => {
+const FlexHeader: React.FC<HeaderProps> = (props) => {
   const { columns, data, tableRef, selectColumns } = props;
 
   return (

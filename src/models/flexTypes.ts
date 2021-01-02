@@ -1,3 +1,5 @@
+import { ValueType } from "react-select";
+
 export interface Column {
   colName: string;
   colWidth: number;
@@ -13,16 +15,29 @@ export interface TableData {
   [key: string]: Cell[];
 }
 
+export type SearchEvent = ValueType<
+  {
+    label: string;
+    value: string;
+  },
+  false
+>;
+
+export type HandleSearchFunc = (event: SearchEvent, col: Column) => void;
+
 export interface TableProps {
   columns: Column[];
   selectColumns: string[];
   data: TableData;
   rowNum: number;
   filterTableCols?: FilterTableCols;
-  handleSearch?: (...args: any[]) => any;
+  handleSearch?: (event: SearchEvent, col: Column) => void;
 }
 
-export type HeaderProps = Pick<
-  TableProps,
-  "data" | "columns" | "selectColumns"
->;
+export interface HeaderProps extends Omit<TableProps, "rowNum"> {
+  tableRef: React.RefObject<HTMLDivElement>;
+}
+
+export interface HeaderCellProps extends Omit<HeaderProps, "columns"> {
+  col: Column;
+}
