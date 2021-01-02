@@ -6,8 +6,14 @@ export const capitalize = (s: String): string => {
   return s.slice(0, 1).toUpperCase() + s.slice(1);
 };
 
-const setIntersection = <T>(s1: Set<T>, s2: Set<T>): T[] => {
-  return Array.from(s1).filter((el) => s2.has(el));
+export const setIntersection = <T>(...sets: Set<T>[]): T[] => {
+  let s1 = Array.from(sets[0]);
+
+  sets.slice(1).forEach((set) => {
+    s1 = s1.filter((el) => set.has(el));
+  });
+
+  return s1;
 };
 
 export const intersection = <T>(s1: T[], s2: T[]): T[] => {

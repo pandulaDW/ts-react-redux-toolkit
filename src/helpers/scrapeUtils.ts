@@ -1,5 +1,6 @@
+import { setIntersection } from "./utils";
 import { ScrapeDataType } from "../models/scrapeTypes";
-import { Column, TableData } from "../models/flexTypes";
+import { Column, TableData, FilterTableCols } from "../models/flexTypes";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
   let arrangedData: TableData = {
@@ -29,15 +30,22 @@ export const createColumns = (fieldList: string[]): Column[] => [
   }),
 ];
 
-// export const filterData = (data: TableData, filterTableCol: FilterTableCol) => {
-//   const copiedData: TableData = { ...data };
-//   const indices: number[] = data[filterTableCol.column]
-//     .map((el, idx) => (el === filterTableCol.value ? idx : -1))
-//     .filter((el) => el !== -1);
+export const filterData = (data: TableData, filterCols: FilterTableCols): number => {
+  const indexSetArray: Set<number>[] = [];
 
-//   Object.keys(copiedData).forEach((key) => {
-//     copiedData[key] = copiedData[key].filter((_, idx) => indices.includes(idx));
-//   });
+  Object.keys(filterCols).forEach((column) => {
+    const indices: number[] = data[column]
+      .map((el, idx) => (el === filterCols[column] ? idx : -1))
+      .filter((el) => el !== -1);
 
-//   return copiedData;
-// };
+    indexSetArray.push(new Set(indices));
+  });
+
+  const filteredIndices: number[] = setIntersection(...indexSetArray);
+
+  Object.keys(data).forEach((key) => {
+    data[key] = data[key].filter((_, idx) => filteredIndices.includes(idx));
+  });
+
+  return filteredIndices.length;
+};

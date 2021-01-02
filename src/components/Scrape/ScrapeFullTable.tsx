@@ -6,7 +6,11 @@ import styles from "../../styles/scrape.module.scss";
 import FlexTable from "../FlexTable/FlexTable";
 import { Column, HandleSelectFunc } from "../../models/flexTypes";
 import { setFilterTableCol } from "../../redux/scrape";
-import { arrangeData, createColumns } from "../../helpers/scrape";
+import {
+  arrangeData,
+  createColumns,
+  filterData,
+} from "../../helpers/scrapeUtils";
 
 interface Props {
   data: ScrapeDataType[];
@@ -26,9 +30,11 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   };
 
   let arrangedData = arrangeData(data, fieldList);
-  // arrangedData = filterTableCol.column
-  //   ? filterData(arrangedData, filterTableCol)
-  //   : arrangedData;
+  let rowNum = data.length;
+
+  // mutating the arrangedData object
+  if (Object.keys(filterTableCols).length)
+    rowNum = filterData(arrangedData, filterTableCols);
 
   return (
     <div className={styles.tableContainer}>
@@ -36,7 +42,7 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
         columns={columns}
         selectColumns={selectColumns}
         data={arrangedData}
-        rowNum={data.length}
+        rowNum={rowNum}
         filterTableCols={filterTableCols}
         handleSelect={handleSelect}
       />
