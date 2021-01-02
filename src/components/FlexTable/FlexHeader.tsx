@@ -7,6 +7,7 @@ import FlexHeaderCell from "./FlexHeaderCell";
 
 const FlexHeader: React.FC<HeaderProps> = (props) => {
   const { columns, data, tableRef, selectColumns } = props;
+  const { filterTableCols, handleSearch } = props;
 
   return (
     <>
@@ -28,6 +29,8 @@ const FlexHeader: React.FC<HeaderProps> = (props) => {
             data={data}
             tableRef={tableRef}
             selectColumns={selectColumns}
+            filterTableCols={filterTableCols}
+            handleSearch={handleSearch}
             col={col}
           />
         ))}

@@ -24,6 +24,8 @@ const FlexHeaderCell: React.FC<HeaderCellProps> = (props) => {
   const { data, tableRef, selectColumns, col } = props;
   const { filterTableCols, handleSearch } = props;
 
+  console.log(filterTableCols && handleSearch);
+
   return (
     <div
       className={styles["table__header-selectInput"]}
