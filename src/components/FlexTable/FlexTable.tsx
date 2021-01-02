@@ -8,7 +8,7 @@ import FlexHeader from "./FlexHeader";
 
 const FlexTable: React.FC<TableProps> = (props) => {
   const { columns, data, rowNum, selectColumns } = props;
-  const { filterTableCols, handleSearch } = props;
+  const { filterTableCols, handleSelect } = props;
   const [, setRefChange] = useState(false);
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -26,7 +26,7 @@ const FlexTable: React.FC<TableProps> = (props) => {
         tableRef={tableRef}
         selectColumns={selectColumns}
         filterTableCols={filterTableCols}
-        handleSearch={handleSearch}
+        handleSelect={handleSelect}
       />
       <div className={styles.table__body} ref={tableRef}>
         {range(rowNum).map((index) => (

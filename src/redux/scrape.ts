@@ -123,7 +123,7 @@ const scrapeReducer = createReducer(initialState, (builder) => {
         state.dataView === DataView.single ? DataView.table : DataView.single;
     })
     .addCase(setFilterTableCol, (state, action) => {
-      if (Object.values(action.payload)[0] === undefined)
+      if (Object.values(action.payload)[0] === "")
         delete state.filterTableCols[Object.keys(action.payload)[0]];
       else
         state.filterTableCols = { ...state.filterTableCols, ...action.payload };

@@ -15,7 +15,7 @@ export interface TableData {
   [key: string]: Cell[];
 }
 
-export type SearchEvent = ValueType<
+export type SelectEvent = ValueType<
   {
     label: string;
     value: string;
@@ -23,7 +23,7 @@ export type SearchEvent = ValueType<
   false
 >;
 
-export type HandleSearchFunc = (event: SearchEvent, col: Column) => void;
+export type HandleSelectFunc = (event: SelectEvent, col: Column) => void;
 
 export interface TableProps {
   columns: Column[];
@@ -31,7 +31,7 @@ export interface TableProps {
   data: TableData;
   rowNum: number;
   filterTableCols?: FilterTableCols;
-  handleSearch?: (event: SearchEvent, col: Column) => void;
+  handleSelect?: (event: SelectEvent, col: Column) => void;
 }
 
 export interface HeaderProps extends Omit<TableProps, "rowNum"> {

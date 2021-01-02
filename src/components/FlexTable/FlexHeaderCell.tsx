@@ -3,8 +3,8 @@ import Select from "react-select";
 import { Column, TableData } from "../../models/flexTypes";
 import {
   HeaderCellProps,
-  SearchEvent,
-  HandleSearchFunc,
+  SelectEvent,
+  HandleSelectFunc,
 } from "../../models/flexTypes";
 import styles from "../../styles/flexTable.module.scss";
 import { calcHeaderWidth, computedStyles } from "./helpers";
@@ -16,22 +16,20 @@ const createOptions = (data: TableData, col: Column) => {
   }));
 };
 
-const handleSearchWrapper = (col: Column, handleSearch: HandleSearchFunc) => {
-  return (event: SearchEvent) => handleSearch(event, col);
+const handleSearchWrapper = (col: Column, handleSelect: HandleSelectFunc) => {
+  return (event: SelectEvent) => handleSelect(event, col);
 };
 
 const FlexHeaderCell: React.FC<HeaderCellProps> = (props) => {
   const { data, tableRef, selectColumns, col } = props;
-  const { filterTableCols, handleSearch } = props;
-
-  console.log(filterTableCols && handleSearch);
+  const { filterTableCols, handleSelect } = props;
 
   return (
     <div
       className={styles["table__header-selectInput"]}
       style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
     >
-      {selectColumns.includes(col.colName) && filterTableCols && handleSearch && (
+      {selectColumns.includes(col.colName) && filterTableCols && handleSelect && (
         <div style={{ width: "90%" }}>
           <Select
             options={createOptions(data, col)}
@@ -45,7 +43,7 @@ const FlexHeaderCell: React.FC<HeaderCellProps> = (props) => {
             }
             isClearable
             isSearchable
-            onChange={(event) => handleSearchWrapper(col, handleSearch)(event)}
+            onChange={(event) => handleSearchWrapper(col, handleSelect)(event)}
           />
         </div>
       )}
