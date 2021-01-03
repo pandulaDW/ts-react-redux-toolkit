@@ -9,7 +9,7 @@ import {
   ScrapeState,
   DataView,
 } from "../models/scrapeTypes";
-import { FilterTableCols } from "../models/flexTypes";
+import { FilterTableCols, SortTableCol } from "../models/flexTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
 
 // initial state --------------
@@ -21,6 +21,7 @@ const initialState: ScrapeState = {
   uniqueRAs: [],
   fieldList: [],
   filterTableCols: {},
+  sortTableCol: {},
   expand: true,
   dataView: DataView.single,
   filterState: FilterState.all,
@@ -40,6 +41,7 @@ export const setFilterTableCol = createAction<FilterTableCols>(
 export const setFilterState = createAction<FilterState>(
   "scrape/setFilterState"
 );
+export const setSortState = createAction<SortTableCol>("scrape/setSortState");
 
 // Thunk action creators -------------------------------
 export const fetchInitData = createAsyncThunk(
@@ -127,6 +129,9 @@ const scrapeReducer = createReducer(initialState, (builder) => {
         delete state.filterTableCols[Object.keys(action.payload)[0]];
       else
         state.filterTableCols = { ...state.filterTableCols, ...action.payload };
+    })
+    .addCase(setSortState, (state, action) => {
+      if (action.payload.column) state.sortTableCol = action.payload;
     })
     .addDefaultCase((state) => state);
 });

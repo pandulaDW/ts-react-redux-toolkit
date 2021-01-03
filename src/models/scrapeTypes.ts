@@ -1,4 +1,4 @@
-import { FilterTableCols } from "./flexTypes";
+import { FilterTableCols, SortTableCol } from "./flexTypes";
 
 interface FieldProperties {
   invalid: boolean;
@@ -46,6 +46,7 @@ export interface ScrapeState {
   dataView: DataView;
   filterState: FilterState;
   filterTableCols: FilterTableCols;
+  sortTableCol: SortTableCol;
   loading: boolean;
   ErrorMsg: string | null;
 }

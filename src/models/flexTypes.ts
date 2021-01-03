@@ -24,6 +24,12 @@ export type SelectEvent = ValueType<
 >;
 
 export type HandleSelectFunc = (event: SelectEvent, col: Column) => void;
+export type HandleSortFunc = (column: Column, desc: boolean) => void;
+
+export interface SortTableCol {
+  column?: Column;
+  desc?: boolean;
+}
 
 export interface TableProps {
   columns: Column[];
@@ -32,13 +38,15 @@ export interface TableProps {
   data: TableData;
   rowNum: number;
   filterTableCols?: FilterTableCols;
-  handleSelect?: (event: SelectEvent, col: Column) => void;
+  handleSelect?: HandleSelectFunc;
+  handleSort?: HandleSortFunc;
 }
 
 export interface HeaderProps extends Omit<TableProps, "rowNum"> {
   tableRef: React.RefObject<HTMLDivElement>;
 }
 
-export interface HeaderCellProps extends Omit<HeaderProps, "columns"> {
+export interface HeaderCellProps
+  extends Omit<HeaderProps, "columns" | "handleSort"> {
   col: Column;
 }

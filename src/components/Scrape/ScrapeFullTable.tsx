@@ -4,12 +4,17 @@ import { ScrapeDataType } from "../../models/scrapeTypes";
 import { RootState } from "../../redux/_store";
 import styles from "../../styles/scrape.module.scss";
 import FlexTable from "../FlexTable/FlexTable";
-import { Column, HandleSelectFunc } from "../../models/flexTypes";
-import { setFilterTableCol } from "../../redux/scrape";
+import {
+  Column,
+  HandleSelectFunc,
+  HandleSortFunc,
+} from "../../models/flexTypes";
+import { setFilterTableCol, setSortState } from "../../redux/scrape";
 import {
   arrangeData,
   createColumns,
   filterData,
+  sortData,
 } from "../../helpers/scrapeUtils";
 
 interface Props {
@@ -18,16 +23,21 @@ interface Props {
 
 const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   const dispatch = useDispatch();
-  const { fieldList, filterTableCols } = useSelector(
+  const { fieldList, filterTableCols, sortTableCol } = useSelector(
     (state: RootState) => state.scrape
   );
 
   const columns: Column[] = createColumns(fieldList);
   const selectColumns = ["KFID", "RA_ID", "company_name", "company_type"];
   const sortColumns = ["KFID", "RA_ID", "company_name", "company_type"];
+
   const handleSelect: HandleSelectFunc = (event, col) => {
     if (event) dispatch(setFilterTableCol({ [col.colName]: event.value }));
     else dispatch(setFilterTableCol({ [col.colName]: "" }));
+  };
+
+  const handleSort: HandleSortFunc = (col, desc) => {
+    dispatch(setSortState({ column: col, desc: desc }));
   };
 
   let arrangedData = arrangeData(data, fieldList);
@@ -36,6 +46,10 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   // mutating the arrangedData object to filter
   if (Object.keys(filterTableCols).length)
     rowNum = filterData(arrangedData, filterTableCols);
+
+  // mutating the arrangedData object to sort
+  if (sortTableCol.column && sortTableCol.desc)
+    sortData(arrangedData, sortTableCol.column, sortTableCol.desc);
 
   return (
     <div className={styles.tableContainer}>
@@ -47,6 +61,7 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
         rowNum={rowNum}
         filterTableCols={filterTableCols}
         handleSelect={handleSelect}
+        handleSort={handleSort}
       />
     </div>
   );

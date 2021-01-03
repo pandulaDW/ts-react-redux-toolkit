@@ -30,7 +30,10 @@ export const createColumns = (fieldList: string[]): Column[] => [
   }),
 ];
 
-export const filterData = (data: TableData, filterCols: FilterTableCols): number => {
+export const filterData = (
+  data: TableData,
+  filterCols: FilterTableCols
+): number => {
   const indexSetArray: Set<number>[] = [];
 
   Object.keys(filterCols).forEach((column) => {
@@ -49,3 +52,5 @@ export const filterData = (data: TableData, filterCols: FilterTableCols): number
 
   return filteredIndices.length;
 };
+
+export const sortData = (data: TableData, col: Column, desc: boolean) => {};

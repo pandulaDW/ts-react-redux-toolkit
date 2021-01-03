@@ -8,7 +8,7 @@ import FlexHeaderCell from "./FlexHeaderCell";
 
 const FlexHeader: React.FC<HeaderProps> = (props) => {
   const { columns, data, tableRef, selectColumns, sortColumns } = props;
-  const { filterTableCols, handleSelect } = props;
+  const { filterTableCols, handleSelect, handleSort } = props;
 
   return (
     <>
@@ -20,10 +20,10 @@ const FlexHeader: React.FC<HeaderProps> = (props) => {
             style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
           >
             <p>{col.colName}</p>
-            {sortColumns && sortColumns.includes(col.colName) && (
+            {sortColumns && sortColumns.includes(col.colName) && handleSort && (
               <div>
-                <FaAngleUp />
-                <FaAngleDown />
+                <FaAngleUp onClick={() => handleSort(col, true)} />
+                <FaAngleDown onClick={() => handleSort(col, false)} />
               </div>
             )}
           </div>
