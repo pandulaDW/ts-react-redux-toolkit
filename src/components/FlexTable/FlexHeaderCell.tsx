@@ -29,24 +29,29 @@ const FlexHeaderCell: React.FC<HeaderCellProps> = (props) => {
       className={styles["table__header-selectInput"]}
       style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
     >
-      {selectColumns.includes(col.colName) && filterTableCols && handleSelect && (
-        <div style={{ width: "90%" }}>
-          <Select
-            options={createOptions(data, col)}
-            value={
-              col.colName in filterTableCols
-                ? {
-                    label: filterTableCols[col.colName],
-                    value: filterTableCols[col.colName],
-                  }
-                : null
-            }
-            isClearable
-            isSearchable
-            onChange={(event) => handleSearchWrapper(col, handleSelect)(event)}
-          />
-        </div>
-      )}
+      {selectColumns &&
+        selectColumns.includes(col.colName) &&
+        filterTableCols &&
+        handleSelect && (
+          <div style={{ width: "90%" }}>
+            <Select
+              options={createOptions(data, col)}
+              value={
+                col.colName in filterTableCols
+                  ? {
+                      label: filterTableCols[col.colName],
+                      value: filterTableCols[col.colName],
+                    }
+                  : null
+              }
+              isClearable
+              isSearchable
+              onChange={(event) =>
+                handleSearchWrapper(col, handleSelect)(event)
+              }
+            />
+          </div>
+        )}
     </div>
   );
 };

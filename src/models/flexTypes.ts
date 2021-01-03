@@ -27,7 +27,8 @@ export type HandleSelectFunc = (event: SelectEvent, col: Column) => void;
 
 export interface TableProps {
   columns: Column[];
-  selectColumns: string[];
+  selectColumns?: string[];
+  sortColumns?: string[];
   data: TableData;
   rowNum: number;
   filterTableCols?: FilterTableCols;

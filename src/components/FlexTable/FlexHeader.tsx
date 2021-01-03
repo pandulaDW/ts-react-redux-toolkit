@@ -7,7 +7,7 @@ import styles from "../../styles/flexTable.module.scss";
 import FlexHeaderCell from "./FlexHeaderCell";
 
 const FlexHeader: React.FC<HeaderProps> = (props) => {
-  const { columns, data, tableRef, selectColumns } = props;
+  const { columns, data, tableRef, selectColumns, sortColumns } = props;
   const { filterTableCols, handleSelect } = props;
 
   return (
@@ -20,10 +20,12 @@ const FlexHeader: React.FC<HeaderProps> = (props) => {
             style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
           >
             <p>{col.colName}</p>
-            <div>
-              <FaAngleUp />
-              <FaAngleDown />
-            </div>
+            {sortColumns && sortColumns.includes(col.colName) && (
+              <div>
+                <FaAngleUp />
+                <FaAngleDown />
+              </div>
+            )}
           </div>
         ))}
       </div>

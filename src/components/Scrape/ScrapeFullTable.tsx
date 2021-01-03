@@ -23,7 +23,8 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   );
 
   const columns: Column[] = createColumns(fieldList);
-  const selectColumns = ["KFID", "RA_ID", "company_name"];
+  const selectColumns = ["KFID", "RA_ID", "company_name", "company_type"];
+  const sortColumns = ["KFID", "RA_ID", "company_name", "company_type"];
   const handleSelect: HandleSelectFunc = (event, col) => {
     if (event) dispatch(setFilterTableCol({ [col.colName]: event.value }));
     else dispatch(setFilterTableCol({ [col.colName]: "" }));
@@ -32,7 +33,7 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   let arrangedData = arrangeData(data, fieldList);
   let rowNum = data.length;
 
-  // mutating the arrangedData object
+  // mutating the arrangedData object to filter
   if (Object.keys(filterTableCols).length)
     rowNum = filterData(arrangedData, filterTableCols);
 
@@ -41,6 +42,7 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
       <FlexTable
         columns={columns}
         selectColumns={selectColumns}
+        sortColumns={sortColumns}
         data={arrangedData}
         rowNum={rowNum}
         filterTableCols={filterTableCols}
