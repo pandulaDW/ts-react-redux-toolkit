@@ -16,6 +16,7 @@ import {
   filterData,
   sortData,
   createOptions,
+  formatData,
 } from "../../helpers/scrapeUtils";
 
 interface Props {
@@ -54,6 +55,9 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
 
   // extracting options
   const options = createOptions(arrangedData, selectColumns);
+
+  // formatting data according to the color
+  formatData(data, arrangedData, fieldList);
 
   return (
     <div className={styles.tableContainer}>

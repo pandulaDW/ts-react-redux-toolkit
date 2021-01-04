@@ -6,6 +6,7 @@ import {
   FilterTableCols,
   OptionsArray,
 } from "../models/flexTypes";
+import { matchFunc } from "../components/Scrape/matchFunc";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
   let arrangedData: TableData<string> = {
@@ -82,4 +83,25 @@ export const createOptions = (data: TableData<string>, cols: string[]) => {
     }));
     return acc;
   }, {});
+};
+
+export const formatData = (
+  data: ScrapeDataType[],
+  arrangedData: TableData<string | React.ReactNode>,
+  cols: string[]
+) => {
+  for (const col of cols) {
+    let elements1: JSX.Element[] = [];
+    let elements2: JSX.Element[] = [];
+
+    data.forEach((item) => {
+      if (!item[col]) return;
+      const { uv_value, scraped_value, match } = item[col];
+      elements1.push(matchFunc(uv_value, scraped_value, match));
+      elements2.push(matchFunc(scraped_value, uv_value, match));
+    });
+
+    arrangedData[col] = elements1;
+    arrangedData[`scraped ${col}`] = elements2;
+  }
 };
