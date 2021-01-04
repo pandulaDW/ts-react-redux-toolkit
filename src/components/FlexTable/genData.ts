@@ -1,5 +1,5 @@
 import faker from "faker";
-import { Column, Cell, TableData } from "../../models/flexTypes";
+import { Column, TableData } from "../../models/flexTypes";
 import { range } from "../../helpers/utils";
 
 export class FakeData {
@@ -26,7 +26,7 @@ export class FakeData {
     ];
   }
 
-  private genCompanyData(): Cell[][] {
+  private genCompanyData() {
     return [
       new Array(this.rowNum).fill("").map(() => faker.company.companyName()),
       new Array(this.rowNum).fill("").map(() => faker.company.companySuffix()),
@@ -40,12 +40,12 @@ export class FakeData {
     ];
   }
 
-  genData(): TableData {
-    const indices: TableData = {
+  genData(): TableData<string> {
+    const indices: TableData<string> = {
       Index: range(this.rowNum + 1, 1).map((el) => String(el)),
     };
     const allData = this.genCompanyData();
-    let data: TableData = { ...indices };
+    let data = { ...indices };
 
     this.columns.forEach((col, idx) => {
       data = { ...data, [col]: allData[idx] };
