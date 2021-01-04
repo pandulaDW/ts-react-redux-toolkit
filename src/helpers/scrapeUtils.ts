@@ -1,9 +1,14 @@
 import { setIntersection, sortArrayIndex } from "./utils";
 import { ScrapeDataType } from "../models/scrapeTypes";
-import { Column, TableData, FilterTableCols } from "../models/flexTypes";
+import {
+  Column,
+  TableData,
+  FilterTableCols,
+  OptionsArray,
+} from "../models/flexTypes";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
-  let arrangedData: TableData = {
+  let arrangedData: TableData<string> = {
     KFID: data.map((item) => item.kfid),
     RA_ID: data.map((item) => item.RAId),
   };
@@ -31,7 +36,7 @@ export const createColumns = (fieldList: string[]): Column[] => [
 ];
 
 export const filterData = (
-  data: TableData,
+  data: TableData<string>,
   filterCols: FilterTableCols
 ): number => {
   const indexSetArray: Set<number>[] = [];
@@ -53,7 +58,11 @@ export const filterData = (
   return filteredIndices.length;
 };
 
-export const sortData = (data: TableData, col: Column, desc: boolean) => {
+export const sortData = (
+  data: TableData<string>,
+  col: Column,
+  desc: boolean
+) => {
   const sortedIndices = sortArrayIndex(data[col.colName], desc);
 
   Object.keys(data).forEach((key) => {
@@ -63,6 +72,14 @@ export const sortData = (data: TableData, col: Column, desc: boolean) => {
     }
     data[key] = sortedArray;
   });
+};
 
-  console.log(data);
+export const createOptions = (data: TableData<string>, cols: string[]) => {
+  return cols.reduce<OptionsArray>((acc, curr) => {
+    acc[curr] = Array.from(new Set(data[curr])).map((item) => ({
+      label: item,
+      value: item,
+    }));
+    return acc;
+  }, {});
 };

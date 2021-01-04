@@ -15,6 +15,7 @@ import {
   createColumns,
   filterData,
   sortData,
+  createOptions,
 } from "../../helpers/scrapeUtils";
 
 interface Props {
@@ -51,11 +52,15 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   if (sortTableCol.column && sortTableCol.desc !== undefined)
     sortData(arrangedData, sortTableCol.column, sortTableCol.desc);
 
+  // extracting options
+  const options = createOptions(arrangedData, selectColumns);
+
   return (
     <div className={styles.tableContainer}>
       <FlexTable
         columns={columns}
         selectColumns={selectColumns}
+        options={options}
         sortColumns={sortColumns}
         data={arrangedData}
         rowNum={rowNum}

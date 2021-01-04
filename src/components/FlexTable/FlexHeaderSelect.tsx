@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import { Column, TableData } from "../../models/flexTypes";
+import { Column } from "../../models/flexTypes";
 import {
   HeaderSelectProps,
   SelectEvent,
@@ -9,20 +9,13 @@ import {
 import styles from "../../styles/flexTable.module.scss";
 import { calcHeaderWidth, computedStyles } from "./helpers";
 
-const createOptions = (data: TableData, col: Column) => {
-  return Array.from(new Set(data[col.colName])).map((item) => ({
-    label: item,
-    value: item,
-  }));
-};
-
 const handleSearchWrapper = (col: Column, handleSelect: HandleSelectFunc) => {
   return (event: SelectEvent) => handleSelect(event, col);
 };
 
 const FlexHeaderSelect: React.FC<HeaderSelectProps> = (props) => {
-  const { data, tableRef, selectColumns, col } = props;
-  const { filterTableCols, handleSelect } = props;
+  const { tableRef, col } = props;
+  const { filterTableCols, selectColumns, handleSelect, options } = props;
 
   return (
     <div
@@ -35,7 +28,7 @@ const FlexHeaderSelect: React.FC<HeaderSelectProps> = (props) => {
         handleSelect && (
           <div style={{ width: "90%" }}>
             <Select
-              options={createOptions(data, col)}
+              options={options && options[col.colName]}
               value={
                 col.colName in filterTableCols
                   ? {

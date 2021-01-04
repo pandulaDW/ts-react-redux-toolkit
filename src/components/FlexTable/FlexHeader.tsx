@@ -6,8 +6,9 @@ import FlexHeaderSelect from "./FlexHeaderSelect";
 import FlexHeaderCell from "./FlexHeaderCell";
 
 const FlexHeader: React.FC<HeaderProps> = (props) => {
-  const { columns, data, tableRef, selectColumns, sortColumns } = props;
-  const { filterTableCols, handleSelect, handleSort, sortTableCol } = props;
+  const { columns, data, tableRef } = props;
+  const { filterTableCols, handleSelect, options, selectColumns } = props;
+  const { sortColumns, handleSort, sortTableCol } = props;
 
   return (
     <>
@@ -31,6 +32,7 @@ const FlexHeader: React.FC<HeaderProps> = (props) => {
             data={data}
             tableRef={tableRef}
             selectColumns={selectColumns}
+            options={options}
             filterTableCols={filterTableCols}
             handleSelect={handleSelect}
             col={col}

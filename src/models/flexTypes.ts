@@ -1,11 +1,10 @@
+import React from "react";
 import { ValueType } from "react-select";
 
 export interface Column {
   colName: string;
   colWidth: number;
 }
-
-export type Cell = string;
 
 export interface FilterTableCols {
   [column: string]: string;
@@ -16,17 +15,19 @@ export interface SortTableCol {
   desc?: boolean;
 }
 
-export interface TableData {
-  [key: string]: Cell[];
+export interface TableData<T> {
+  [key: string]: T[];
 }
 
-export type SelectEvent = ValueType<
-  {
-    label: string;
-    value: string;
-  },
-  false
->;
+export interface OptionType {
+  label: string;
+  value: string;
+}
+
+export type SelectEvent = ValueType<OptionType, false>;
+export interface OptionsArray {
+  [col: string]: OptionType[];
+}
 
 export type HandleSelectFunc = (event: SelectEvent, col: Column) => void;
 export type HandleSortFunc = (sortCol: SortTableCol) => void;
@@ -34,9 +35,10 @@ export type HandleSortFunc = (sortCol: SortTableCol) => void;
 export interface TableProps {
   columns: Column[];
   selectColumns?: string[];
+  options?: OptionsArray;
   sortColumns?: string[];
   sortTableCol?: SortTableCol;
-  data: TableData;
+  data: TableData<string | React.ReactNode>;
   rowNum: number;
   filterTableCols?: FilterTableCols;
   handleSelect?: HandleSelectFunc;
@@ -53,6 +55,6 @@ export interface HeaderSelectProps
 }
 
 export interface HeaderCellProps
-  extends Omit<HeaderProps, "columns" | "handleSelect" | "data"> {
+  extends Omit<HeaderProps, "columns" | "handleSelect" | "data" | "options"> {
   col: Column;
 }
