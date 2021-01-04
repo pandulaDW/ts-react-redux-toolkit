@@ -1,11 +1,6 @@
-import { setIntersection, sortArrayIndex } from "./utils";
+import { range } from "./utils";
 import { ScrapeDataType } from "../models/scrapeTypes";
-import {
-  Column,
-  TableData,
-  FilterTableCols,
-  OptionsArray,
-} from "../models/flexTypes";
+import { Column, TableData, OptionsArray } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
@@ -36,45 +31,6 @@ export const createColumns = (fieldList: string[]): Column[] => [
   }),
 ];
 
-export const filterData = (
-  data: TableData<string>,
-  filterCols: FilterTableCols
-): number => {
-  const indexSetArray: Set<number>[] = [];
-
-  Object.keys(filterCols).forEach((column) => {
-    const indices: number[] = data[column]
-      .map((el, idx) => (el === filterCols[column] ? idx : -1))
-      .filter((el) => el !== -1);
-
-    indexSetArray.push(new Set(indices));
-  });
-
-  const filteredIndices: number[] = setIntersection(...indexSetArray);
-
-  Object.keys(data).forEach((key) => {
-    data[key] = data[key].filter((_, idx) => filteredIndices.includes(idx));
-  });
-
-  return filteredIndices.length;
-};
-
-export const sortData = (
-  data: TableData<string>,
-  col: Column,
-  desc: boolean
-) => {
-  const sortedIndices = sortArrayIndex(data[col.colName], desc);
-
-  Object.keys(data).forEach((key) => {
-    const sortedArray = [];
-    for (let index = 0; index < sortedIndices.length; index++) {
-      sortedArray.push(data[key][sortedIndices[index]]);
-    }
-    data[key] = sortedArray;
-  });
-};
-
 export const createOptions = (data: TableData<string>, cols: string[]) => {
   return cols.reduce<OptionsArray>((acc, curr) => {
     acc[curr] = Array.from(new Set(data[curr])).map((item) => ({
@@ -86,7 +42,6 @@ export const createOptions = (data: TableData<string>, cols: string[]) => {
 };
 
 export const formatData = (
-  data: ScrapeDataType[],
   arrangedData: TableData<string | React.ReactNode>,
   cols: string[]
 ) => {
@@ -94,11 +49,11 @@ export const formatData = (
     let elements1: JSX.Element[] = [];
     let elements2: JSX.Element[] = [];
 
-    data.forEach((item) => {
-      if (!item[col]) return;
-      const { uv_value, scraped_value, match } = item[col];
-      elements1.push(matchFunc(uv_value, scraped_value, match));
-      elements2.push(matchFunc(scraped_value, uv_value, match));
+    range(arrangedData[col].length).forEach((index) => {
+      const uv_value = arrangedData[col][index] as string;
+      const scraped_value = arrangedData[`scraped ${col}`][index] as string;
+      elements1.push(matchFunc(uv_value, scraped_value));
+      elements2.push(matchFunc(scraped_value, uv_value));
     });
 
     arrangedData[col] = elements1;

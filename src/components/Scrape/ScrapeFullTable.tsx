@@ -13,11 +13,10 @@ import { setFilterTableCol, setSortState } from "../../redux/scrape";
 import {
   arrangeData,
   createColumns,
-  filterData,
-  sortData,
   createOptions,
   formatData,
 } from "../../helpers/scrapeUtils";
+import { filterData, sortData } from "../FlexTable/FlexUtils";
 
 interface Props {
   data: ScrapeDataType[];
@@ -57,7 +56,7 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   const options = createOptions(arrangedData, selectColumns);
 
   // formatting data according to the color
-  formatData(data, arrangedData, fieldList);
+  formatData(arrangedData, fieldList);
 
   return (
     <div className={styles.tableContainer}>
