@@ -36,8 +36,8 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
     else dispatch(setFilterTableCol({ [col.colName]: "" }));
   };
 
-  const handleSort: HandleSortFunc = (col, desc) => {
-    dispatch(setSortState({ column: col, desc: desc }));
+  const handleSort: HandleSortFunc = (sortTableCol) => {
+    dispatch(setSortState(sortTableCol));
   };
 
   let arrangedData = arrangeData(data, fieldList);

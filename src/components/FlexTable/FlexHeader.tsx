@@ -1,9 +1,8 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
-import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { HeaderProps } from "../../models/flexTypes";
-import { calcHeaderWidth, computedStyles } from "./helpers";
 import styles from "../../styles/flexTable.module.scss";
+import FlexHeaderSelect from "./FlexHeaderSelect";
 import FlexHeaderCell from "./FlexHeaderCell";
 
 const FlexHeader: React.FC<HeaderProps> = (props) => {
@@ -14,24 +13,18 @@ const FlexHeader: React.FC<HeaderProps> = (props) => {
     <>
       <div className={styles.table__header}>
         {columns.map((col) => (
-          <div
-            className={styles["table__header-headerCell"]}
+          <FlexHeaderCell
+            col={col}
             key={uuid()}
-            style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
-          >
-            <p>{col.colName}</p>
-            {sortColumns && sortColumns.includes(col.colName) && handleSort && (
-              <div>
-                <FaAngleUp onClick={() => handleSort(col, true)} />
-                <FaAngleDown onClick={() => handleSort(col, false)} />
-              </div>
-            )}
-          </div>
+            tableRef={tableRef}
+            handleSort={handleSort}
+            sortColumns={sortColumns}
+          />
         ))}
       </div>
       <div className={styles["table__body-row"]}>
         {columns.map((col) => (
-          <FlexHeaderCell
+          <FlexHeaderSelect
             key={uuid()}
             data={data}
             tableRef={tableRef}
