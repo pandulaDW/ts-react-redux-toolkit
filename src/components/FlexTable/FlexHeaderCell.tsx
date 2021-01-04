@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import cx from "classnames";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { calcHeaderWidth, computedStyles } from "./helpers";
@@ -6,8 +6,7 @@ import styles from "../../styles/flexTable.module.scss";
 import { HeaderCellProps } from "../../models/flexTypes";
 
 const FlexHeaderCell: React.FC<HeaderCellProps> = (props) => {
-  const { col, handleSort, tableRef, sortColumns } = props;
-  const [order, setOrder] = useState<"asc" | "desc" | "none">("none");
+  const { col, handleSort, tableRef, selectColumns, sortTableCol } = props;
 
   return (
     <div
@@ -15,25 +14,23 @@ const FlexHeaderCell: React.FC<HeaderCellProps> = (props) => {
       style={computedStyles(calcHeaderWidth(tableRef, col.colWidth))}
     >
       <p>{col.colName}</p>
-      {sortColumns && sortColumns.includes(col.colName) && handleSort && (
+      {selectColumns && selectColumns.includes(col.colName) && handleSort && (
         <div>
           <FaAngleUp
             className={cx(styles["sort-icon"], {
-              [styles.active]: order === "desc",
+              [styles.active]:
+                sortTableCol?.column?.colName === col.colName &&
+                sortTableCol?.desc === true,
             })}
-            onClick={() => {
-              setOrder("desc");
-              handleSort({ column: col, desc: true });
-            }}
+            onClick={() => handleSort({ column: col, desc: true })}
           />
           <FaAngleDown
             className={cx(styles["sort-icon"], {
-              [styles.active]: order === "asc",
+              [styles.active]:
+                sortTableCol?.column?.colName === col.colName &&
+                sortTableCol?.desc === false,
             })}
-            onClick={() => {
-              setOrder("asc");
-              handleSort({ column: col, desc: false });
-            }}
+            onClick={() => handleSort({ column: col, desc: false })}
           />
         </div>
       )}

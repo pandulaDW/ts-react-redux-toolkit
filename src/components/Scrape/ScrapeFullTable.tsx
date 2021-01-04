@@ -62,6 +62,7 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
         filterTableCols={filterTableCols}
         handleSelect={handleSelect}
         handleSort={handleSort}
+        sortTableCol={sortTableCol}
       />
     </div>
   );

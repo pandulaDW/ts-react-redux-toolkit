@@ -7,7 +7,7 @@ import FlexHeaderCell from "./FlexHeaderCell";
 
 const FlexHeader: React.FC<HeaderProps> = (props) => {
   const { columns, data, tableRef, selectColumns, sortColumns } = props;
-  const { filterTableCols, handleSelect, handleSort } = props;
+  const { filterTableCols, handleSelect, handleSort, sortTableCol } = props;
 
   return (
     <>
@@ -18,7 +18,9 @@ const FlexHeader: React.FC<HeaderProps> = (props) => {
             key={uuid()}
             tableRef={tableRef}
             handleSort={handleSort}
+            selectColumns={selectColumns}
             sortColumns={sortColumns}
+            sortTableCol={sortTableCol}
           />
         ))}
       </div>
