@@ -48,7 +48,7 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
     rowNum = filterData(arrangedData, filterTableCols);
 
   // mutating the arrangedData object to sort
-  if (sortTableCol.column && sortTableCol.desc)
+  if (sortTableCol.column && sortTableCol.desc !== undefined)
     sortData(arrangedData, sortTableCol.column, sortTableCol.desc);
 
   return (

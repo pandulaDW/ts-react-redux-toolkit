@@ -1,4 +1,4 @@
-import { setIntersection } from "./utils";
+import { setIntersection, sortArrayIndex } from "./utils";
 import { ScrapeDataType } from "../models/scrapeTypes";
 import { Column, TableData, FilterTableCols } from "../models/flexTypes";
 
@@ -53,4 +53,16 @@ export const filterData = (
   return filteredIndices.length;
 };
 
-export const sortData = (data: TableData, col: Column, desc: boolean) => {};
+export const sortData = (data: TableData, col: Column, desc: boolean) => {
+  const sortedIndices = sortArrayIndex(data[col.colName], desc);
+
+  Object.keys(data).forEach((key) => {
+    const sortedArray = [];
+    for (let index = 0; index < sortedIndices.length; index++) {
+      sortedArray.push(data[key][sortedIndices[index]]);
+    }
+    data[key] = sortedArray;
+  });
+
+  console.log(data);
+};

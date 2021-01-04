@@ -27,3 +27,24 @@ export const range = (end: number, start = 0, step = 1): number[] => {
   }
   return seq;
 };
+
+export const sortArrayIndex = <T extends string | number>(
+  arr: T[],
+  desc: boolean
+): number[] => {
+  var sorted = arr
+    .map((el, idx) => ({ [el]: idx }))
+    .sort((a, b) => {
+      if (Object.keys(a)[0] < Object.keys(b)[0]) {
+        if (desc) return 1;
+        return -1;
+      }
+      if (Object.keys(a)[0] > Object.keys(b)[0]) {
+        if (desc) return -1;
+        return 1;
+      }
+      return 0;
+    });
+
+  return sorted.map((el) => Object.values(el)[0]);
+};
