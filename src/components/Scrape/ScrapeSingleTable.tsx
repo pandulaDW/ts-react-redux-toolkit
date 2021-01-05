@@ -16,6 +16,7 @@ import { setLocalFinished, setLocalProgress } from "../../redux/scrape";
 import { ScrapeDataType } from "../../models/scrapeTypes";
 import { capitalize } from "../../helpers/utils";
 import styles from "../../styles/tables.module.scss";
+import { matchFunc } from "./matchFunc";
 
 interface Props {
   data: ScrapeDataType;
@@ -71,8 +72,18 @@ const ScrapeSingleTable: React.FC<Props> = ({ data }) => {
                   return field in data ? (
                     <tr key={uuid()}>
                       <td>{capitalize(field)}</td>
-                      <td>{data[field].uv_value}</td>
-                      <td>{data[field].scraped_value}</td>
+                      <td>
+                        {matchFunc(
+                          data[field].uv_value,
+                          data[field].scraped_value
+                        )}
+                      </td>
+                      <td>
+                        {matchFunc(
+                          data[field].scraped_value,
+                          data[field].uv_value
+                        )}
+                      </td>
                       <td>{data[field].match ? "Match" : "No Match"}</td>
                     </tr>
                   ) : (
