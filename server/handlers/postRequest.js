@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { promisfiedPutData } = require("../db/loadData");
 
 const filepath = path.join(__dirname, "..", "data", "requestData.json");
 const allData = JSON.parse(fs.readFileSync(filepath, "utf-8"));
@@ -25,23 +26,30 @@ const genRandomNums = (limit) => {
   return seq.slice(0, limit);
 };
 
-exports.testHandler = async (req, res) => {
+exports.putItemsHandler = async (req, res) => {
   const requestData = [];
+  const timestamp = new Date().getTime();
 
   genRandomNums(10).forEach((index) => {
-    requestData.push(allData[index]);
+    const item = allData[index];
+    item["timestamp"] = timestamp;
+    requestData.push(item);
   });
+
+  const kfids = requestData.map((el) => el.kfid);
 
   // Sending back data (timestamp plus kfid)
-  res.json({
-    timestamp: new Date().getTime(),
-    kfids: requestData.map((el) => el.kfid),
-  });
+  res.json({ timestamp, kfids });
 
-  // let counter = 1;
-  // const timeout = setInterval(() => {
-  //   console.log("Scraping on progress", counter); // Put request (timestamp plus kfid)
-  //   counter++;
-  //   if (counter > 10) clearInterval(timeout); // clear interval when all data has been inserted
-  // }, 2000);
+  let counter = 0;
+  const timeout = setInterval(async () => {
+    try {
+      await promisfiedPutData(requestData[counter]);
+    } catch (err) {
+      console.error(err);
+    }
+    counter++;
+    // clearing the interval when all data has been inserted
+    if (counter >= 10) clearInterval(timeout);
+  }, 2000);
 };

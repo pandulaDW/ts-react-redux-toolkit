@@ -17,7 +17,7 @@ const promisfiedPutData = (item) => {
   });
 };
 
-exports.putAllItems = () => {
+const putAllItems = () => {
   allItems.forEach(async (item) => {
     try {
       await promisfiedPutData(item);
@@ -27,4 +27,9 @@ exports.putAllItems = () => {
     }
   });
   console.log("Data inserted successfully");
+};
+
+module.exports = {
+  putAllItems,
+  promisfiedPutData,
 };

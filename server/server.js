@@ -7,7 +7,7 @@ const {
   fetchRequestHandler,
   scanAndFetchHandler,
 } = require("./handlers/handlers");
-const { testHandler } = require("./handlers/test");
+const { putItemsHandler } = require("./handlers/postRequest");
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.get("/lei/scrape/scanned-index", scanIndexHandler);
 app.get("/lei/scrape/scrape-request", fetchRequestHandler);
 app.get("/lei/scrape/init-data", scanAndFetchHandler);
-app.get("/test", testHandler);
+app.get("/lei/scrape/upload-file", putItemsHandler);
 
 app.listen(5000, async () => {
   await initDb();
