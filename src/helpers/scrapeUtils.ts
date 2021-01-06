@@ -1,6 +1,6 @@
-import { AxiosResponse } from "axios";
 import { range, promisfiedTimeout } from "./utils";
 import { uploadScrapeFile, fetchRequestData } from "./apiCalls";
+import { AxiosResponse } from "axios";
 import {
   ScrapeDataType,
   UploadFileResponseType,

@@ -31,8 +31,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "CHAPEL HOUSE 1 BOROUGH ROAD ALTRINCHAM GREATER MANCHESTER UNITED KINGDOM WA15 9RA",
-      "scraped_address": "Chapel House, 1 Borough Road, Altrincham, Cheshire, WA15 9RA",
+      "uv_value": "CHAPEL HOUSE 1 BOROUGH ROAD ALTRINCHAM GREATER MANCHESTER UNITED KINGDOM WA15 9RA",
+      "scraped_value": "Chapel House, 1 Borough Road, Altrincham, Cheshire, WA15 9RA",
       "matched": "CHAPEL HOUSE - 1 BOROUGH ROAD - ALTRINCHAM - WA15 9RA",
       "unmatched": "GREATER MANCHESTER - UNITED KINGDOM"
     },
@@ -71,8 +71,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "5 WOODSIDE MEWS CLAYTON WOOD CLOSE LEEDS WEST YORKSHIRE UNITED KINGDOM LS16 6QE",
-      "scraped_address": "5 Woodside Mews, Clayton Wood Close, Leeds, West Yorkshire, England, LS16 6QE",
+      "uv_value": "5 WOODSIDE MEWS CLAYTON WOOD CLOSE LEEDS WEST YORKSHIRE UNITED KINGDOM LS16 6QE",
+      "scraped_value": "5 Woodside Mews, Clayton Wood Close, Leeds, West Yorkshire, England, LS16 6QE",
       "matched": "5 WOODSIDE MEWS - CLAYTON WOOD CLOSE - LEEDS - WEST YORKSHIRE - LS16 6QE",
       "unmatched": "UNITED KINGDOM"
     },
@@ -111,8 +111,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "106 CHURCH SIDE EPSOM SURREY UNITED KINGDOM KT18 7SY",
-      "scraped_address": "106 Church Side, Epsom, Surrey, KT18 7SY",
+      "uv_value": "106 CHURCH SIDE EPSOM SURREY UNITED KINGDOM KT18 7SY",
+      "scraped_value": "106 Church Side, Epsom, Surrey, KT18 7SY",
       "matched": "106 CHURCH SIDE - EPSOM - SURREY - KT18 7SY",
       "unmatched": "UNITED KINGDOM"
     },
@@ -151,8 +151,8 @@
       "invalid": false
     },
     "address": {
-      "uv_address": "EIGHTH FLOOR 6 NEW STREET SQUARE NEW FETTER LANE LONDON GREATER LONDON UNITED KINGDOM EC4A 3AQ",
-      "scraped_address": "Eighth Floor 6 New Street Square, New Fetter Lane, London, EC4A 3AQ",
+      "uv_value": "EIGHTH FLOOR 6 NEW STREET SQUARE NEW FETTER LANE LONDON GREATER LONDON UNITED KINGDOM EC4A 3AQ",
+      "scraped_value": "Eighth Floor 6 New Street Square, New Fetter Lane, London, EC4A 3AQ",
       "matched": "EIGHTH FLOOR 6 NEW STREET SQUARE - NEW FETTER LANE - LONDON - EC4A 3AQ",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -191,8 +191,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "23 SPRINGVALE EDGWORTH BOLTON GREATER MANCHESTER UNITED KINGDOM BL7 0FS",
-      "scraped_address": "23 Springvale, Edgworth, Bolton, Lancashire, BL7 0FS",
+      "uv_value": "23 SPRINGVALE EDGWORTH BOLTON GREATER MANCHESTER UNITED KINGDOM BL7 0FS",
+      "scraped_value": "23 Springvale, Edgworth, Bolton, Lancashire, BL7 0FS",
       "matched": "23 SPRINGVALE - EDGWORTH - BOLTON - BL7 0FS",
       "unmatched": "GREATER MANCHESTER - UNITED KINGDOM"
     },
@@ -231,8 +231,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "50 LOTHIAN ROAD FESTIVAL SQUARE EDINBURGH MIDLOTHIAN UNITED KINGDOM EH3 9WJ",
-      "scraped_address": "50 Lothian Road, Festival Square, Edinburgh, EH3 9WJ",
+      "uv_value": "50 LOTHIAN ROAD FESTIVAL SQUARE EDINBURGH MIDLOTHIAN UNITED KINGDOM EH3 9WJ",
+      "scraped_value": "50 Lothian Road, Festival Square, Edinburgh, EH3 9WJ",
       "matched": "50 LOTHIAN ROAD - FESTIVAL SQUARE - EDINBURGH - EH3 9WJ",
       "unmatched": "MIDLOTHIAN - UNITED KINGDOM"
     },
@@ -271,8 +271,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "16 PALACE STREET LONDON GREATER LONDON UNITED KINGDOM SW1E 5JD",
-      "scraped_address": "16 Palace Street, London, SW1E 5JD",
+      "uv_value": "16 PALACE STREET LONDON GREATER LONDON UNITED KINGDOM SW1E 5JD",
+      "scraped_value": "16 Palace Street, London, SW1E 5JD",
       "matched": "16 PALACE STREET - LONDON - SW1E 5JD",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -311,8 +311,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "JUXON HOUSE 100 ST. PAUL'S CHURCHYARD LONDON GREATER LONDON UNITED KINGDOM EC4M 8BU",
-      "scraped_address": "Juxon House, 100 St. Paul's Churchyard, London, EC4M 8BU",
+      "uv_value": "JUXON HOUSE 100 ST. PAUL'S CHURCHYARD LONDON GREATER LONDON UNITED KINGDOM EC4M 8BU",
+      "scraped_value": "Juxon House, 100 St. Paul's Churchyard, London, EC4M 8BU",
       "matched": "JUXON HOUSE - 100 ST. PAUL'S CHURCHYARD - LONDON - EC4M 8BU",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -351,8 +351,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "UNIT 3 SUN STUDIOS  30  WARPLE WAY LONDON GREATER LONDON UNITED KINGDOM W3 0RX",
-      "scraped_address": "3 Sun Studios, 30 Warple Way, London, London, England, W3 0RX",
+      "uv_value": "UNIT 3 SUN STUDIOS  30  WARPLE WAY LONDON GREATER LONDON UNITED KINGDOM W3 0RX",
+      "scraped_value": "3 Sun Studios, 30 Warple Way, London, London, England, W3 0RX",
       "matched": "LONDON - W3 0RX",
       "unmatched": "UNIT 3 SUN STUDIOS -  - 30 - WARPLE WAY - GREATER LONDON - UNITED KINGDOM"
     },
@@ -391,8 +391,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "B3 KINGFISHER HOUSE TEAM VALLEY GATESHEAD TYNE AND WEAR UNITED KINGDOM NE11 0JQ",
-      "scraped_address": "B3 Kingfisher House, Team Valley, Gateshead, Tyne & Wear, England, NE11 0JQ",
+      "uv_value": "B3 KINGFISHER HOUSE TEAM VALLEY GATESHEAD TYNE AND WEAR UNITED KINGDOM NE11 0JQ",
+      "scraped_value": "B3 Kingfisher House, Team Valley, Gateshead, Tyne & Wear, England, NE11 0JQ",
       "matched": "B3 KINGFISHER HOUSE - TEAM VALLEY - GATESHEAD - NE11 0JQ",
       "unmatched": "TYNE AND WEAR - UNITED KINGDOM"
     },
@@ -431,8 +431,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "C/O SBA BUREAU SERVICES LIMITED 10 CHESHIRE ROAD THAME OXFORDSHIRE UNITED KINGDOM OX9 3LQ",
-      "scraped_address": "Sba Bureau Services Limited, 10 Cheshire Road, Thame, Oxfordshire, OX9 3LQ",
+      "uv_value": "C/O SBA BUREAU SERVICES LIMITED 10 CHESHIRE ROAD THAME OXFORDSHIRE UNITED KINGDOM OX9 3LQ",
+      "scraped_value": "Sba Bureau Services Limited, 10 Cheshire Road, Thame, Oxfordshire, OX9 3LQ",
       "matched": "10 CHESHIRE ROAD - THAME - OXFORDSHIRE - OX9 3LQ",
       "unmatched": "C/O SBA BUREAU SERVICES LIMITED - UNITED KINGDOM"
     },
@@ -471,8 +471,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "55 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0RL",
-      "scraped_address": "55 Gracechurch Street, London, England, EC3V 0RL",
+      "uv_value": "55 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0RL",
+      "scraped_value": "55 Gracechurch Street, London, England, EC3V 0RL",
       "matched": "55 GRACECHURCH STREET - LONDON - EC3V 0RL",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -511,8 +511,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "57-58 RUSSELL SQUARE LONDON GREATER LONDON UNITED KINGDOM WC1B 4HS",
-      "scraped_address": "11 Upper Brook Street, Mayfair, London, England, W1K 6PB",
+      "uv_value": "57-58 RUSSELL SQUARE LONDON GREATER LONDON UNITED KINGDOM WC1B 4HS",
+      "scraped_value": "11 Upper Brook Street, Mayfair, London, England, W1K 6PB",
       "matched": "LONDON",
       "unmatched": "57-58 RUSSELL SQUARE - GREATER LONDON - UNITED KINGDOM - WC1B 4HS"
     },
@@ -551,8 +551,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "9 HARTS LANE SOUTH GODSTONE GODSTONE SURREY UNITED KINGDOM RH9 8LZ",
-      "scraped_address": "9 Harts Lane, South Godstone, Godstone, Surrey, RH9 8LZ",
+      "uv_value": "9 HARTS LANE SOUTH GODSTONE GODSTONE SURREY UNITED KINGDOM RH9 8LZ",
+      "scraped_value": "9 Harts Lane, South Godstone, Godstone, Surrey, RH9 8LZ",
       "matched": "9 HARTS LANE - SOUTH GODSTONE - GODSTONE - SURREY - RH9 8LZ",
       "unmatched": "UNITED KINGDOM"
     },
@@ -591,8 +591,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "24 ONSLOW ROAD HERSHAM WALTON ON THAMES SURREY UNITED KINGDOM KT12 5BB",
-      "scraped_address": "24 Onslow Road, Hersham, Walton On Thames, Surrey, KT12 5BB",
+      "uv_value": "24 ONSLOW ROAD HERSHAM WALTON ON THAMES SURREY UNITED KINGDOM KT12 5BB",
+      "scraped_value": "24 Onslow Road, Hersham, Walton On Thames, Surrey, KT12 5BB",
       "matched": "24 ONSLOW ROAD - HERSHAM - WALTON ON THAMES - SURREY - KT12 5BB",
       "unmatched": "UNITED KINGDOM"
     },
@@ -631,8 +631,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "1210 LINCOLN ROAD WERRINGTON PETERBOROUGH CAMBRIDGESHIRE UNITED KINGDOM PE4 6ND",
-      "scraped_address": "1210 Lincoln Road, Werrington, Peterborough, Cambridgeshire, PE4 6ND",
+      "uv_value": "1210 LINCOLN ROAD WERRINGTON PETERBOROUGH CAMBRIDGESHIRE UNITED KINGDOM PE4 6ND",
+      "scraped_value": "1210 Lincoln Road, Werrington, Peterborough, Cambridgeshire, PE4 6ND",
       "matched": "1210 LINCOLN ROAD - WERRINGTON - PETERBOROUGH - CAMBRIDGESHIRE - PE4 6ND",
       "unmatched": "UNITED KINGDOM"
     },
@@ -671,8 +671,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "LYNTON HOUSE 7-12 TAVISTOCK SQUARE LONDON GREATER LONDON UNITED KINGDOM WC1H 9LT",
-      "scraped_address": "Lynton House, 7-12 Tavistock Square, London, WC1H 9LT",
+      "uv_value": "LYNTON HOUSE 7-12 TAVISTOCK SQUARE LONDON GREATER LONDON UNITED KINGDOM WC1H 9LT",
+      "scraped_value": "Lynton House, 7-12 Tavistock Square, London, WC1H 9LT",
       "matched": "LYNTON HOUSE - 7-12 TAVISTOCK SQUARE - LONDON - WC1H 9LT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -711,8 +711,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "52 EDENSOR GARDENS CHISWICK LONDON GREATER LONDON UNITED KINGDOM W4 2QZ",
-      "scraped_address": "52 Edensor Gardens, Chiswick, London, United Kingdom, W4 2QZ",
+      "uv_value": "52 EDENSOR GARDENS CHISWICK LONDON GREATER LONDON UNITED KINGDOM W4 2QZ",
+      "scraped_value": "52 Edensor Gardens, Chiswick, London, United Kingdom, W4 2QZ",
       "matched": "52 EDENSOR GARDENS - CHISWICK - LONDON - UNITED KINGDOM - W4 2QZ",
       "unmatched": "GREATER LONDON"
     },
@@ -751,8 +751,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "HEYWOODS COUNTRYWIDE HOUSE KNIGHTS WAY BATTLEFIELD ENTERPRISE PARK SHREWSBURY SHROPSHIRE UNITED KINGDOM SY1 3AB",
-      "scraped_address": "Heywoods Countrywide House Knights Way, Battlefield Enterprise Park, Shrewsbury, Shropshire, SY1 3AB",
+      "uv_value": "HEYWOODS COUNTRYWIDE HOUSE KNIGHTS WAY BATTLEFIELD ENTERPRISE PARK SHREWSBURY SHROPSHIRE UNITED KINGDOM SY1 3AB",
+      "scraped_value": "Heywoods Countrywide House Knights Way, Battlefield Enterprise Park, Shrewsbury, Shropshire, SY1 3AB",
       "matched": "BATTLEFIELD ENTERPRISE PARK - SHREWSBURY - SHROPSHIRE - SY1 3AB",
       "unmatched": "HEYWOODS COUNTRYWIDE HOUSE - KNIGHTS WAY - UNITED KINGDOM"
     },
@@ -791,8 +791,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -831,8 +831,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -871,8 +871,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -911,8 +911,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -951,8 +951,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -991,8 +991,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1031,8 +1031,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1071,8 +1071,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1111,8 +1111,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1151,8 +1151,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1191,8 +1191,8 @@
       "invalid": false
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1231,8 +1231,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1271,8 +1271,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1311,8 +1311,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
-      "scraped_address": "40 Gracechurch Street, London, EC3V 0BT",
+      "uv_value": "40 GRACECHURCH STREET LONDON GREATER LONDON UNITED KINGDOM EC3V 0BT",
+      "scraped_value": "40 Gracechurch Street, London, EC3V 0BT",
       "matched": "40 GRACECHURCH STREET - LONDON - EC3V 0BT",
       "unmatched": "GREATER LONDON - UNITED KINGDOM"
     },
@@ -1351,8 +1351,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "C/O WRIGHT  JOHNSTON & MACKENZIE LLP 302 ST. VINCENT STREET GLASGOW LANARKSHIRE UNITED KINGDOM G2 5RZ",
-      "scraped_address": "Wright, Johnston & Mackenzie Llp, 302 St. Vincent Street, Glasgow, Scotland, G2 5RZ",
+      "uv_value": "C/O WRIGHT  JOHNSTON & MACKENZIE LLP 302 ST. VINCENT STREET GLASGOW LANARKSHIRE UNITED KINGDOM G2 5RZ",
+      "scraped_value": "Wright, Johnston & Mackenzie Llp, 302 St. Vincent Street, Glasgow, Scotland, G2 5RZ",
       "matched": "JOHNSTON & MACKENZIE LLP - 302 ST. VINCENT STREET - GLASGOW - G2 5RZ",
       "unmatched": "C/O WRIGHT - LANARKSHIRE - UNITED KINGDOM"
     },
@@ -1391,8 +1391,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "VIRGINIA LEA EAST AVENUE Lindley HUDDERSFIELD WEST YORKSHIRE UNITED KINGDOM HD3 3LW",
-      "scraped_address": "Virginia Lea, East Avenue Lindley, Huddersfield, West Yorkshire, HD3 3LW",
+      "uv_value": "VIRGINIA LEA EAST AVENUE Lindley HUDDERSFIELD WEST YORKSHIRE UNITED KINGDOM HD3 3LW",
+      "scraped_value": "Virginia Lea, East Avenue Lindley, Huddersfield, West Yorkshire, HD3 3LW",
       "matched": "VIRGINIA LEA - HUDDERSFIELD - WEST YORKSHIRE - HD3 3LW",
       "unmatched": "EAST AVENUE - LINDLEY - UNITED KINGDOM"
     },
@@ -1431,8 +1431,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "C/O ASTRA ASSET MANAGEMENT LLP 35 KING STREET LONDON GREATER LONDON UNITED KINGDOM EC2V 8EH",
-      "scraped_address": "Astra Asset Management Llp, 35 King Street, London, King Street, London, EC2V 8EH",
+      "uv_value": "C/O ASTRA ASSET MANAGEMENT LLP 35 KING STREET LONDON GREATER LONDON UNITED KINGDOM EC2V 8EH",
+      "scraped_value": "Astra Asset Management Llp, 35 King Street, London, King Street, London, EC2V 8EH",
       "matched": "35 KING STREET - LONDON - EC2V 8EH",
       "unmatched": "C/O ASTRA ASSET MANAGEMENT LLP - GREATER LONDON - UNITED KINGDOM"
     },
@@ -1471,8 +1471,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "A J WELLS & SONS LTD BISHOPS WAY NEWPORT ISLE OF WIGHT UNITED KINGDOM PO30 5WS",
-      "scraped_address": "A J Wells & Sons Ltd, Bishops, Way, Newport, Isle Of Wight, PO30 5WS",
+      "uv_value": "A J WELLS & SONS LTD BISHOPS WAY NEWPORT ISLE OF WIGHT UNITED KINGDOM PO30 5WS",
+      "scraped_value": "A J Wells & Sons Ltd, Bishops, Way, Newport, Isle Of Wight, PO30 5WS",
       "matched": "A J WELLS & SONS LTD - NEWPORT - ISLE OF WIGHT - PO30 5WS",
       "unmatched": "BISHOPS WAY - UNITED KINGDOM"
     },
@@ -1511,8 +1511,8 @@
       "invalid": null
     },
     "address": {
-      "uv_address": "SPYNIE KIRK HOUSE QUARRYWOOD ELGIN MORAY UNITED KINGDOM IV30 8XJ",
-      "scraped_address": "Spynie Kirk House, Quarrywood, Elgin, Moray, IV30 8XJ",
+      "uv_value": "SPYNIE KIRK HOUSE QUARRYWOOD ELGIN MORAY UNITED KINGDOM IV30 8XJ",
+      "scraped_value": "Spynie Kirk House, Quarrywood, Elgin, Moray, IV30 8XJ",
       "matched": "SPYNIE KIRK HOUSE - QUARRYWOOD - ELGIN - MORAY - IV30 8XJ",
       "unmatched": "UNITED KINGDOM"
     },

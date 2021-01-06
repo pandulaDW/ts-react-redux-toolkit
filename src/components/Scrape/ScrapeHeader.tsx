@@ -7,6 +7,7 @@ import {
   selectRaAction,
   setFilterState,
   setDataView,
+  fetchScrapeData,
 } from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
@@ -71,7 +72,11 @@ const ScrapeHeader = () => {
           placeholder="Select the file here!"
           marginRight="1.5rem"
         />
-        <Button text="Upload" type="Animated" />
+        <Button
+          text="Upload"
+          type="Animated"
+          clickHandler={() => dispatch(fetchScrapeData(false))}
+        />
       </div>
     </div>
   );
