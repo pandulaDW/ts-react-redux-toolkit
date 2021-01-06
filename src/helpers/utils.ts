@@ -48,3 +48,6 @@ export const sortArrayIndex = <T extends string | number>(
 
   return sorted.map((el) => Object.values(el)[0]);
 };
+
+export const promisfiedTimeout = (interval: number) =>
+  new Promise((resolve) => setTimeout(() => resolve, interval));

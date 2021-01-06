@@ -4,7 +4,7 @@ import styles from "../../styles/scrape.module.scss";
 import ScrapeContent from "./ScrapeContent";
 import ScrapeHeader from "./ScrapeHeader";
 import Loader from "../Common/Loader";
-import { fetchInitData } from "../../redux/scrape";
+import { fetchScrapeData } from "../../redux/scrape";
 import { RootState } from "../../redux/_store";
 
 const ScrapeMain = () => {
@@ -14,7 +14,7 @@ const ScrapeMain = () => {
   );
 
   useEffect(() => {
-    if (ScrapeData.length === 0) dispatch(fetchInitData());
+    if (ScrapeData.length === 0) dispatch(fetchScrapeData(true));
     // eslint-disable-next-line
   }, []);
 

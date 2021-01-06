@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.get("/lei/scrape/scanned-index", scanIndexHandler);
 app.get("/lei/scrape/scrape-request", fetchRequestHandler);
 app.get("/lei/scrape/init-data", scanAndFetchHandler);
-app.get("/lei/scrape/upload-file", putItemsHandler);
+app.post("/lei/scrape/upload-file", putItemsHandler);
 
 app.listen(5000, async () => {
   await initDb();

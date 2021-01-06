@@ -1,5 +1,11 @@
-import { range } from "./utils";
-import { ScrapeDataType } from "../models/scrapeTypes";
+import { AxiosResponse } from "axios";
+import { range, promisfiedTimeout } from "./utils";
+import { uploadScrapeFile, fetchRequestData } from "./apiCalls";
+import {
+  ScrapeDataType,
+  UploadFileResponseType,
+  ScrapeDataResponseType,
+} from "../models/scrapeTypes";
 import { Column, TableData, OptionsArray } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
 
@@ -59,4 +65,30 @@ export const formatData = (
     arrangedData[col] = elements1;
     arrangedData[`scraped ${col}`] = elements2;
   }
+};
+
+export const fetchAndPollData = async (): Promise<
+  AxiosResponse<ScrapeDataResponseType>
+> => {
+  const uploadRes = await uploadScrapeFile();
+  const { timestamp, kfids } = uploadRes.data as UploadFileResponseType;
+
+  const fetchData = async () => {
+    const fetchRes = await fetchRequestData(timestamp);
+    const { Items } = fetchRes.data as ScrapeDataResponseType;
+    const returnedKfids = Items.map((el) => el.kfid);
+    if (returnedKfids.length < kfids.length) return false;
+    return true;
+  };
+
+  // poll dynamoDb every 5 seconds
+  const interval = 5000;
+  let polling = false;
+
+  while (!polling) {
+    await promisfiedTimeout(interval);
+    polling = await fetchData();
+  }
+
+  return await fetchRequestData(timestamp);
 };

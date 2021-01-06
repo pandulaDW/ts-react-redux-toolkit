@@ -34,6 +34,11 @@ export interface ScrapeDataResponseType {
   fieldList: string[];
 }
 
+export interface UploadFileResponseType {
+  timestamp: number;
+  kfids: string[];
+}
+
 // state definition --------------
 export interface ScrapeState {
   ScrapeData: ScrapeDataType[];

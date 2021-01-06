@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import {
   createAction,
   createAsyncThunk,
@@ -11,6 +12,7 @@ import {
 } from "../models/scrapeTypes";
 import { FilterTableCols, SortTableCol } from "../models/flexTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
+import { fetchAndPollData } from "../helpers/scrapeUtils";
 
 // initial state --------------
 const initialState: ScrapeState = {
@@ -44,14 +46,16 @@ export const setFilterState = createAction<FilterState>(
 export const setSortState = createAction<SortTableCol>("scrape/setSortState");
 
 // Thunk action creators -------------------------------
-export const fetchInitData = createAsyncThunk(
-  "scrape/fetchInitData",
-  async (arg, thunkAPI) => {
+export const fetchScrapeData = createAsyncThunk(
+  "scrape/fetchScrapeData",
+  async (isInitial: boolean, thunkAPI) => {
     try {
-      const response = await fetchInitCall();
-      return response.data as ScrapeDataResponseType;
+      let response: AxiosResponse<ScrapeDataResponseType>;
+      if (isInitial) response = await fetchInitCall();
+      else response = await fetchAndPollData();
+      return response.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue("Error fetching initial data");
+      return thunkAPI.rejectWithValue("Error fetching data");
     }
   }
 );
@@ -59,10 +63,10 @@ export const fetchInitData = createAsyncThunk(
 // Reducer -------------------------------------------
 const scrapeReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(fetchInitData.pending, (state) => {
+    .addCase(fetchScrapeData.pending, (state) => {
       state.loading = true;
     })
-    .addCase(fetchInitData.fulfilled, (state, action) => {
+    .addCase(fetchScrapeData.fulfilled, (state, action) => {
       state.loading = false;
       state.ErrorMsg = null;
       const { Items } = action.payload;
@@ -77,7 +81,7 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       state.fieldList = action.payload.fieldList;
       state.uniqueRAs = Array.from(new Set(Items.map((item) => item.RAId)));
     })
-    .addCase(fetchInitData.rejected, (state, action) => {
+    .addCase(fetchScrapeData.rejected, (state, action) => {
       state.loading = false;
       state.ErrorMsg = action.payload as string;
     })
