@@ -22,7 +22,7 @@ const ScrapeMain = () => {
     <div className={styles.content}>
       <ScrapeHeader />
       {loading ? (
-        <Loader message="fetching initial data..." />
+        <Loader message="fetching data..." />
       ) : (
         <ScrapeContent />
       )}

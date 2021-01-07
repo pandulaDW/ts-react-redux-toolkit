@@ -32,6 +32,7 @@ const initialState: ScrapeState = {
 };
 
 // Action creators -----------------------------------
+export const testAction = createAction<number>("scrape/test");
 export const expandAction = createAction("scrape/expand");
 export const setDataView = createAction("scrape/setDataView");
 export const selectRaAction = createAction<string>("scrape/selectRA");
@@ -44,15 +45,20 @@ export const setFilterState = createAction<FilterState>(
   "scrape/setFilterState"
 );
 export const setSortState = createAction<SortTableCol>("scrape/setSortState");
+export const clearAllState = createAction("scrape/clearAllState");
 
 // Thunk action creators -------------------------------
 export const fetchScrapeData = createAsyncThunk(
   "scrape/fetchScrapeData",
   async (isInitial: boolean, thunkAPI) => {
+    const { dispatch } = thunkAPI;
     try {
       let response: AxiosResponse<ScrapeDataResponseType>;
       if (isInitial) response = await fetchInitCall();
-      else response = await fetchAndPollData();
+      else {
+        response = await fetchAndPollData(dispatch);
+        dispatch(clearAllState());
+      }
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue("Error fetching data");
@@ -136,6 +142,14 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setSortState, (state, action) => {
       if (action.payload.column) state.sortTableCol = action.payload;
+    })
+    .addCase(clearAllState, (state) => {
+      const { fieldList } = state;
+      state = Object.assign(state, initialState);
+      state.fieldList = fieldList;
+    })
+    .addCase(testAction, (_, action) => {
+      console.log(action.payload);
     })
     .addDefaultCase((state) => state);
 });

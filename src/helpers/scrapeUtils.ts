@@ -8,6 +8,8 @@ import {
 } from "../models/scrapeTypes";
 import { Column, TableData, OptionsArray } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { testAction } from "../redux/scrape";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
   let arrangedData: TableData<string> = {
@@ -67,18 +69,24 @@ export const formatData = (
   }
 };
 
-export const fetchAndPollData = async (): Promise<
-  AxiosResponse<ScrapeDataResponseType>
-> => {
+interface PollingReturn {
+  polling: boolean;
+  percCompleted: number;
+}
+
+export async function fetchAndPollData(
+  dispatch: ThunkDispatch<unknown, unknown, AnyAction>
+): Promise<AxiosResponse<ScrapeDataResponseType>> {
   const uploadRes = await uploadScrapeFile();
   const { timestamp, kfids } = uploadRes.data as UploadFileResponseType;
 
-  const fetchData = async () => {
+  const fetchData = async (): Promise<PollingReturn> => {
     const fetchRes = await fetchRequestData(timestamp);
     const { Items } = fetchRes.data as ScrapeDataResponseType;
     const returnedKfids = Items.map((el) => el.kfid);
-    if (returnedKfids.length < kfids.length) return false;
-    return true;
+    const percCompleted = returnedKfids.length / kfids.length;
+    if (percCompleted === 1) return { polling: false, percCompleted };
+    return { polling: true, percCompleted };
   };
 
   // poll dynamoDb every 5 seconds
@@ -87,8 +95,10 @@ export const fetchAndPollData = async (): Promise<
 
   while (!polling) {
     await promisfiedTimeout(interval);
-    polling = await fetchData();
+    const { polling: isPolling, percCompleted } = await fetchData();
+    polling = isPolling;
+    dispatch(testAction(percCompleted));
   }
 
   return await fetchRequestData(timestamp);
-};
+}
