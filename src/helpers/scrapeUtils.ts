@@ -1,6 +1,7 @@
+import { AxiosResponse } from "axios";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { range, promisfiedTimeout } from "./utils";
 import { uploadScrapeFile, fetchRequestData } from "./apiCalls";
-import { AxiosResponse } from "axios";
 import {
   ScrapeDataType,
   UploadFileResponseType,
@@ -8,8 +9,7 @@ import {
 } from "../models/scrapeTypes";
 import { Column, TableData, OptionsArray } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import { testAction } from "../redux/scrape";
+import { setLoadingProgress } from "../redux/scrape";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
   let arrangedData: TableData<string> = {
@@ -91,13 +91,13 @@ export async function fetchAndPollData(
 
   // poll dynamoDb every 5 seconds
   const interval = 5000;
-  let polling = false;
+  let polling = true;
 
-  while (!polling) {
+  while (polling) {
     await promisfiedTimeout(interval);
     const { polling: isPolling, percCompleted } = await fetchData();
     polling = isPolling;
-    dispatch(testAction(percCompleted));
+    dispatch(setLoadingProgress(percCompleted));
   }
 
   return await fetchRequestData(timestamp);

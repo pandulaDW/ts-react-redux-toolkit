@@ -53,6 +53,7 @@ export interface ScrapeState {
   filterTableCols: FilterTableCols;
   sortTableCol: SortTableCol;
   loading: boolean;
+  loadingProgress: number;
   ErrorMsg: string | null;
 }
 

@@ -51,5 +51,5 @@ exports.putItemsHandler = async (req, res) => {
     counter++;
     // clearing the interval when all data has been inserted
     if (counter >= 10) clearInterval(timeout);
-  }, 1500);
+  }, 2500);
 };

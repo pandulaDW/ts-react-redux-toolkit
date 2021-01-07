@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Progress from "../Common/Progress";
 import styles from "../../styles/scrape.module.scss";
 import ScrapeContent from "./ScrapeContent";
 import ScrapeHeader from "./ScrapeHeader";
@@ -9,7 +10,7 @@ import { RootState } from "../../redux/_store";
 
 const ScrapeMain = () => {
   const dispatch = useDispatch();
-  const { loading, ScrapeData } = useSelector(
+  const { loading, ScrapeData, loadingProgress } = useSelector(
     (state: RootState) => state.scrape
   );
 
@@ -18,14 +19,19 @@ const ScrapeMain = () => {
     // eslint-disable-next-line
   }, []);
 
+  let component: JSX.Element;
+  if (loading) {
+    if (ScrapeData.length > 0)
+      component = <Progress completed={loadingProgress} />;
+    else component = <Loader message="fetching initial data..." />;
+  } else {
+    component = <ScrapeContent />;
+  }
+
   return (
     <div className={styles.content}>
       <ScrapeHeader />
-      {loading ? (
-        <Loader message="fetching data..." />
-      ) : (
-        <ScrapeContent />
-      )}
+      {component}
     </div>
   );
 };

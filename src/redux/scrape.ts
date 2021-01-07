@@ -28,16 +28,19 @@ const initialState: ScrapeState = {
   dataView: DataView.single,
   filterState: FilterState.all,
   loading: false,
+  loadingProgress: 0,
   ErrorMsg: null,
 };
 
 // Action creators -----------------------------------
-export const testAction = createAction<number>("scrape/test");
 export const expandAction = createAction("scrape/expand");
 export const setDataView = createAction("scrape/setDataView");
 export const selectRaAction = createAction<string>("scrape/selectRA");
 export const setLocalFinished = createAction<string>("scrape/setLocalFinish");
 export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
+export const setLoadingProgress = createAction<number>(
+  "scrape/setLoadProgress"
+);
 export const setFilterTableCol = createAction<FilterTableCols>(
   "scrape/filterTableCols"
 );
@@ -148,8 +151,8 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       state = Object.assign(state, initialState);
       state.fieldList = fieldList;
     })
-    .addCase(testAction, (_, action) => {
-      console.log(action.payload);
+    .addCase(setLoadingProgress, (state, action) => {
+      state.loadingProgress = action.payload * 100;
     })
     .addDefaultCase((state) => state);
 });
