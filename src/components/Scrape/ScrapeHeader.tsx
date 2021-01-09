@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import cx from "classnames";
 import { SegmentedControl, Switch, FilePicker, Select } from "evergreen-ui";
 import Button from "../Common/Button";
 import {
@@ -16,12 +17,17 @@ import { FilterState, DataView } from "../../models/scrapeTypes";
 
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
-  const { expand, uniqueRAs, filterState, timestamp, dataView } = useSelector(
-    (state: RootState) => state.scrape
-  );
+  const {
+    expand,
+    uniqueRAs,
+    filterState,
+    timestamp,
+    dataView,
+    loading,
+  } = useSelector((state: RootState) => state.scrape);
 
   return (
-    <div className={styles.header}>
+    <div className={cx(styles.header, { blockElement: loading })}>
       <div className={styles.header__left}>
         <SegmentedControl
           width={240}

@@ -1,16 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import cx from "classnames";
 import { Link } from "react-router-dom";
 import { FaFolderOpen, FaCheckDouble, FaChrome } from "react-icons/fa";
 import { RiFileExcel2Line } from "react-icons/ri";
 import { IoMdAnalytics } from "react-icons/io";
 
+import { RootState } from "../../redux/_store";
 import BSLLabsLogo from "../../images/BSL_Labs_-_Aug_2019.png";
 import routes from "../../routes";
 import styles from "../../styles/sidebar.module.scss";
+import "../../styles/_global.scss";
 
 const Sidebar = () => {
+  const { loading } = useSelector((state: RootState) => state.scrape);
+
   return (
-    <div className={styles.sidebar}>
+    <div className={cx(styles.sidebar, { blockElement: loading })}>
       <ul>
         <li>
           <div>

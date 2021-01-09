@@ -46,3 +46,8 @@ body {
   overflow-y: auto;
   background-color: $color-grey-1;
 }
+
+.blockElement {
+  pointer-events: none;
+  opacity: 0.3;
+}

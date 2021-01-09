@@ -1,9 +1,13 @@
 import React from "react";
+import cx from "classnames";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import gleifLogo from "../../images/gleif-logo-full.png";
 import lsegLogo from "../../images/LSEG_LOGO_RGB_GWB_0.png";
-import styles from "../../styles/header.module.scss";
 import routes from "../../routes";
+import { RootState } from "../../redux/_store";
+import styles from "../../styles/header.module.scss";
+import "../../styles/_global.scss";
 
 const titleMap = [
   {
@@ -45,8 +49,10 @@ const Header = () => {
   // update document title
   document.title = headerObj!.browserTitle;
 
+  const { loading } = useSelector((state: RootState) => state.scrape);
+
   return (
-    <div className={styles.container}>
+    <div className={cx(styles.container, { blockElement: loading })}>
       <img src={gleifLogo} alt="glief logo" className={styles.glief_logo} />
       <div className={styles.title}>
         <h1>
