@@ -1,15 +1,15 @@
+import * as XLSX from "xlsx";
+import { v4 as uuid } from "uuid";
 import { AxiosResponse } from "axios";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import { range, promisfiedTimeout } from "./utils";
-import { uploadScrapeFile, fetchRequestData } from "./apiCalls";
+import { range } from "./utils";
+import { fetchSingleRequest } from "./apiCalls";
 import {
   ScrapeDataType,
-  UploadFileResponseType,
+  ExcelDataType,
   ScrapeDataResponseType,
 } from "../models/scrapeTypes";
 import { Column, TableData, OptionsArray } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
-import { setLoadingProgress } from "../redux/scrape";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
   let arrangedData: TableData<string> = {
@@ -69,36 +69,70 @@ export const formatData = (
   }
 };
 
-interface PollingReturn {
-  polling: boolean;
-  percCompleted: number;
+// Excel reader promise
+const readExcel = (file: File): Promise<ExcelDataType> => {
+  const promise: Promise<ExcelDataType> = new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsArrayBuffer(file);
+
+    fileReader.onload = (e) => {
+      const bufferArray = e.target!.result;
+      const wb = XLSX.read(bufferArray, { type: "buffer" });
+      const wsName = wb.SheetNames[0];
+      const ws = wb.Sheets[wsName];
+      const data = XLSX.utils.sheet_to_json(ws) as ExcelDataType;
+      resolve(data);
+    };
+
+    fileReader.onerror = (err) => {
+      reject(err);
+    };
+  });
+
+  return promise;
+};
+
+// Creating encoded file based on rows
+const createFilteredFile = (row: ExcelDataType | any) => {
+  const wb = XLSX.utils.book_new();
+  const ws_name = "Sheet 1";
+  const ws = XLSX.utils.json_to_sheet(row);
+  XLSX.utils.book_append_sheet(wb, ws, ws_name);
+
+  const wbout = XLSX.write(wb, {
+    bookType: "xlsx",
+    bookSST: false,
+    type: "base64",
+  });
+
+  return wbout;
+};
+
+// PromiseObject interface
+interface PromiseObject {
+  requestId: string;
+  promise: Promise<AxiosResponse<ScrapeDataResponseType>>;
 }
 
-export async function fetchAndPollData(
-  dispatch: ThunkDispatch<unknown, unknown, AnyAction>
-): Promise<AxiosResponse<ScrapeDataResponseType>> {
-  const uploadRes = await uploadScrapeFile();
-  const { timestamp, kfids } = uploadRes.data as UploadFileResponseType;
+// Creating promise object list
+const createPromiseObjList = (data: ExcelDataType) => {
+  const promiseObjects: PromiseObject[] = data.map((row) => {
+    const rowFile = createFilteredFile(row);
+    const promise = fetchSingleRequest(rowFile);
+    return { requestId: uuid(), promise };
+  });
 
-  const fetchData = async (): Promise<PollingReturn> => {
-    const fetchRes = await fetchRequestData(timestamp);
-    const { Items } = fetchRes.data as ScrapeDataResponseType;
-    const returnedKfids = Items.map((el) => el.kfid);
-    const percCompleted = returnedKfids.length / kfids.length;
-    if (percCompleted === 1) return { polling: false, percCompleted };
-    return { polling: true, percCompleted };
-  };
+  return promiseObjects;
+};
 
-  // poll dynamoDb every 5 seconds
-  const interval = 5000;
-  let polling = true;
+// Scrape requests multiplexing
+export async function sendScrapeRequests(file: File) {
+  const data = await readExcel(file);
+  const promiseObjList = createPromiseObjList(data);
+  const promiseList = promiseObjList.map((obj) => obj.promise);
 
-  while (polling) {
-    await promisfiedTimeout(interval);
-    const { polling: isPolling, percCompleted } = await fetchData();
-    polling = isPolling;
-    dispatch(setLoadingProgress(percCompleted));
+  while (promiseList.length > 0) {
+    const response = await Promise.race(promiseList);
   }
-
-  return await fetchRequestData(timestamp);
+  await fetchSingleRequest(data);
 }

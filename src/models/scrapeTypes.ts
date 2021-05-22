@@ -27,17 +27,18 @@ interface CommonFields {
 
 export type ScrapeDataType = NonCommonFields & CommonFields & AddedFields;
 
-export interface ScrapeDataResponseType {
-  Items: ScrapeDataType[];
-  Count: number;
-  ScannedCount: number;
+export interface ScrapeDataInitResponseType {
+  data: ScrapeDataType;
   fieldList: string[];
 }
 
-export interface UploadFileResponseType {
-  timestamp: number;
-  kfids: string[];
+export interface ScrapeDataResponseType extends ScrapeDataInitResponseType {
+  requestId: string;
 }
+
+export type ExcelDataType = Array<{
+  [colName: string]: string;
+}>;
 
 // state definition --------------
 export interface ScrapeState {

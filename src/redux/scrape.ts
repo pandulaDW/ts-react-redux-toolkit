@@ -5,7 +5,7 @@ import {
   createReducer,
 } from "@reduxjs/toolkit";
 import {
-  ScrapeDataResponseType,
+  ScrapeDataInitResponseType,
   FilterState,
   ScrapeState,
   DataView,
@@ -56,7 +56,7 @@ export const fetchScrapeData = createAsyncThunk(
   async (isInitial: boolean, thunkAPI) => {
     const { dispatch } = thunkAPI;
     try {
-      let response: AxiosResponse<ScrapeDataResponseType>;
+      let response: AxiosResponse<ScrapeDataInitResponseType>;
       if (isInitial) response = await fetchInitCall();
       else {
         response = await fetchAndPollData(dispatch);

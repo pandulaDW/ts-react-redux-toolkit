@@ -1,13 +1,14 @@
 const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
-const { initDb } = require("./db/initDB");
+// const { initDb } = require("./db/initDB");
 const {
   scanIndexHandler,
   fetchRequestHandler,
   scanAndFetchHandler,
 } = require("./handlers/handlers");
 const { putItemsHandler } = require("./handlers/postRequest");
+const { handleTimeoutResponse } = require("./handlers/timeoutFuncs");
 
 const app = express();
 
@@ -21,8 +22,9 @@ app.get("/lei/scrape/scanned-index", scanIndexHandler);
 app.get("/lei/scrape/scrape-request", fetchRequestHandler);
 app.get("/lei/scrape/init-data", scanAndFetchHandler);
 app.post("/lei/scrape/upload-file", putItemsHandler);
+app.get("/lei/scrape/simulate", handleTimeoutResponse);
 
 app.listen(5000, async () => {
-  await initDb();
+  // await initDb();
   console.log("server started listening to requests at port 5000...");
 });

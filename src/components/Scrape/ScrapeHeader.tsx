@@ -12,19 +12,14 @@ import {
 } from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
+import { sendScrapeRequests } from "../../helpers/scrapeUtils";
 import { RootState } from "../../redux/_store";
 import { FilterState, DataView } from "../../models/scrapeTypes";
 
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
-  const {
-    expand,
-    uniqueRAs,
-    filterState,
-    timestamp,
-    dataView,
-    loading,
-  } = useSelector((state: RootState) => state.scrape);
+  const { expand, uniqueRAs, filterState, timestamp, dataView, loading } =
+    useSelector((state: RootState) => state.scrape);
 
   return (
     <div className={cx(styles.header, { blockElement: loading })}>
@@ -77,6 +72,10 @@ const ScrapeHeader = () => {
           width={250}
           placeholder="Select the file here!"
           marginRight="1.5rem"
+          onChange={(fileList) => {
+            const file = fileList[0];
+            sendScrapeRequests(file);
+          }}
         />
         <Button
           text="Upload"
