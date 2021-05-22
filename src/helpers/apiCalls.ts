@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import {
-  ScrapeDataInitResponseType,
-  ScrapeDataResponseType,
+  ScrapeDataInitResponse,
+  ScrapeDataResponse,
+  ScrapeRequest,
 } from "../models/scrapeTypes";
 
 const address = process.env.REACT_APP_URL;
@@ -10,17 +11,13 @@ const url =
   process.env.NODE_ENV === "development" ? `${address}:${port}` : address;
 
 export const fetchInitCall = (): Promise<
-  AxiosResponse<ScrapeDataInitResponseType>
+  AxiosResponse<ScrapeDataInitResponse>
 > => {
   return axios.get(`${url}/lei/scrape/init-data`);
 };
 
-export const uploadScrapeFile = () => {
-  return axios.post(`${url}/lei/scrape/upload-file`);
-};
-
 export const fetchSingleRequest = (
-  data: any
-): Promise<AxiosResponse<ScrapeDataResponseType>> => {
+  data: ScrapeRequest
+): Promise<AxiosResponse<ScrapeDataResponse>> => {
   return axios.post(`${url}/lei/scrape/simulate`, data);
 };

@@ -27,12 +27,17 @@ interface CommonFields {
 
 export type ScrapeDataType = NonCommonFields & CommonFields & AddedFields;
 
-export interface ScrapeDataInitResponseType {
+export interface ScrapeRequest {
+  requestId: string;
+  content: string;
+}
+
+export interface ScrapeDataInitResponse {
   data: ScrapeDataType;
   fieldList: string[];
 }
 
-export interface ScrapeDataResponseType extends ScrapeDataInitResponseType {
+export interface ScrapeDataResponse extends ScrapeDataInitResponse {
   requestId: string;
 }
 

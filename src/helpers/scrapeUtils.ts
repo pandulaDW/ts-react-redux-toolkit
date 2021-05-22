@@ -6,7 +6,7 @@ import { fetchSingleRequest } from "./apiCalls";
 import {
   ScrapeDataType,
   ExcelDataType,
-  ScrapeDataResponseType,
+  ScrapeDataResponse,
 } from "../models/scrapeTypes";
 import { Column, TableData, OptionsArray } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
@@ -92,8 +92,8 @@ const readExcel = (file: File): Promise<ExcelDataType> => {
   return promise;
 };
 
-// Creating encoded file based on rows
-const createFilteredFile = (row: ExcelDataType | any) => {
+// Creating base64 encoded file based on the given row
+const createFilteredFile = (row: any) => {
   const wb = XLSX.utils.book_new();
   const ws_name = "Sheet 1";
   const ws = XLSX.utils.json_to_sheet(row);
@@ -105,21 +105,22 @@ const createFilteredFile = (row: ExcelDataType | any) => {
     type: "base64",
   });
 
-  return wbout;
+  return wbout as string;
 };
 
 // PromiseObject interface
 interface PromiseObject {
   requestId: string;
-  promise: Promise<AxiosResponse<ScrapeDataResponseType>>;
+  promise: Promise<AxiosResponse<ScrapeDataResponse>>;
 }
 
 // Creating promise object list
 const createPromiseObjList = (data: ExcelDataType) => {
   const promiseObjects: PromiseObject[] = data.map((row) => {
-    const rowFile = createFilteredFile(row);
-    const promise = fetchSingleRequest(rowFile);
-    return { requestId: uuid(), promise };
+    const content = createFilteredFile(row);
+    const requestId = uuid();
+    const promise = fetchSingleRequest({ requestId, content });
+    return { requestId, promise };
   });
 
   return promiseObjects;
@@ -128,11 +129,16 @@ const createPromiseObjList = (data: ExcelDataType) => {
 // Scrape requests multiplexing
 export async function sendScrapeRequests(file: File) {
   const data = await readExcel(file);
-  const promiseObjList = createPromiseObjList(data);
-  const promiseList = promiseObjList.map((obj) => obj.promise);
+  let promiseObjList = createPromiseObjList(data);
+  let promiseList = promiseObjList.map((obj) => obj.promise);
 
   while (promiseList.length > 0) {
     const response = await Promise.race(promiseList);
+    const { data, requestId } = response.data;
+    console.log(data);
+    promiseObjList = promiseObjList.filter(
+      (obj) => obj.requestId !== requestId
+    );
+    promiseList = promiseObjList.map((obj) => obj.promise);
   }
-  await fetchSingleRequest(data);
 }
