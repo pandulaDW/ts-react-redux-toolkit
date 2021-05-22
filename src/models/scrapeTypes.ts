@@ -22,7 +22,6 @@ interface CommonFields {
   url: string;
   RAId: string;
   company_id: string;
-  timestamp: number;
 }
 
 export type ScrapeDataType = NonCommonFields & CommonFields & AddedFields;
@@ -30,15 +29,20 @@ export type ScrapeDataType = NonCommonFields & CommonFields & AddedFields;
 export interface ScrapeRequest {
   requestId: string;
   content: string;
+  timestamp: number;
 }
 
 export interface ScrapeDataInitResponse {
-  data: ScrapeDataType;
+  data: ScrapeDataType[];
   fieldList: string[];
+  timestamp: number;
 }
 
-export interface ScrapeDataResponse extends ScrapeDataInitResponse {
+export interface ScrapeDataResponse {
   requestId: string;
+  data: ScrapeDataType;
+  fieldList: string[];
+  timestamp: number;
 }
 
 export type ExcelDataType = Array<{
@@ -48,7 +52,8 @@ export type ExcelDataType = Array<{
 // state definition --------------
 export interface ScrapeState {
   ScrapeData: ScrapeDataType[];
-  timestamp: ScrapeDataType["timestamp"];
+  timestamp: number;
+  file: File | null;
   filteredByView: string[];
   filteredByRA: string[];
   uniqueRAs: string[];

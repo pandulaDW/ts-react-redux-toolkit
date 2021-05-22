@@ -115,11 +115,11 @@ interface PromiseObject {
 }
 
 // Creating promise object list
-const createPromiseObjList = (data: ExcelDataType) => {
+const createPromiseObjList = (data: ExcelDataType, timestamp: number) => {
   const promiseObjects: PromiseObject[] = data.map((row) => {
     const content = createFilteredFile(row);
     const requestId = uuid();
-    const promise = fetchSingleRequest({ requestId, content });
+    const promise = fetchSingleRequest({ requestId, content, timestamp });
     return { requestId, promise };
   });
 
@@ -127,18 +127,23 @@ const createPromiseObjList = (data: ExcelDataType) => {
 };
 
 // Scrape requests multiplexing
-export async function sendScrapeRequests(file: File) {
+export async function fetchScrapeRequests(file: File) {
   const data = await readExcel(file);
-  let promiseObjList = createPromiseObjList(data);
+  const timestamp = Date.now();
+  const responseData: ScrapeDataType[] = [];
+
+  let promiseObjList = createPromiseObjList(data, timestamp);
   let promiseList = promiseObjList.map((obj) => obj.promise);
 
   while (promiseList.length > 0) {
     const response = await Promise.race(promiseList);
     const { data, requestId } = response.data;
-    console.log(data);
+    responseData.push(data);
     promiseObjList = promiseObjList.filter(
       (obj) => obj.requestId !== requestId
     );
     promiseList = promiseObjList.map((obj) => obj.promise);
   }
+
+  return { data: responseData, timestamp };
 }

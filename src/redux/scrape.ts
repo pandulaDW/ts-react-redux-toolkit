@@ -1,18 +1,13 @@
-import { AxiosResponse } from "axios";
 import {
   createAction,
   createAsyncThunk,
   createReducer,
 } from "@reduxjs/toolkit";
-import {
-  ScrapeDataInitResponse,
-  FilterState,
-  ScrapeState,
-  DataView,
-} from "../models/scrapeTypes";
+import { FilterState, ScrapeState, DataView } from "../models/scrapeTypes";
 import { FilterTableCols, SortTableCol } from "../models/flexTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
-import { fetchAndPollData } from "../helpers/scrapeUtils";
+import { fetchScrapeRequests } from "../helpers/scrapeUtils";
+import { RootState } from "./_store";
 
 // initial state --------------
 const initialState: ScrapeState = {
@@ -21,6 +16,7 @@ const initialState: ScrapeState = {
   filteredByView: [],
   filteredByRA: [],
   uniqueRAs: [],
+  file: null,
   fieldList: [],
   filterTableCols: {},
   sortTableCol: {},
@@ -49,20 +45,25 @@ export const setFilterState = createAction<FilterState>(
 );
 export const setSortState = createAction<SortTableCol>("scrape/setSortState");
 export const clearAllState = createAction("scrape/clearAllState");
+export const setUploadFile = createAction<File>("scrape/uploadFile");
 
 // Thunk action creators -------------------------------
 export const fetchScrapeData = createAsyncThunk(
   "scrape/fetchScrapeData",
   async (isInitial: boolean, thunkAPI) => {
-    const { dispatch } = thunkAPI;
+    const { dispatch, getState } = thunkAPI;
+    const { scrape } = getState() as RootState;
+    const { file } = scrape;
+
     try {
-      let response: AxiosResponse<ScrapeDataInitResponse>;
-      if (isInitial) response = await fetchInitCall();
-      else {
-        response = await fetchAndPollData(dispatch);
-        dispatch(clearAllState());
+      if (isInitial) {
+        const response = await fetchInitCall();
+        const { data, timestamp, fieldList } = response.data;
+        return { data, timestamp, fieldList };
       }
-      return response.data;
+      const { data, timestamp } = await fetchScrapeRequests(file as File);
+      dispatch(clearAllState());
+      return { data, timestamp };
     } catch (err) {
       return thunkAPI.rejectWithValue("Error fetching data");
     }
@@ -78,16 +79,16 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     .addCase(fetchScrapeData.fulfilled, (state, action) => {
       state.loading = false;
       state.ErrorMsg = null;
-      const { Items } = action.payload;
+      const { data: Items, timestamp } = action.payload;
       Items.forEach((item) => {
         item.finished = false;
         item.onProgress = false;
       });
       state.ScrapeData = Items;
-      state.timestamp = Items[0]["timestamp"];
+      state.timestamp = timestamp;
       state.filteredByView = Items.map((item) => item.kfid);
       state.filteredByRA = Items.map((item) => item.kfid);
-      if (action.meta.arg) state.fieldList = action.payload.fieldList;
+      if (action.payload.fieldList) state.fieldList = action.payload.fieldList;
       state.uniqueRAs = Array.from(new Set(Items.map((item) => item.RAId)));
     })
     .addCase(fetchScrapeData.rejected, (state, action) => {
@@ -153,6 +154,9 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setLoadingProgress, (state, action) => {
       state.loadingProgress = action.payload * 100;
+    })
+    .addCase(setUploadFile, (state, action) => {
+      state.file = action.payload;
     })
     .addDefaultCase((state) => state);
 });
