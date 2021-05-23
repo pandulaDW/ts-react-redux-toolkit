@@ -1,3 +1,6 @@
+const path = require("path");
+const fs = require("fs");
+
 const { tableData } = require("../db/config");
 const { promisifyAWSScan, promisifyAWSQuery } = require("./promisfiedFuncs");
 
@@ -60,4 +63,20 @@ exports.scanAndFetchHandler = async (_, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
+};
+
+const dataPath = path.join(process.cwd(), "server", "data", "loadData.json");
+const data = fs.readFileSync(dataPath, "utf-8");
+
+exports.readInitData = async (_, res) => {
+  const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  await timeout(1000);
+
+  const responseObj = {
+    data: JSON.parse(data),
+    timeout: Date.now(),
+    fieldList: fieldList,
+  };
+
+  res.status(200).json(responseObj);
 };

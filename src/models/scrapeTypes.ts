@@ -41,7 +41,6 @@ export interface ScrapeDataInitResponse {
 export interface ScrapeDataResponse {
   requestId: string;
   data: ScrapeDataType;
-  fieldList: string[];
   timestamp: number;
 }
 

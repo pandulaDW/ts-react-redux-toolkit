@@ -1,7 +1,7 @@
 const path = require("path");
-var fs = require("fs");
+const fs = require("fs");
 
-const dataPath = path.join(process.cwd(), "server", "data", "loadData.json");
+const dataPath = path.join(process.cwd(), "server", "data", "requestData.json");
 const data = fs.readFileSync(dataPath, "utf-8");
 
 const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

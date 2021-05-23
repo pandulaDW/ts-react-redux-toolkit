@@ -5,9 +5,9 @@ const morgan = require("morgan");
 const {
   scanIndexHandler,
   fetchRequestHandler,
-  scanAndFetchHandler,
+  readInitData,
 } = require("./handlers/handlers");
-const { putItemsHandler } = require("./handlers/postRequest");
+
 const { handleTimeoutResponse } = require("./handlers/timeoutFuncs");
 
 const app = express();
@@ -20,11 +20,10 @@ app.use(morgan("dev"));
 // routes
 app.get("/lei/scrape/scanned-index", scanIndexHandler);
 app.get("/lei/scrape/scrape-request", fetchRequestHandler);
-app.get("/lei/scrape/init-data", scanAndFetchHandler);
-app.post("/lei/scrape/upload-file", putItemsHandler);
-app.get("/lei/scrape/simulate", handleTimeoutResponse);
+app.get("/lei/scrape/init-data", readInitData);
+app.get("/lei/scrape/upload-file", handleTimeoutResponse);
 
-app.listen(5000, async () => {
+app.listen(4000, async () => {
   // await initDb();
-  console.log("server started listening to requests at port 5000...");
+  console.log("server started listening to requests at port 4000...");
 });
