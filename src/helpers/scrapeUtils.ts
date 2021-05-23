@@ -1,6 +1,6 @@
 import * as XLSX from "xlsx";
 import { v4 as uuid } from "uuid";
-import { AxiosResponse } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
 import { range } from "./utils";
@@ -144,15 +144,25 @@ export async function fetchScrapeRequests(
   let promiseList = promiseObjList.map((obj) => obj.promise);
 
   while (promiseList.length > 0) {
-    const response = await Promise.race(promiseList);
-    const { requestId } = JSON.parse(response.config.data) as ScrapeRequest;
-    const { data } = response.data;
-    responseData.push(data);
+    let requestId: ScrapeRequest["requestId"];
+    try {
+      const response = await Promise.race(promiseList);
+      requestId = (JSON.parse(response.config.data) as ScrapeRequest).requestId;
+      const { data } = response.data;
+      responseData.push(data);
+    } catch (error) {
+      const err = error as AxiosError;
+      if (err.response?.status !== 504) {
+        requestId = (JSON.parse(err.response?.config.data) as ScrapeRequest)
+          .requestId;
+      }
+    }
+
     promiseObjList = promiseObjList.filter(
       (obj) => obj.requestId !== requestId
     );
     promiseList = promiseObjList.map((obj) => obj.promise);
-    const currentProgress = responseData.length / numRequests;
+    const currentProgress = promiseList.length / numRequests;
     dispatch(setLoadingProgress(Math.round(currentProgress * 100) / 100));
   }
 

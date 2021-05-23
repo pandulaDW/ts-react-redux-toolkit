@@ -21,3 +21,9 @@ export const fetchSingleRequest = (
 ): Promise<AxiosResponse<ScrapeDataResponse>> => {
   return axios.post(`${url}/lei/scrape/upload-file`, data);
 };
+
+export const fetchDBRequest = (
+  requestId: string
+): Promise<AxiosResponse<ScrapeDataResponse>> => {
+  return axios.get(`${url}/lei/scrape/fetch-from-db/${requestId}`);
+};
