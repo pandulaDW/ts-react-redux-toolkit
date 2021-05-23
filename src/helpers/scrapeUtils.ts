@@ -93,7 +93,7 @@ const readExcel = (file: File): Promise<ExcelDataType> => {
 };
 
 // Creating base64 encoded file based on the given row
-const createFilteredFile = (row: any) => {
+const createFilteredFile = (row: ExcelDataType) => {
   const wb = XLSX.utils.book_new();
   const ws_name = "Sheet 1";
   const ws = XLSX.utils.json_to_sheet(row);
@@ -117,7 +117,7 @@ interface PromiseObject {
 // Creating promise object list
 const createPromiseObjList = (data: ExcelDataType, timestamp: number) => {
   const promiseObjects: PromiseObject[] = data.map((row) => {
-    const content = createFilteredFile(row);
+    const content = createFilteredFile([row]);
     const requestId = uuid();
     const promise = fetchSingleRequest({ requestId, content, timestamp });
     return { requestId, promise };
