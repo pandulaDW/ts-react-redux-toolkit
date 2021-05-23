@@ -14,10 +14,11 @@ const ScrapeMain = () => {
     (state: RootState) => state.scrape
   );
 
-  // useEffect(() => {
-  //   if (ScrapeData.length === 0) dispatch(fetchScrapeData(true));
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    if (ScrapeData.length === 0)
+      dispatch(fetchScrapeData({ file: null, isInitial: true }));
+    // eslint-disable-next-line
+  }, []);
 
   let component: JSX.Element;
   if (loading) {

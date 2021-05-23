@@ -7,7 +7,6 @@ import { FilterState, ScrapeState, DataView } from "../models/scrapeTypes";
 import { FilterTableCols, SortTableCol } from "../models/flexTypes";
 import { fetchInitCall } from "../helpers/apiCalls";
 import { fetchScrapeRequests } from "../helpers/scrapeUtils";
-import { RootState } from "./_store";
 
 // initial state --------------
 const initialState: ScrapeState = {
@@ -16,7 +15,6 @@ const initialState: ScrapeState = {
   filteredByView: [],
   filteredByRA: [],
   uniqueRAs: [],
-  file: null,
   fieldList: [],
   filterTableCols: {},
   sortTableCol: {},
@@ -50,10 +48,9 @@ export const setUploadFile = createAction<File>("scrape/uploadFile");
 // Thunk action creators -------------------------------
 export const fetchScrapeData = createAsyncThunk(
   "scrape/fetchScrapeData",
-  async (isInitial: boolean, thunkAPI) => {
-    const { dispatch, getState } = thunkAPI;
-    const { scrape } = getState() as RootState;
-    const { file } = scrape;
+  async (args: { isInitial: boolean; file: File | null }, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    const { isInitial, file } = args;
 
     try {
       if (isInitial) {
@@ -154,9 +151,6 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setLoadingProgress, (state, action) => {
       state.loadingProgress = action.payload * 100;
-    })
-    .addCase(setUploadFile, (state, action) => {
-      state.file = action.payload;
     })
     .addDefaultCase((state) => state);
 });

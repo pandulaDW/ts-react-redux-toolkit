@@ -19,5 +19,5 @@ export const fetchInitCall = (): Promise<
 export const fetchSingleRequest = (
   data: ScrapeRequest
 ): Promise<AxiosResponse<ScrapeDataResponse>> => {
-  return axios.post(`${url}/lei/scrape/simulate`, data);
+  return axios.post(`${url}/lei/scrape/upload-file`, data);
 };

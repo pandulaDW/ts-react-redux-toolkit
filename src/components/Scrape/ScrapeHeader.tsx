@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 import { SegmentedControl, Switch, FilePicker, Select } from "evergreen-ui";
@@ -9,7 +9,6 @@ import {
   setFilterState,
   setDataView,
   fetchScrapeData,
-  setUploadFile,
 } from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
@@ -18,7 +17,8 @@ import { FilterState, DataView } from "../../models/scrapeTypes";
 
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
-  const { expand, uniqueRAs, filterState, timestamp, dataView, loading, file } =
+  const [file, setFile] = useState<File | null>(null);
+  const { expand, uniqueRAs, filterState, timestamp, dataView, loading } =
     useSelector((state: RootState) => state.scrape);
 
   return (
@@ -72,12 +72,14 @@ const ScrapeHeader = () => {
           width={250}
           placeholder="Select the file here!"
           marginRight="1.5rem"
-          onChange={(fileList) => dispatch(setUploadFile(fileList[0]))}
+          onChange={(fileList) => setFile(fileList[0])}
         />
         <Button
           text="Upload"
           type="Animated"
-          clickHandler={() => file && dispatch(fetchScrapeData(false))}
+          clickHandler={() =>
+            file && dispatch(fetchScrapeData({ isInitial: false, file }))
+          }
         />
       </div>
     </div>

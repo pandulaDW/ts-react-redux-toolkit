@@ -52,7 +52,6 @@ export type ExcelDataType = Array<{
 export interface ScrapeState {
   ScrapeData: ScrapeDataType[];
   timestamp: number;
-  file: File | null;
   filteredByView: string[];
   filteredByRA: string[];
   uniqueRAs: string[];
