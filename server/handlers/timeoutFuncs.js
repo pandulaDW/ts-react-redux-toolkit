@@ -6,11 +6,17 @@ const data = fs.readFileSync(dataPath, "utf-8");
 
 const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-exports.handleTimeoutResponse = async (req, res) => {
-  const { requestId, timestamp } = req.body;
+exports.handleTimeoutResponse = async (_, res) => {
   const jsonData = JSON.parse(data);
-  const waitingTime = 5000 + Math.floor(Math.random() * 15000);
+  const waitingTime = 1000 + Math.floor(Math.random() * 2000);
   await timeout(waitingTime);
+
+  // if (waitingTime > 15000) {
+  //   return res.status(504).json({ error: "request timeout" });
+  // }
+
   const index = Math.floor(Math.random() * jsonData.length);
-  res.status(200).json({ requestId, data: jsonData[index], timestamp });
+  res.status(200).json({ data: jsonData[index] });
 };
+
+exports.handleDynamoResponse = async (req, res) => {};

@@ -29,7 +29,6 @@ export type ScrapeDataType = NonCommonFields & CommonFields & AddedFields;
 export interface ScrapeRequest {
   requestId: string;
   content: string;
-  timestamp: number;
 }
 
 export interface ScrapeDataInitResponse {
@@ -39,9 +38,7 @@ export interface ScrapeDataInitResponse {
 }
 
 export interface ScrapeDataResponse {
-  requestId: string;
   data: ScrapeDataType;
-  timestamp: number;
 }
 
 export type ExcelDataType = Array<{

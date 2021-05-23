@@ -9,6 +9,7 @@ import {
   ScrapeDataType,
   ExcelDataType,
   ScrapeDataResponse,
+  ScrapeRequest,
 } from "../models/scrapeTypes";
 import { setLoadingProgress } from "../redux/scrape";
 import { Column, TableData, OptionsArray } from "../models/flexTypes";
@@ -118,11 +119,11 @@ interface PromiseObject {
 }
 
 // Creating promise object list
-const createPromiseObjList = (data: ExcelDataType, timestamp: number) => {
+const createPromiseObjList = (data: ExcelDataType) => {
   const promiseObjects: PromiseObject[] = data.map((row) => {
     const content = createFilteredFile([row]);
     const requestId = uuid();
-    const promise = fetchSingleRequest({ requestId, content, timestamp });
+    const promise = fetchSingleRequest({ requestId, content });
     return { requestId, promise };
   });
 
@@ -139,12 +140,13 @@ export async function fetchScrapeRequests(
   const responseData: ScrapeDataType[] = [];
   const numRequests = data.length;
 
-  let promiseObjList = createPromiseObjList(data, timestamp);
+  let promiseObjList = createPromiseObjList(data);
   let promiseList = promiseObjList.map((obj) => obj.promise);
 
   while (promiseList.length > 0) {
     const response = await Promise.race(promiseList);
-    const { data, requestId } = response.data;
+    const { requestId } = JSON.parse(response.config.data) as ScrapeRequest;
+    const { data } = response.data;
     responseData.push(data);
     promiseObjList = promiseObjList.filter(
       (obj) => obj.requestId !== requestId
