@@ -1,6 +1,8 @@
 import * as XLSX from "xlsx";
 import { v4 as uuid } from "uuid";
 import { AxiosResponse } from "axios";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+
 import { range } from "./utils";
 import { fetchSingleRequest } from "./apiCalls";
 import {
@@ -8,6 +10,7 @@ import {
   ExcelDataType,
   ScrapeDataResponse,
 } from "../models/scrapeTypes";
+import { setLoadingProgress } from "../redux/scrape";
 import { Column, TableData, OptionsArray } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
 
@@ -127,10 +130,14 @@ const createPromiseObjList = (data: ExcelDataType, timestamp: number) => {
 };
 
 // Scrape requests multiplexing
-export async function fetchScrapeRequests(file: File) {
+export async function fetchScrapeRequests(
+  dispatch: ThunkDispatch<unknown, unknown, AnyAction>,
+  file: File
+) {
   const data = await readExcel(file);
   const timestamp = Date.now();
   const responseData: ScrapeDataType[] = [];
+  const numRequests = data.length;
 
   let promiseObjList = createPromiseObjList(data, timestamp);
   let promiseList = promiseObjList.map((obj) => obj.promise);
@@ -143,6 +150,8 @@ export async function fetchScrapeRequests(file: File) {
       (obj) => obj.requestId !== requestId
     );
     promiseList = promiseObjList.map((obj) => obj.promise);
+    const currentProgress = responseData.length / numRequests;
+    dispatch(setLoadingProgress(Math.round(currentProgress * 100) / 100));
   }
 
   return { data: responseData, timestamp };

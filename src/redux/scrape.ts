@@ -43,7 +43,6 @@ export const setFilterState = createAction<FilterState>(
 );
 export const setSortState = createAction<SortTableCol>("scrape/setSortState");
 export const clearAllState = createAction("scrape/clearAllState");
-export const setUploadFile = createAction<File>("scrape/uploadFile");
 
 // Thunk action creators -------------------------------
 export const fetchScrapeData = createAsyncThunk(
@@ -58,7 +57,10 @@ export const fetchScrapeData = createAsyncThunk(
         const { data, timestamp, fieldList } = response.data;
         return { data, timestamp, fieldList };
       }
-      const { data, timestamp } = await fetchScrapeRequests(file as File);
+      const { data, timestamp } = await fetchScrapeRequests(
+        dispatch,
+        file as File
+      );
       dispatch(clearAllState());
       return { data, timestamp };
     } catch (err) {
