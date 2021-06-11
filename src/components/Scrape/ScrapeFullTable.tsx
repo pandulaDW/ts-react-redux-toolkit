@@ -29,8 +29,8 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   );
 
   const columns: Column[] = createColumns(fieldList);
-  const selectColumns = ["KFID", "RA_ID", "company_name", "company_type"];
-  const sortColumns = ["KFID", "RA_ID", "company_name", "company_type"];
+  const selectColumns = ["kfid", "ra_id", "company_name", "company_type"];
+  const sortColumns = ["kfid", "ra_id", "company_name", "company_type"];
 
   const handleSelect: HandleSelectFunc = (event, col) => {
     if (event) dispatch(setFilterTableCol({ [col.colName]: event.value }));

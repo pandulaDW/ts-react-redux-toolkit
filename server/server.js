@@ -6,12 +6,8 @@ const {
   scanIndexHandler,
   fetchRequestHandler,
   readInitData,
+  handleFileUpload,
 } = require("./handlers/handlers");
-
-const {
-  handleTimeoutResponse,
-  handleDynamoResponse,
-} = require("./handlers/timeoutFuncs");
 
 const app = express();
 
@@ -24,8 +20,7 @@ app.use(morgan("dev"));
 app.get("/lei/scrape/scanned-index", scanIndexHandler);
 app.get("/lei/scrape/scrape-request", fetchRequestHandler);
 app.get("/lei/scrape/init-data", readInitData);
-app.post("/lei/scrape/upload-file", handleTimeoutResponse);
-app.post("/lei/scrape/fetch-from-db", handleDynamoResponse);
+app.post("/lei/scrape/upload-file", handleFileUpload);
 
 app.listen(4000, async () => {
   // await initDb();

@@ -35,7 +35,7 @@ const ScrapeSingleTable: React.FC<Props> = ({ data }) => {
     <div className={styles.scrapeSingle}>
       <AccordionItem uuid={data.kfid} dangerouslySetExpanded={localExpand}>
         <div className={headerClass}>
-          <p>{`KeyID - ${data.kfid} | CompanyID - ${data.company_id} | RaID - ${data.RAId}`}</p>
+          <p>{`KeyID - ${data.kfid} | CompanyID - ${data.ref_no} | RaID - ${data.ra_id}`}</p>
           <div>
             <FaGlobe className={styles["scrapeSingle__header-icon"]} />
             <FaCheckCircle

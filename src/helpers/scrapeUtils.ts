@@ -17,8 +17,8 @@ import { matchFunc } from "../components/Scrape/matchFunc";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
   let arrangedData: TableData<string> = {
-    KFID: data.map((item) => item.kfid),
-    RA_ID: data.map((item) => item.RAId),
+    kfid: data.map((item) => item.kfid),
+    ra_id: data.map((item) => item.ra_id),
   };
 
   fieldList.forEach((field) => {
@@ -33,8 +33,8 @@ export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
 };
 
 export const createColumns = (fieldList: string[]): Column[] => [
-  { colName: "KFID", colWidth: 120 },
-  { colName: "RA_ID", colWidth: 120 },
+  { colName: "kfid", colWidth: 120 },
+  { colName: "ra_id", colWidth: 120 },
   ...fieldList.flatMap((field) => {
     return [
       { colName: field, colWidth: 200 },
@@ -149,7 +149,7 @@ export async function fetchScrapeRequests(
       const response = await Promise.race(promiseList);
       requestId = (JSON.parse(response.config.data) as ScrapeRequest).requestId;
       const { data } = response.data;
-      responseData.push(data);
+      responseData.push(data[0]);
     } catch (error) {
       const err = error as AxiosError;
       if (err.response?.status !== 504) {

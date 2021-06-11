@@ -88,7 +88,7 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       state.filteredByView = Items.map((item) => item.kfid);
       state.filteredByRA = Items.map((item) => item.kfid);
       if (action.payload.fieldList) state.fieldList = action.payload.fieldList;
-      state.uniqueRAs = Array.from(new Set(Items.map((item) => item.RAId)));
+      state.uniqueRAs = Array.from(new Set(Items.map((item) => item.ra_id)));
     })
     .addCase(fetchScrapeData.rejected, (state, action) => {
       state.loading = false;
@@ -102,7 +102,7 @@ const scrapeReducer = createReducer(initialState, (builder) => {
         state.filteredByRA = state.ScrapeData.map((el) => el.kfid);
       else
         state.filteredByRA = state.ScrapeData.filter(
-          (el) => el.RAId === action.payload
+          (el) => el.ra_id === action.payload
         ).map((el) => el.kfid);
     })
     .addCase(setLocalFinished, (state, action) => {

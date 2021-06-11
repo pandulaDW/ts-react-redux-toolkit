@@ -1,5 +1,7 @@
 const path = require("path");
 const fs = require("fs");
+const XLSX = require("xlsx");
+const _ = require("underscore");
 
 const { tableData } = require("../db/config");
 const { promisifyAWSScan, promisifyAWSQuery } = require("./promisfiedFuncs");
@@ -65,18 +67,45 @@ exports.scanAndFetchHandler = async (_, res) => {
   }
 };
 
-const dataPath = path.join(process.cwd(), "server", "data", "loadData.json");
-const data = fs.readFileSync(dataPath, "utf-8");
+const dataPath = path.join(process.cwd(), "server", "data", "results.json");
+const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-exports.readInitData = async (_, res) => {
-  const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+exports.readInitData = async (req, res) => {
   await timeout(1000);
+  const indices = [];
+  for (let i = -1; i < data["data"].length; i++) {
+    indices.push(i + 1);
+  }
+  const randomIndicesSample = _.take(_.shuffle(indices), 5);
+  const returnedData = randomIndicesSample.map((idx) => data["data"][idx]);
 
   const responseObj = {
-    data: JSON.parse(data),
-    timeout: Date.now(),
+    data: returnedData,
+    timestamp: Date.now(),
     fieldList: fieldList,
   };
 
   res.status(200).json(responseObj);
+};
+
+exports.handleFileUpload = async (req, res) => {
+  const waitingTime = 1000 + Math.floor(Math.random() * 4000);
+  await timeout(waitingTime);
+
+  const wb = XLSX.read(req.body.content, {
+    type: "base64",
+  });
+
+  const wsName = wb.SheetNames[0];
+  const ws = wb.Sheets[wsName];
+
+  const content = XLSX.utils.sheet_to_json(ws);
+  const kfids = content.map((item) => item["keyfieldvalue"].toString());
+
+  const relevantData = data["data"].filter((item) => {
+    return kfids.includes(item["kfid"]);
+  });
+
+  return res.status(200).json({ data: relevantData });
 };

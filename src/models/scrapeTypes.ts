@@ -1,11 +1,9 @@
 import { FilterTableCols, SortTableCol } from "./flexTypes";
 
 interface FieldProperties {
-  invalid: boolean;
-  match: boolean;
-  update: boolean;
   uv_value: string;
   scraped_value: string;
+  match: boolean;
 }
 
 interface NonCommonFields {
@@ -20,8 +18,8 @@ interface AddedFields {
 interface CommonFields {
   kfid: string;
   url: string;
-  RAId: string;
-  company_id: string;
+  ra_id: string;
+  ref_no: string;
 }
 
 export type ScrapeDataType = NonCommonFields & CommonFields & AddedFields;
@@ -38,7 +36,7 @@ export interface ScrapeDataInitResponse {
 }
 
 export interface ScrapeDataResponse {
-  data: ScrapeDataType;
+  data: ScrapeDataType[];
 }
 
 export type ExcelDataType = Array<{
