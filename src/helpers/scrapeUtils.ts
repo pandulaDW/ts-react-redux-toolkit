@@ -1,18 +1,19 @@
+import React from "react";
 import * as XLSX from "xlsx";
 import { v4 as uuid } from "uuid";
-import { AxiosResponse, AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
-import { range } from "./utils";
+import { range, createIndexChunks } from "./utils";
 import { fetchSingleRequest } from "./apiCalls";
 import {
-  ScrapeDataType,
   ExcelDataType,
   ScrapeDataResponse,
+  ScrapeDataType,
   ScrapeRequest,
 } from "../models/scrapeTypes";
 import { setLoadingProgress } from "../redux/scrape";
-import { Column, TableData, OptionsArray } from "../models/flexTypes";
+import { Column, OptionsArray, TableData } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
@@ -75,7 +76,7 @@ export const formatData = (
 
 // Excel reader promise
 const readExcel = (file: File): Promise<ExcelDataType> => {
-  const promise: Promise<ExcelDataType> = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     fileReader.readAsArrayBuffer(file);
 
@@ -92,8 +93,6 @@ const readExcel = (file: File): Promise<ExcelDataType> => {
       reject(err);
     };
   });
-
-  return promise;
 };
 
 // Creating base64 encoded file based on the given row
@@ -103,13 +102,26 @@ const createFilteredFile = (row: ExcelDataType) => {
   const ws = XLSX.utils.json_to_sheet(row);
   XLSX.utils.book_append_sheet(wb, ws, ws_name);
 
-  const wbout = XLSX.write(wb, {
+  const wbOut = XLSX.write(wb, {
     bookType: "xlsx",
     bookSST: false,
     type: "base64",
   });
 
-  return wbout as string;
+  return wbOut as string;
+};
+
+// Take the excel data and create an array of data chunks
+const createDataChunks = (data: ExcelDataType, chunkSize: number) => {
+  const indicesList = createIndexChunks(data.length, chunkSize);
+  const chunkList: Array<ExcelDataType> = [];
+
+  indicesList.forEach((indexSet) => {
+    const chunk = indexSet.map((idx) => data[idx]);
+    chunkList.push(chunk);
+  });
+
+  return chunkList;
 };
 
 // PromiseObject interface
@@ -120,8 +132,9 @@ interface PromiseObject {
 
 // Creating promise object list
 const createPromiseObjList = (data: ExcelDataType) => {
-  const promiseObjects: PromiseObject[] = data.map((row) => {
-    const content = createFilteredFile([row]);
+  const chunkList = createDataChunks(data, 15);
+  const promiseObjects: PromiseObject[] = chunkList.map((chunk) => {
+    const content = createFilteredFile(chunk);
     const requestId = uuid();
     const promise = fetchSingleRequest({ requestId, content });
     return { requestId, promise };
@@ -137,8 +150,8 @@ export async function fetchScrapeRequests(
 ) {
   const data = await readExcel(file);
   const timestamp = Date.now();
-  const responseData: ScrapeDataType[] = [];
-  const numRequests = data.length;
+  let responseData: ScrapeDataType[] = [];
+  let completedNumRequests = 0;
 
   let promiseObjList = createPromiseObjList(data);
   let promiseList = promiseObjList.map((obj) => obj.promise);
@@ -149,7 +162,8 @@ export async function fetchScrapeRequests(
       const response = await Promise.race(promiseList);
       requestId = (JSON.parse(response.config.data) as ScrapeRequest).requestId;
       const { data } = response.data;
-      responseData.push(data[0]);
+      completedNumRequests += data.length;
+      responseData = [...responseData, ...data];
     } catch (error) {
       const err = error as AxiosError;
       if (err.response?.status !== 504) {
@@ -162,7 +176,7 @@ export async function fetchScrapeRequests(
       (obj) => obj.requestId !== requestId
     );
     promiseList = promiseObjList.map((obj) => obj.promise);
-    const currentProgress = promiseList.length / numRequests;
+    const currentProgress = completedNumRequests / data.length;
     dispatch(setLoadingProgress(Math.round(currentProgress * 100) / 100));
   }
 

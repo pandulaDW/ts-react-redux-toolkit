@@ -32,7 +32,7 @@ export const sortArrayIndex = <T extends string | number>(
   arr: T[],
   desc: boolean
 ): number[] => {
-  var sorted = arr
+  const sorted = arr
     .map((el, idx) => ({ [el]: idx }))
     .sort((a, b) => {
       if (Object.keys(a)[0] < Object.keys(b)[0]) {
@@ -49,6 +49,23 @@ export const sortArrayIndex = <T extends string | number>(
   return sorted.map((el) => Object.values(el)[0]);
 };
 
-export function promisfiedTimeout(interval: number) {
+export function promisifiedTimeout(interval: number) {
   return new Promise((resolve) => setTimeout(resolve, interval));
+}
+
+export function createIndexChunks(arrLength: number, chunkSize: number) {
+  const indices = range(arrLength);
+  const listOfArrays = [];
+  let elementsPerChunk = Math.floor(arrLength / chunkSize);
+  if (elementsPerChunk === 0) elementsPerChunk = arrLength;
+  let elementCount = 0;
+
+  while (elementCount <= arrLength) {
+    const subArr = indices.slice(elementCount, elementCount + elementsPerChunk);
+    listOfArrays.push(subArr);
+    elementCount += subArr.length;
+    if (subArr.length === arrLength || subArr.length < elementsPerChunk) break;
+  }
+
+  return listOfArrays.filter((subArr) => subArr.length !== 0);
 }

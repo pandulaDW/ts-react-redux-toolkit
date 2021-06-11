@@ -55,7 +55,7 @@ exports.fetchRequestHandler = async (req, res) => {
 exports.scanAndFetchHandler = async (_, res) => {
   try {
     const scannedData = await promisifyAWSScan(scanParams);
-    const maxTimestamp = scannedData.Items.reduce(
+    const maxTimestamp = scannedData["Items"].reduce(
       (acc, curr) => Math.max(acc, curr.timestamp),
       0
     );
