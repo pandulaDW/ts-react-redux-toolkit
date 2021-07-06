@@ -53,19 +53,12 @@ export function promisifiedTimeout(interval: number) {
   return new Promise((resolve) => setTimeout(resolve, interval));
 }
 
-export function createIndexChunks(arrLength: number, chunkSize: number) {
-  const indices = range(arrLength);
-  const listOfArrays = [];
-  let elementsPerChunk = Math.floor(arrLength / chunkSize);
-  if (elementsPerChunk === 0) elementsPerChunk = arrLength;
-  let elementCount = 0;
-
-  while (elementCount <= arrLength) {
-    const subArr = indices.slice(elementCount, elementCount + elementsPerChunk);
-    listOfArrays.push(subArr);
-    elementCount += subArr.length;
-    if (subArr.length === arrLength || subArr.length < elementsPerChunk) break;
-  }
-
-  return listOfArrays.filter((subArr) => subArr.length !== 0);
+export function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () =>
+      resolve((reader.result as string).split(";base64,")[1]);
+    reader.onerror = (err) => reject(err);
+  });
 }

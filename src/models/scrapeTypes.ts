@@ -25,8 +25,7 @@ interface CommonFields {
 export type ScrapeDataType = NonCommonFields & CommonFields & AddedFields;
 
 export interface ScrapeRequest {
-  requestId: string;
-  content: string;
+  uploaded_file: string;
   timestamp: number;
 }
 
@@ -39,10 +38,6 @@ export interface ScrapeDataInitResponse {
 export interface ScrapeDataResponse {
   data: ScrapeDataType[];
 }
-
-export type ExcelDataType = Array<{
-  [colName: string]: string;
-}>;
 
 // state definition --------------
 export interface ScrapeState {
@@ -58,7 +53,6 @@ export interface ScrapeState {
   filterTableCols: FilterTableCols;
   sortTableCol: SortTableCol;
   loading: boolean;
-  loadingProgress: number;
   ErrorMsg: string | null;
 }
 

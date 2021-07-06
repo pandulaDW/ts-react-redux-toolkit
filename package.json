@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ramonak/react-progress-bar": "^2.0.0",
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
@@ -18,7 +17,7 @@
     "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.816.0",
     "axios": "^0.21.0",
-    "classnames": "^2.2.6",
+    "classnames": "^2.3.1",
     "cors": "^2.8.5",
     "evergreen-ui": "^5.1.2",
     "node-sass": "^4.14.1",
@@ -38,7 +37,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "concurrently -k \"nodemon server/server.js\" \"npm start",
     "build": "react-scripts build",
     "deploy": "react-scripts build && aws s3 rm s3://react-deploy-test-s3/ --recursive && aws s3 cp ./build s3://react-deploy-test-s3/ --recursive --acl public-read",
     "test": "react-scripts test",

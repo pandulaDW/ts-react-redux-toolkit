@@ -22,7 +22,6 @@ const initialState: ScrapeState = {
   dataView: DataView.single,
   filterState: FilterState.all,
   loading: false,
-  loadingProgress: 0,
   ErrorMsg: null,
 };
 
@@ -32,9 +31,6 @@ export const setDataView = createAction("scrape/setDataView");
 export const selectRaAction = createAction<string>("scrape/selectRA");
 export const setLocalFinished = createAction<string>("scrape/setLocalFinish");
 export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
-export const setLoadingProgress = createAction<number>(
-  "scrape/setLoadProgress"
-);
 export const setFilterTableCol = createAction<FilterTableCols>(
   "scrape/filterTableCols"
 );
@@ -57,10 +53,7 @@ export const fetchScrapeData = createAsyncThunk(
         const { data, timestamp, fieldList } = response.data;
         return { data, timestamp, fieldList };
       }
-      const { data, timestamp } = await fetchScrapeRequests(
-        dispatch,
-        file as File
-      );
+      const { data, timestamp } = await fetchScrapeRequests(file as File);
       dispatch(clearAllState());
       return { data, timestamp };
     } catch (err) {
@@ -150,9 +143,6 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       const { fieldList } = state;
       state = Object.assign(state, initialState);
       state.fieldList = fieldList;
-    })
-    .addCase(setLoadingProgress, (state, action) => {
-      state.loadingProgress = action.payload * 100;
     })
     .addDefaultCase((state) => state);
 });
