@@ -131,12 +131,12 @@ interface PromiseObject {
 }
 
 // Creating promise object list
-const createPromiseObjList = (data: ExcelDataType) => {
+const createPromiseObjList = (data: ExcelDataType, timestamp: number) => {
   const chunkList = createDataChunks(data, 15);
   const promiseObjects: PromiseObject[] = chunkList.map((chunk) => {
     const content = createFilteredFile(chunk);
     const requestId = uuid();
-    const promise = fetchSingleRequest({ requestId, content });
+    const promise = fetchSingleRequest({ requestId, content, timestamp });
     return { requestId, promise };
   });
 
@@ -153,7 +153,7 @@ export async function fetchScrapeRequests(
   let responseData: ScrapeDataType[] = [];
   let completedNumRequests = 0;
 
-  let promiseObjList = createPromiseObjList(data);
+  let promiseObjList = createPromiseObjList(data, timestamp);
   let promiseList = promiseObjList.map((obj) => obj.promise);
 
   while (promiseList.length > 0) {
