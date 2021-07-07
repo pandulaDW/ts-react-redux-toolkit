@@ -5,8 +5,10 @@ import {
 } from "@reduxjs/toolkit";
 import { FilterState, ScrapeState, DataView } from "../models/scrapeTypes";
 import { FilterTableCols, SortTableCol } from "../models/flexTypes";
-import { fetchInitCall } from "../helpers/apiCalls";
+import { APIErrorResponse } from "../models/generalTypes";
+import { fetchScrapeInitData } from "../helpers/apiCalls";
 import { fetchScrapeRequests } from "../helpers/scrapeUtils";
+import { AxiosError } from "axios";
 
 // initial state --------------
 const initialState: ScrapeState = {
@@ -49,7 +51,7 @@ export const fetchScrapeData = createAsyncThunk(
 
     try {
       if (isInitial) {
-        const response = await fetchInitCall();
+        const response = await fetchScrapeInitData();
         const { data, timestamp, fieldList } = response.data;
         return { data, timestamp, fieldList };
       }
@@ -57,7 +59,8 @@ export const fetchScrapeData = createAsyncThunk(
       dispatch(clearAllState());
       return { data, timestamp };
     } catch (err) {
-      return thunkAPI.rejectWithValue("Error fetching data");
+      const error = err as AxiosError<APIErrorResponse>;
+      return thunkAPI.rejectWithValue(error.response?.data.errMessage);
     }
   }
 );

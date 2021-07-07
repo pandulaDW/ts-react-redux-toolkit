@@ -1,6 +1,6 @@
 import React from "react";
 import { range, fileToBase64 } from "./utils";
-import { fetchSingleRequest } from "./apiCalls";
+import { postScrapeRequest } from "./apiCalls";
 import { ScrapeDataType } from "../models/scrapeTypes";
 import { Column, OptionsArray, TableData } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
@@ -68,7 +68,7 @@ export async function fetchScrapeRequests(file: File) {
   try {
     const fileString = await fileToBase64(file);
     const timestamp = Date.now();
-    const response = await fetchSingleRequest({
+    const response = await postScrapeRequest({
       uploaded_file: fileString,
       timestamp,
     });
