@@ -10,6 +10,7 @@ import {
   setFilterState,
   setDataView,
   fetchScrapeData,
+  fetchOnlyData,
 } from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
@@ -69,7 +70,7 @@ const ScrapeHeader = () => {
         {showReloadButton() && (
           <div className={styles["header__left-reload"]}>
             <div>
-              <MdRefresh />
+              <MdRefresh onClick={() => dispatch(fetchOnlyData())} />
             </div>
             <div>
               <p>Reload</p>

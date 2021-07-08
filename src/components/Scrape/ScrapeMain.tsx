@@ -35,7 +35,7 @@ const ScrapeMain = () => {
     component = (
       <React.Fragment>
         {!ErrorMsg && (
-          <ScrapeReportBox numRecords={ScrapeData.length} numFetched={numRecords} />
+          <ScrapeReportBox numRecords={numRecords} numFetched={ScrapeData.length} />
         )}
         <ScrapeContent />
       </React.Fragment>

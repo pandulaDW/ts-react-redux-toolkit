@@ -11,6 +11,7 @@ import { APIErrorResponse } from "../models/generalTypes";
 import { fetchScrapeInitData, fetchScrapeRequestData } from "../helpers/apiCalls";
 import { fetchScrapeRequests } from "../helpers/scrapeUtils";
 import { toast } from "../components/Common/toast";
+import { RootState } from "./_store";
 
 // initial state --------------
 const initialState: ScrapeState = {
@@ -78,6 +79,15 @@ export const fetchScrapeData = createAsyncThunk(
   }
 );
 
+export const fetchOnlyData = createAsyncThunk(
+  "scrape/fetchDataOnly",
+  async (_, { getState }) => {
+    const { timestamp } = (getState() as RootState).scrape;
+    const response = await fetchScrapeRequestData(timestamp);
+    return { data: response.data.data };
+  }
+);
+
 // Reducer -------------------------------------------
 const scrapeReducer = createReducer(initialState, (builder) => {
   builder
@@ -107,6 +117,17 @@ const scrapeReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.ErrorMsg = action.payload as string;
       toast(state.ErrorMsg, "error");
+    })
+    .addCase(fetchOnlyData.fulfilled, (state, action) => {
+      const { data: Items } = action.payload;
+      Items.forEach((item) => {
+        item.finished = false;
+        item.onProgress = false;
+      });
+      state.ScrapeData = Items;
+      state.filteredByView = Items.map((item) => item.kfid);
+      state.filteredByRA = Items.map((item) => item.kfid);
+      state.uniqueRAs = Array.from(new Set(Items.map((item) => item.ra_id)));
     })
     .addCase(expandAction, (state) => {
       state.expand = !state.expand;
