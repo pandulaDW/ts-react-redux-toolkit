@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { MdRefresh } from "react-icons/md";
 import cx from "classnames";
 import { SegmentedControl, Switch, FilePicker, Select } from "evergreen-ui";
 import Button from "../Common/Button";
@@ -18,9 +19,20 @@ import { FilterState, DataView } from "../../models/scrapeTypes";
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
   const [file, setFile] = useState<File | null>(null);
-  const { expand, uniqueRAs, filterState, timestamp, dataView, loading } = useSelector(
-    (state: RootState) => state.scrape
-  );
+  const {
+    expand,
+    uniqueRAs,
+    filterState,
+    timestamp,
+    dataView,
+    loading,
+    fileDetails,
+    ScrapeData,
+  } = useSelector((state: RootState) => state.scrape);
+
+  const showReloadButton = () => {
+    return fileDetails.numRecords !== 0 && fileDetails.numRecords < ScrapeData.length;
+  };
 
   return (
     <div className={cx(styles.header, { blockElement: loading })}>
@@ -54,6 +66,17 @@ const ScrapeHeader = () => {
             <p>Table View</p>
           </div>
         </div>
+        {showReloadButton() && (
+          <div className={styles["header__left-reload"]}>
+            <div>
+              <MdRefresh />
+            </div>
+            <div>
+              <p>Reload</p>
+              <p>Data</p>
+            </div>
+          </div>
+        )}
       </div>
       <div className={styles.header__right}>
         <Select onChange={(e) => dispatch(selectRaAction(e.target.value))}>

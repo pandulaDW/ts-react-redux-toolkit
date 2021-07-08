@@ -17,7 +17,7 @@ const ScrapeReportBox: React.FC<Props> = ({ numFetched, numRecords }) => {
 
   const title = "LEI Scrape Request Details";
   const description = `${numRecords} requests were sent \n
-  and ${numFetched} of them were scraped successfully`;
+  and ${numFetched} scraped successfully`;
 
   return (
     <CornerDialog
