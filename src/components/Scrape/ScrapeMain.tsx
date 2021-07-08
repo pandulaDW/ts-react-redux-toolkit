@@ -15,6 +15,7 @@ const ScrapeMain = () => {
     loading,
     ScrapeData,
     fileDetails: { numRecords },
+    ErrorMsg,
   } = useSelector((state: RootState) => state.scrape);
 
   useEffect(() => {
@@ -33,7 +34,9 @@ const ScrapeMain = () => {
   } else {
     component = (
       <React.Fragment>
-        <ScrapeReportBox numRecords={ScrapeData.length} numFetched={numRecords} />
+        {!ErrorMsg && (
+          <ScrapeReportBox numRecords={ScrapeData.length} numFetched={numRecords} />
+        )}
         <ScrapeContent />
       </React.Fragment>
     );

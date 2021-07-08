@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import {
   FilterState,
@@ -9,7 +10,7 @@ import { FilterTableCols, SortTableCol } from "../models/flexTypes";
 import { APIErrorResponse } from "../models/generalTypes";
 import { fetchScrapeInitData, fetchScrapeRequestData } from "../helpers/apiCalls";
 import { fetchScrapeRequests } from "../helpers/scrapeUtils";
-import { AxiosError } from "axios";
+import { toast } from "../components/Common/toast";
 
 // initial state --------------
 const initialState: ScrapeState = {
@@ -105,6 +106,7 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     .addCase(fetchScrapeData.rejected, (state, action) => {
       state.loading = false;
       state.ErrorMsg = action.payload as string;
+      toast(state.ErrorMsg, "error");
     })
     .addCase(expandAction, (state) => {
       state.expand = !state.expand;
