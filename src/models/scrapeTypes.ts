@@ -1,5 +1,6 @@
 import { FilterTableCols, SortTableCol } from "./flexTypes";
 
+// Scrape data definitions ----------------
 interface FieldProperties {
   uv_value: string;
   scraped_value: string;
@@ -24,6 +25,16 @@ interface CommonFields {
 
 export type ScrapeDataType = NonCommonFields & CommonFields & AddedFields;
 
+// Request, Response definitions ----------------
+export interface ValidationRequest {
+  uploaded_file: string;
+}
+
+export interface ValidationResponse {
+  numRecords: number;
+  kfids: string[];
+}
+
 export interface ScrapeRequest {
   uploaded_file: string;
   timestamp: number;
@@ -39,7 +50,7 @@ export interface ScrapeDataResponse {
   data: ScrapeDataType[];
 }
 
-// state definition --------------
+// State definition --------------
 export interface ScrapeState {
   ScrapeData: ScrapeDataType[];
   timestamp: number;
@@ -54,6 +65,7 @@ export interface ScrapeState {
   sortTableCol: SortTableCol;
   loading: boolean;
   ErrorMsg: string | null;
+  fileDetails: ValidationResponse;
 }
 
 // UI type defs -----------------

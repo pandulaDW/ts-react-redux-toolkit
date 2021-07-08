@@ -3,9 +3,17 @@ import {
   ScrapeDataInitResponse,
   ScrapeDataResponse,
   ScrapeRequest,
+  ValidationRequest,
+  ValidationResponse,
 } from "../models/scrapeTypes";
 
 const address = process.env.REACT_APP_URL;
+
+export const checkScrapeValidation = (
+  data: ValidationRequest
+): Promise<AxiosResponse<ValidationResponse>> => {
+  return axios.post(`${address}/lei/scrape/validation`, data);
+};
 
 export const fetchScrapeInitData = (): Promise<
   AxiosResponse<ScrapeDataInitResponse>

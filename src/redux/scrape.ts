@@ -1,12 +1,13 @@
+import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import {
-  createAction,
-  createAsyncThunk,
-  createReducer,
-} from "@reduxjs/toolkit";
-import { FilterState, ScrapeState, DataView } from "../models/scrapeTypes";
+  FilterState,
+  ScrapeState,
+  DataView,
+  ValidationResponse,
+} from "../models/scrapeTypes";
 import { FilterTableCols, SortTableCol } from "../models/flexTypes";
 import { APIErrorResponse } from "../models/generalTypes";
-import { fetchScrapeInitData } from "../helpers/apiCalls";
+import { fetchScrapeInitData, fetchScrapeRequestData } from "../helpers/apiCalls";
 import { fetchScrapeRequests } from "../helpers/scrapeUtils";
 import { AxiosError } from "axios";
 
@@ -25,20 +26,21 @@ const initialState: ScrapeState = {
   filterState: FilterState.all,
   loading: false,
   ErrorMsg: null,
+  fileDetails: {
+    kfids: [],
+    numRecords: 0,
+  },
 };
 
 // Action creators -----------------------------------
 export const expandAction = createAction("scrape/expand");
+export const setFileDetails = createAction<ValidationResponse>("scrape/setFileDetails");
 export const setDataView = createAction("scrape/setDataView");
 export const selectRaAction = createAction<string>("scrape/selectRA");
 export const setLocalFinished = createAction<string>("scrape/setLocalFinish");
 export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
-export const setFilterTableCol = createAction<FilterTableCols>(
-  "scrape/filterTableCols"
-);
-export const setFilterState = createAction<FilterState>(
-  "scrape/setFilterState"
-);
+export const setFilterTableCol = createAction<FilterTableCols>("scrape/filterTableCols");
+export const setFilterState = createAction<FilterState>("scrape/setFilterState");
 export const setSortState = createAction<SortTableCol>("scrape/setSortState");
 export const clearAllState = createAction("scrape/clearAllState");
 
@@ -48,6 +50,7 @@ export const fetchScrapeData = createAsyncThunk(
   async (args: { isInitial: boolean; file: File | null }, thunkAPI) => {
     const { dispatch } = thunkAPI;
     const { isInitial, file } = args;
+    const requestTimestamp = Date.now();
 
     try {
       if (isInitial) {
@@ -55,11 +58,20 @@ export const fetchScrapeData = createAsyncThunk(
         const { data, timestamp, fieldList } = response.data;
         return { data, timestamp, fieldList };
       }
-      const { data, timestamp } = await fetchScrapeRequests(file as File);
+      const { data } = await fetchScrapeRequests(
+        file as File,
+        requestTimestamp,
+        dispatch
+      );
       dispatch(clearAllState());
-      return { data, timestamp };
+      return { data, timestamp: requestTimestamp };
     } catch (err) {
       const error = err as AxiosError<APIErrorResponse>;
+      if (error.response?.status === 504) {
+        const response = await fetchScrapeRequestData(requestTimestamp);
+        dispatch(clearAllState());
+        return { data: response.data.data, timestamp: requestTimestamp };
+      }
       return thunkAPI.rejectWithValue(error.response?.data.errMessage);
     }
   }
@@ -68,6 +80,10 @@ export const fetchScrapeData = createAsyncThunk(
 // Reducer -------------------------------------------
 const scrapeReducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(setFileDetails, (state, action) => {
+      state.fileDetails.kfids = action.payload.kfids;
+      state.fileDetails.numRecords = action.payload.numRecords;
+    })
     .addCase(fetchScrapeData.pending, (state) => {
       state.loading = true;
     })
@@ -125,9 +141,9 @@ const scrapeReducer = createReducer(initialState, (builder) => {
           (el) => el.kfid
         );
       if (filterState === FilterState.progress)
-        state.filteredByView = state.ScrapeData.filter(
-          (el) => el.onProgress
-        ).map((el) => el.kfid);
+        state.filteredByView = state.ScrapeData.filter((el) => el.onProgress).map(
+          (el) => el.kfid
+        );
     })
     .addCase(setDataView, (state) => {
       state.dataView =
@@ -136,16 +152,16 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     .addCase(setFilterTableCol, (state, action) => {
       if (Object.values(action.payload)[0] === "")
         delete state.filterTableCols[Object.keys(action.payload)[0]];
-      else
-        state.filterTableCols = { ...state.filterTableCols, ...action.payload };
+      else state.filterTableCols = { ...state.filterTableCols, ...action.payload };
     })
     .addCase(setSortState, (state, action) => {
       if (action.payload.column) state.sortTableCol = action.payload;
     })
     .addCase(clearAllState, (state) => {
-      const { fieldList } = state;
+      const { fieldList, fileDetails } = state;
       state = Object.assign(state, initialState);
       state.fieldList = fieldList;
+      state.fileDetails = fileDetails;
     })
     .addDefaultCase((state) => state);
 });

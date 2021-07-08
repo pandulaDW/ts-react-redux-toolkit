@@ -1,9 +1,11 @@
 import React from "react";
+import { setFileDetails } from "../redux/scrape";
 import { range, fileToBase64 } from "./utils";
-import { postScrapeRequest } from "./apiCalls";
+import { checkScrapeValidation, postScrapeRequest } from "./apiCalls";
 import { ScrapeDataType } from "../models/scrapeTypes";
 import { Column, OptionsArray, TableData } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
   let arrangedData: TableData<string> = {
@@ -63,16 +65,29 @@ export const formatData = (
   }
 };
 
-// Scrape requests multiplexing
-export async function fetchScrapeRequests(file: File) {
+export async function fetchScrapeRequests(
+  file: File,
+  timestamp: number,
+  dispatch: ThunkDispatch<unknown, unknown, AnyAction>
+) {
   try {
     const fileString = await fileToBase64(file);
-    const timestamp = Date.now();
+    const validationResponse = await validateScrapeData(fileString);
+    dispatch(setFileDetails(validationResponse));
     const response = await postScrapeRequest({
       uploaded_file: fileString,
       timestamp,
     });
-    return { data: response.data.data, timestamp };
+    return { data: response.data.data };
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function validateScrapeData(fileString: string) {
+  try {
+    const response = await checkScrapeValidation({ uploaded_file: fileString });
+    return response.data;
   } catch (err) {
     throw err;
   }
