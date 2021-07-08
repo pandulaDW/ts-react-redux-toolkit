@@ -55,8 +55,7 @@ const Header = () => {
       <img src={gleifLogo} alt="glief logo" className={styles.glief_logo} />
       <div className={styles.title}>
         <h1>
-          <span>{headerObj?.title.split(" ")[0]}</span>{" "}
-          {headerObj?.title.split(" ")[1]}
+          <span>{headerObj?.title.split(" ")[0]}</span> {headerObj?.title.split(" ")[1]}
         </h1>
         <h4>{headerObj?.subtitle}</h4>
       </div>

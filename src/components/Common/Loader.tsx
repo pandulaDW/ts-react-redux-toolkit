@@ -9,12 +9,7 @@ interface Props {
 const Loader: React.FC<Props> = ({ message }) => {
   return (
     <div className={styles.container}>
-      <Spinner
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        size={54}
-      />
+      <Spinner display="flex" alignItems="center" justifyContent="center" size={54} />
       <p>{message}</p>
     </div>
   );

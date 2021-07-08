@@ -4,11 +4,7 @@ import { ScrapeDataType } from "../../models/scrapeTypes";
 import { RootState } from "../../redux/_store";
 import styles from "../../styles/scrape.module.scss";
 import FlexTable from "../FlexTable/FlexTable";
-import {
-  Column,
-  HandleSelectFunc,
-  HandleSortFunc,
-} from "../../models/flexTypes";
+import { Column, HandleSelectFunc, HandleSortFunc } from "../../models/flexTypes";
 import { setFilterTableCol, setSortState } from "../../redux/scrape";
 import {
   arrangeData,

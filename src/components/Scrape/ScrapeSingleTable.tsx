@@ -73,16 +73,10 @@ const ScrapeSingleTable: React.FC<Props> = ({ data }) => {
                     <tr key={uuid()}>
                       <td>{capitalize(field)}</td>
                       <td>
-                        {matchFunc(
-                          data[field].uv_value,
-                          data[field].scraped_value
-                        )}
+                        {matchFunc(data[field].uv_value, data[field].scraped_value)}
                       </td>
                       <td>
-                        {matchFunc(
-                          data[field].scraped_value,
-                          data[field].uv_value
-                        )}
+                        {matchFunc(data[field].scraped_value, data[field].uv_value)}
                       </td>
                       <td>{data[field].match ? "Match" : "No Match"}</td>
                     </tr>

@@ -24,11 +24,7 @@ export const filterData = (
   return filteredIndices.length;
 };
 
-export const sortData = (
-  data: TableData<string>,
-  col: Column,
-  desc: boolean
-) => {
+export const sortData = (data: TableData<string>, col: Column, desc: boolean) => {
   const sortedIndices = sortArrayIndex(data[col.colName], desc);
 
   Object.keys(data).forEach((key) => {

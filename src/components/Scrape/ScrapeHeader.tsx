@@ -18,8 +18,9 @@ import { FilterState, DataView } from "../../models/scrapeTypes";
 const ScrapeHeader = () => {
   const dispatch = useDispatch();
   const [file, setFile] = useState<File | null>(null);
-  const { expand, uniqueRAs, filterState, timestamp, dataView, loading } =
-    useSelector((state: RootState) => state.scrape);
+  const { expand, uniqueRAs, filterState, timestamp, dataView, loading } = useSelector(
+    (state: RootState) => state.scrape
+  );
 
   return (
     <div className={cx(styles.header, { blockElement: loading })}>

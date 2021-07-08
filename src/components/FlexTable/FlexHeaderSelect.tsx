@@ -1,11 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import { Column } from "../../models/flexTypes";
-import {
-  HeaderSelectProps,
-  SelectEvent,
-  HandleSelectFunc,
-} from "../../models/flexTypes";
+import { HeaderSelectProps, SelectEvent, HandleSelectFunc } from "../../models/flexTypes";
 import styles from "../../styles/flexTable.module.scss";
 import { calcHeaderWidth, computedStyles } from "./helpers";
 
@@ -39,9 +35,7 @@ const FlexHeaderSelect: React.FC<HeaderSelectProps> = (props) => {
               }
               isClearable
               isSearchable
-              onChange={(event) =>
-                handleSearchWrapper(col, handleSelect)(event)
-              }
+              onChange={(event) => handleSearchWrapper(col, handleSelect)(event)}
             />
           </div>
         )}

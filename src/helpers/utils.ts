@@ -1,5 +1,5 @@
 export const convertToDTString = (d: number): string => {
-  return new Date(d).toDateString() + " " + new Date(d).toLocaleTimeString();
+  return new Date(+d).toDateString() + " " + new Date(+d).toLocaleTimeString();
 };
 
 export const capitalize = (s: String): string => {
@@ -57,8 +57,7 @@ export function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () =>
-      resolve((reader.result as string).split(";base64,")[1]);
+    reader.onload = () => resolve((reader.result as string).split(";base64,")[1]);
     reader.onerror = (err) => reject(err);
   });
 }

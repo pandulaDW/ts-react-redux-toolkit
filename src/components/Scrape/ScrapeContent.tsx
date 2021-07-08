@@ -15,9 +15,7 @@ const ScrapeContent = () => {
   );
 
   const filteredIDs = intersection(filteredByRA, filteredByView);
-  const filteredData = ScrapeData.filter((data) =>
-    filteredIDs.includes(data.kfid)
-  );
+  const filteredData = ScrapeData.filter((data) => filteredIDs.includes(data.kfid));
 
   return dataView === DataView.single ? (
     <Accordion allowMultipleExpanded allowZeroExpanded>

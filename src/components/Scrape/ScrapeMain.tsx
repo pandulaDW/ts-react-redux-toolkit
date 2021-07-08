@@ -9,9 +9,11 @@ import { RootState } from "../../redux/_store";
 
 const ScrapeMain = () => {
   const dispatch = useDispatch();
-  const { loading, ScrapeData } = useSelector(
-    (state: RootState) => state.scrape
-  );
+  const {
+    loading,
+    ScrapeData,
+    fileDetails: { numRecords },
+  } = useSelector((state: RootState) => state.scrape);
 
   useEffect(() => {
     if (ScrapeData.length === 0)
@@ -22,7 +24,7 @@ const ScrapeMain = () => {
   let component: JSX.Element;
   if (loading) {
     if (ScrapeData.length > 0) {
-      component = <Loader message="fetching request data..." />;
+      component = <Loader message={`scraping ${numRecords} records...`} />;
     } else {
       component = <Loader message="fetching initial data..." />;
     }
