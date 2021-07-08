@@ -4,11 +4,13 @@ import styles from "../../styles/scrape.module.scss";
 import ScrapeContent from "./ScrapeContent";
 import ScrapeHeader from "./ScrapeHeader";
 import Loader from "../Common/Loader";
+import ScrapeReportBox from "./ScrapeReportBox";
 import { fetchScrapeData } from "../../redux/scrape";
 import { RootState } from "../../redux/_store";
 
 const ScrapeMain = () => {
   const dispatch = useDispatch();
+
   const {
     loading,
     ScrapeData,
@@ -29,7 +31,12 @@ const ScrapeMain = () => {
       component = <Loader message="fetching initial data..." />;
     }
   } else {
-    component = <ScrapeContent />;
+    component = (
+      <React.Fragment>
+        <ScrapeReportBox numRecords={ScrapeData.length} numFetched={numRecords} />
+        <ScrapeContent />
+      </React.Fragment>
+    );
   }
 
   return (
