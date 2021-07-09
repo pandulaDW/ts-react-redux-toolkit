@@ -32,7 +32,7 @@ const ScrapeHeader = () => {
   } = useSelector((state: RootState) => state.scrape);
 
   const showReloadButton = () => {
-    return fileDetails.numRecords !== 0 && fileDetails.numRecords < ScrapeData.length;
+    return fileDetails.numRecords !== 0 && ScrapeData.length < fileDetails.numRecords;
   };
 
   return (

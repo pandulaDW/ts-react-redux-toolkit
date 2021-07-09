@@ -1,11 +1,17 @@
 import React from "react";
 import { setFileDetails } from "../redux/scrape";
-import { range, fileToBase64 } from "./utils";
-import { checkScrapeValidation, postScrapeRequest } from "./apiCalls";
+import { range, fileToBase64, promisifiedTimeout } from "./utils";
+import {
+  checkScrapeValidation,
+  fetchScrapeRequestData,
+  postScrapeRequest,
+} from "./apiCalls";
 import { ScrapeDataType } from "../models/scrapeTypes";
 import { Column, OptionsArray, TableData } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
+import { APIErrorResponse } from "../models/generalTypes";
 
 export const arrangeData = (data: ScrapeDataType[], fieldList: string[]) => {
   let arrangedData: TableData<string> = {
@@ -80,6 +86,13 @@ export async function fetchScrapeRequests(
     });
     return { data: response.data.data };
   } catch (err) {
+    const error = err as AxiosError<APIErrorResponse>;
+    // if the error is a timeout generated from the API gateway
+    if (!error.response) {
+      await promisifiedTimeout(3000);
+      const response = await fetchScrapeRequestData(timestamp);
+      return { data: response.data.data };
+    }
     throw err;
   }
 }

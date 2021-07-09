@@ -52,7 +52,6 @@ export const fetchScrapeData = createAsyncThunk(
   async (args: { isInitial: boolean; file: File | null }, thunkAPI) => {
     const { dispatch } = thunkAPI;
     const { isInitial, file } = args;
-    const requestTimestamp = Date.now();
 
     try {
       if (isInitial) {
@@ -60,20 +59,13 @@ export const fetchScrapeData = createAsyncThunk(
         const { data, timestamp, fieldList } = response.data;
         return { data, timestamp, fieldList };
       }
-      const { data } = await fetchScrapeRequests(
-        file as File,
-        requestTimestamp,
-        dispatch
-      );
+
+      const timestamp = Date.now();
+      const { data } = await fetchScrapeRequests(file as File, timestamp, dispatch);
       dispatch(clearAllState());
-      return { data, timestamp: requestTimestamp };
+      return { data, timestamp };
     } catch (err) {
       const error = err as AxiosError<APIErrorResponse>;
-      if (error.response?.status === 504) {
-        const response = await fetchScrapeRequestData(requestTimestamp);
-        dispatch(clearAllState());
-        return { data: response.data.data, timestamp: requestTimestamp };
-      }
       return thunkAPI.rejectWithValue(error.response?.data.errMessage);
     }
   }
