@@ -6,6 +6,7 @@ import {
   ValidationRequest,
   ValidationResponse,
 } from "../models/scrapeTypes";
+import { RequestParams, ResponseBody } from "../models/concatTypes";
 
 const address = process.env.REACT_APP_URL;
 
@@ -15,9 +16,7 @@ export const checkScrapeValidation = (
   return axios.post(`${address}/lei/scrape/validation`, data);
 };
 
-export const fetchScrapeInitData = (): Promise<
-  AxiosResponse<ScrapeDataInitResponse>
-> => {
+export const fetchScrapeInitData = (): Promise<AxiosResponse<ScrapeDataInitResponse>> => {
   return axios.get(`${address}/lei/scrape/init`);
 };
 
@@ -31,4 +30,12 @@ export const fetchScrapeRequestData = (
   timestamp: number
 ): Promise<AxiosResponse<ScrapeDataResponse>> => {
   return axios.get(`${address}/lei/scrape?timestamp=${timestamp}`);
+};
+
+export const fetchConcatData = (
+  queryParams: RequestParams
+): Promise<AxiosResponse<ResponseBody>> => {
+  return axios.get(
+    `${address}/lei/concat?fileType=${queryParams.fileType}&value=${queryParams.value}`
+  );
 };

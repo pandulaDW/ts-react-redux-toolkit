@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RadioGroup, TextInputField } from "evergreen-ui";
-import { setFileType } from "../../redux/concat";
+import { setFileType, setValue, fetchData } from "../../redux/concat";
 import { ConcatFileTypes } from "../../models/concatTypes";
 import { RootState } from "../../redux/_store";
 import Button from "../Common/Button";
@@ -32,8 +32,15 @@ const ConcatHeader = () => {
             description="LEI to search for"
             placeholder="Paste LEI here"
             width={200}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              dispatch(setValue(e.target.value))
+            }
           />
-          <Button text="fetch data" type="Animated" />
+          <Button
+            text="fetch data"
+            type="Animated"
+            clickHandler={() => dispatch(fetchData())}
+          />
         </div>
       </div>
       <div className={styles["content__header-right"]}>
