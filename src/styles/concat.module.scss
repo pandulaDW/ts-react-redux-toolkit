@@ -1,0 +1,48 @@
+@import "./theme";
+
+.content {
+  height: 100%;
+  width: 100%;
+
+  &__header {
+    display: flex;
+    padding: 2rem 4rem;
+
+    &-left {
+      display: flex;
+      width: 40%;
+      justify-content: space-between;
+
+      button {
+        margin-top: -1rem;
+      }
+    }
+
+    &-right {
+      display: flex;
+      flex-direction: row;
+      width: 60%;
+      align-items: flex-start;
+      margin-left: 8rem;
+
+      div {
+        background-color: $color-grey-2;
+        padding: 2rem;
+
+        p:first-child {
+          font-size: 1rem;
+          letter-spacing: 0.3px;
+          color: $color-grey-6;
+        }
+
+        p:last-child {
+          font-size: 1.1rem;
+        }
+
+        &:not(:last-of-type) {
+          border-right: 2px solid $color-grey-1;
+        }
+      }
+    }
+  }
+}
