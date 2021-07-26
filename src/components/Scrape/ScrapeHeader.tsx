@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdRefresh } from "react-icons/md";
+import { FcClearFilters } from "react-icons/fc";
 import cx from "classnames";
 import { SegmentedControl, Switch, FilePicker, Select } from "evergreen-ui";
 import Button from "../Common/Button";
@@ -11,6 +12,7 @@ import {
   setDataView,
   fetchScrapeData,
   fetchOnlyData,
+  clearAllTableFilters,
 } from "../../redux/scrape";
 import styles from "../../styles/scrape.module.scss";
 import { convertToDTString } from "../../helpers/utils";
@@ -24,6 +26,7 @@ const ScrapeHeader = () => {
     expand,
     uniqueRAs,
     filterState,
+    filterTableCols,
     timestamp,
     dataView,
     loading,
@@ -33,6 +36,10 @@ const ScrapeHeader = () => {
 
   const showReloadButton = () => {
     return fileDetails.numRecords !== 0 && ScrapeData.length < fileDetails.numRecords;
+  };
+
+  const showClearFilterButton = () => {
+    return dataView === DataView.table && Object.keys(filterTableCols).length > 0;
   };
 
   return (
@@ -67,6 +74,15 @@ const ScrapeHeader = () => {
             <p>Table View</p>
           </div>
         </div>
+        {showClearFilterButton() && (
+          <button
+            className={styles["header__left-clearButton"]}
+            onClick={() => dispatch(clearAllTableFilters())}
+          >
+            <span>Clear Filters</span>
+            <FcClearFilters />
+          </button>
+        )}
         {showReloadButton() && (
           <div className={styles["header__left-reload"]}>
             <div>

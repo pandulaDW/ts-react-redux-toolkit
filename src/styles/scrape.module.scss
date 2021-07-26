@@ -40,7 +40,7 @@
     }
 
     &-reload {
-      margin-left: 8rem;
+      margin-left: 7rem;
       display: flex;
       align-items: center;
 
@@ -64,6 +64,24 @@
         &:active {
           transform: rotate(180deg);
         }
+      }
+    }
+
+    &-clearButton {
+      background-color: white;
+      margin-left: 1.5rem;
+      border: none;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+      padding: 5px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        color: $color-grey-6;
+        margin-right: 5px;
+        font-size: 1.2rem;
       }
     }
   }

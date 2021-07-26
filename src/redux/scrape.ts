@@ -44,6 +44,7 @@ export const setLocalProgress = createAction<string>("scrape/setLocalProgress");
 export const setFilterTableCol = createAction<FilterTableCols>("scrape/filterTableCols");
 export const setFilterState = createAction<FilterState>("scrape/setFilterState");
 export const setSortState = createAction<SortTableCol>("scrape/setSortState");
+export const clearAllTableFilters = createAction("scrape/clearAllTableFilters");
 export const clearAllState = createAction("scrape/clearAllState");
 
 // Thunk action creators -------------------------------
@@ -171,6 +172,9 @@ const scrapeReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setSortState, (state, action) => {
       if (action.payload.column) state.sortTableCol = action.payload;
+    })
+    .addCase(clearAllTableFilters, (state) => {
+      state.filterTableCols = {};
     })
     .addCase(clearAllState, (state) => {
       const { fieldList, fileDetails } = state;
