@@ -6,6 +6,7 @@ import {
   ValidationRequest,
   ValidationResponse,
 } from "../models/scrapeTypes";
+import { DQRequestBody, DQResponseBody } from "../models/dqTypes";
 import { RequestParams, ResponseBody } from "../models/concatTypes";
 
 const address = process.env.REACT_APP_URL;
@@ -30,6 +31,12 @@ export const fetchScrapeRequestData = (
   timestamp: number
 ): Promise<AxiosResponse<ScrapeDataResponse>> => {
   return axios.get(`${address}/lei/scrape?timestamp=${timestamp}`);
+};
+
+export const fetchDQData = (
+  data: DQRequestBody
+): Promise<AxiosResponse<DQResponseBody>> => {
+  return axios.post(`${address}/lei/dq`, data);
 };
 
 export const fetchConcatData = (
