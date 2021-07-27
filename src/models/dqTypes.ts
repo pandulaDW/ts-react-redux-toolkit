@@ -1,9 +1,3 @@
-enum Impact {
-  High = "High",
-  Medium = "Medium",
-  Low = "Low",
-}
-
 enum Color {
   Red = "Red",
   Burgundy = "Burgundy",
@@ -11,7 +5,7 @@ enum Color {
 
 export interface DQItem {
   errorType: string;
-  Impact: Impact;
+  Impact: string;
   Colour: Color;
   KFID: string[];
   errorColumn: string[];
