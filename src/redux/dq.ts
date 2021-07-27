@@ -7,15 +7,12 @@ const initialState: DQState = {
   timestamp: undefined,
 };
 
-export const fetchData = createAsyncThunk(
-  "scrape/fetchData",
-  async (args: DQRequestBody) => {
-    const response = await fetchDQData(args);
-    return { data: response.data.data, timestamp: response.data.timestamp };
-  }
-);
+export const fetchData = createAsyncThunk("dq/fetchData", async (args: DQRequestBody) => {
+  const response = await fetchDQData(args);
+  return { data: response.data.data, timestamp: response.data.timestamp };
+});
 
-const concatReducer = createReducer(initialState, (builder) => {
+const dqReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchData.fulfilled, (state, action) => {
       state.data = action.payload.data;
@@ -24,4 +21,4 @@ const concatReducer = createReducer(initialState, (builder) => {
     .addDefaultCase((state) => state);
 });
 
-export default concatReducer;
+export default dqReducer;

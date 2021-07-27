@@ -9,10 +9,10 @@ const initialState: ConcatState = {
   data: [],
 };
 
-export const setFileType = createAction<ConcatFileTypes>("scrape/setFileType");
-export const setValue = createAction<string>("scrape/setValue");
+export const setFileType = createAction<ConcatFileTypes>("concat/setFileType");
+export const setValue = createAction<string>("concat/setValue");
 
-export const fetchData = createAsyncThunk("scrape/fetchData", async (_, { getState }) => {
+export const fetchData = createAsyncThunk("concat/fetchData", async (_, { getState }) => {
   const { fileType, value } = (getState() as RootState).concat;
   const response = await fetchConcatData({ fileType, value });
   return { data: response.data.records };
