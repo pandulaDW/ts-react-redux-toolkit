@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { signUp } from "./cognitoDetails";
 
-const UserForm = () => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,4 +27,4 @@ const UserForm = () => {
   );
 };
 
-export default UserForm;
+export default SignUp;

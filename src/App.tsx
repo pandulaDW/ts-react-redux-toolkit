@@ -5,13 +5,19 @@ import ScrapeMain from "./components/Scrape/ScrapeMain";
 import DQMain from "./components/DQ/DQMain";
 import ConcatMain from "./components/Concat/ConcatMain";
 import Sidebar from "./components/Common/Sidebar";
-import UserForm from "./components/Auth/UserForm";
+import SignUp from "./components/Auth/SignUp";
 import routes from "./routes";
+import SignIn from "./components/Auth/SignIn";
 
 const App = () => {
   const [showAuth, setShowAuth] = useState(true);
 
-  const authComponent = <UserForm />;
+  const authComponent = (
+    <div>
+      <SignUp />
+      <SignIn />
+    </div>
+  );
 
   const mainComponent = (
     <BrowserRouter>
