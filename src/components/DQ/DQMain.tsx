@@ -11,7 +11,7 @@ const DQMain = () => {
   return (
     <div className={styles.content}>
       <DQHeader />
-      <DQTable data={data} />
+      {data.length > 0 && <DQTable data={data} />}
     </div>
   );
 };

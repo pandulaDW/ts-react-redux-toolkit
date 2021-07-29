@@ -1,5 +1,7 @@
 import React from "react";
+import FlexTable from "../FlexTable/FlexTable";
 import { DQItem } from "../../models/dqTypes";
+import { Column, TableData } from "../../models/flexTypes";
 import styles from "../../styles/dq.module.scss";
 
 enum colNames {
@@ -12,11 +14,12 @@ enum colNames {
   "LEIStatus" = "LEI Status",
   "FieldsOrRelatedField" = "Fields or Related Field",
   "ErrorDescription" = "Error Description",
-  "Count" = "Count",
 }
 
+type FlattenData = { [key: string]: string }[];
+
 const flattenData = (data: DQItem[]) => {
-  const flatData = [];
+  const flatData: FlattenData = [];
 
   for (const item of data) {
     const newRowObj = {
@@ -24,7 +27,7 @@ const flattenData = (data: DQItem[]) => {
       [colNames.ErrorCategory]: item["errorType"],
       [colNames.ErrorImpact]: item["Impact"],
       [colNames.ErrorDescription]: item["error"],
-      [colNames.FieldsOrRelatedField]: item["errorColumn"],
+      [colNames.FieldsOrRelatedField]: item["errorColumn"].join(", "),
       [colNames.KeyFieldValue]: "",
       [colNames.Owner]: "",
       [colNames.LEIStatus]: "",
@@ -44,16 +47,50 @@ const flattenData = (data: DQItem[]) => {
       flatData.push(newAdditionalRowObj);
     });
   }
+
+  return flatData;
+};
+
+const arrangeData = (data: FlattenData) => {
+  const tableData: TableData<string> = {};
+  Object.values(colNames).forEach((colName) => {
+    tableData[colName] = data.map((item) => item[colName]);
+  });
+
+  return tableData;
 };
 
 interface Props {
   data: DQItem[];
 }
 
+const createColumns = (): Column[] => {
+  const columnList: Column[] = [];
+  columnList.push({ colName: colNames.Date, colWidth: 120 });
+  columnList.push({ colName: colNames.ErrorCategory, colWidth: 120 });
+  columnList.push({ colName: colNames.ErrorImpact, colWidth: 120 });
+  columnList.push({ colName: colNames.Owner, colWidth: 80 });
+  columnList.push({ colName: colNames.KeyFieldValue, colWidth: 120 });
+  columnList.push({ colName: colNames.OfficialEntityName, colWidth: 200 });
+  columnList.push({ colName: colNames.LEIStatus, colWidth: 120 });
+  columnList.push({ colName: colNames.FieldsOrRelatedField, colWidth: 200 });
+  columnList.push({ colName: colNames.ErrorDescription, colWidth: 200 });
+  return columnList;
+};
+
 const DQTable: React.FC<Props> = ({ data }) => {
   const flattenedData = flattenData(data);
-  console.log(flattenedData);
-  return <div className={styles.tableContainer}></div>;
+  const arrangedData = arrangeData(flattenedData);
+  const columns = createColumns();
+
+  console.log(arrangedData);
+  console.log(columns);
+
+  return (
+    <div className={styles.tableContainer}>
+      <FlexTable data={arrangedData} rowNum={flattenData.length} columns={columns} />
+    </div>
+  );
 };
 
 export default DQTable;
