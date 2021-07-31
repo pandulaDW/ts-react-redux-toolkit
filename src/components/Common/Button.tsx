@@ -12,7 +12,7 @@ interface Props {
 const Button: React.FC<Props> = ({ text, type, clickHandler }) => {
   let classname: string;
   if (type === "Animated") classname = styles.animatedButton;
-  else classname = "button";
+  else classname = styles.jira;
 
   return (
     <button className={classname} onClick={clickHandler}>

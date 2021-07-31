@@ -1,10 +1,10 @@
 DQ:
     ✔ Add colors to the Error Impact column
-  ☐ Create Header correctly
-  ☐ Add button transition
+    ✔ Create Header correctly
+    ✔ Add button transition
+    ✔ Add JIRA buttoon
   ☐ Create kfid single view
   ☐ Add loading spinner
-  ☐ Create kfid single view
   ☐ Add count column
   ☐ Add filtering capability to the table
   ☐ Add empty table
