@@ -47,6 +47,18 @@ export const arrangeData = (data: FlattenData) => {
   return tableData;
 };
 
+export const calculateKFIDCount = (data: TableData<string>) => {
+  const kfidCount: { [kfid: string]: number } = {};
+  const kfids = data[colNames.KeyFieldValue];
+
+  kfids.forEach((kfid) => {
+    kfidCount[kfid] = kfidCount[kfid] ? kfidCount[kfid] + 1 : 1;
+  });
+
+  const countArray = kfids.map((kfid) => kfidCount[kfid].toString());
+  return countArray;
+};
+
 export const createColumns = (): Column[] => {
   const columnList: Column[] = [];
   columnList.push({ colName: colNames.Date, colWidth: 120 });
@@ -58,6 +70,7 @@ export const createColumns = (): Column[] => {
   columnList.push({ colName: colNames.LEIStatus, colWidth: 120 });
   columnList.push({ colName: colNames.FieldsOrRelatedField, colWidth: 300 });
   columnList.push({ colName: colNames.ErrorDescription, colWidth: 400 });
+  columnList.push({ colName: colNames.Count, colWidth: 80 });
   return columnList;
 };
 

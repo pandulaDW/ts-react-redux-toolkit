@@ -35,3 +35,33 @@
     }
   }
 }
+
+.singleTable {
+  margin-left: 3rem;
+
+  &__metadata {
+    h1 {
+      color: $color-grey-7;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 1rem 0;
+
+      li {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+
+        span:first-of-type {
+          color: $color-grey-7;
+          font-weight: 400;
+        }
+
+        span:last-of-type {
+          color: $color-grey-6;
+        }
+      }
+    }
+  }
+}

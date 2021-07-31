@@ -4,9 +4,9 @@ DQ:
     ✔ Add button transition
     ✔ Add JIRA buttoon
     ✔ Add clear all button functionality
-  ☐ Create kfid single view
+    ✔ Create kfid single view
+    ✔ Add count column
   ☐ Add loading spinner
-  ☐ Add count column
   ☐ Add filtering capability to the table
   ☐ Add empty table
   ☐ Add and test lambda handler to create excel file

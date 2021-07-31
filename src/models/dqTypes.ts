@@ -36,6 +36,13 @@ export enum colNames {
   "LEIStatus" = "LEI Status",
   "FieldsOrRelatedField" = "Fields or Related Field",
   "ErrorDescription" = "Error Description",
+  "Count" = "Count",
+}
+
+export interface MetaData {
+  Owner: string;
+  OfficialEntityName: string;
+  LEIStatus: string;
 }
 
 export interface DQItem {
@@ -46,11 +53,7 @@ export interface DQItem {
   errorColumn: string[];
   error: string;
   metadata: {
-    [kfid: string]: {
-      Owner: string;
-      OfficialEntityName: string;
-      LEIStatus: string;
-    };
+    [kfid: string]: MetaData;
   };
 }
 

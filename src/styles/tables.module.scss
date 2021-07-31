@@ -37,6 +37,15 @@
   }
 }
 
+.dqSingleTable {
+  @include generalTable();
+  td,
+  th {
+    padding: 10px;
+    font-size: 1.1rem;
+  }
+}
+
 .concatTable {
   &__table {
     @include generalTable();
