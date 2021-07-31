@@ -74,4 +74,5 @@ export interface DQState {
   kfids: string[];
   selectedKfid: string | undefined;
   view: DQView;
+  loading: boolean;
 }

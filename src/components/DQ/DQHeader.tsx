@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Select, { ValueType } from "react-select";
+import cx from "classnames";
 import { FilePicker } from "evergreen-ui";
 import { fetchData, setKfid, setView, clearAll } from "../../redux/dq";
 import Button from "../Common/Button";
@@ -10,7 +11,7 @@ import styles from "../../styles/dq.module.scss";
 
 const DQHeader = () => {
   const dispatch = useDispatch();
-  const { kfids } = useSelector((state: RootState) => state.dq);
+  const { kfids, loading } = useSelector((state: RootState) => state.dq);
 
   const [file, setFile] = useState<File | null>(null);
   const selectOptions = kfids.map((kfid) => ({ value: kfid, label: kfid }));
@@ -44,7 +45,7 @@ const DQHeader = () => {
   };
 
   return (
-    <div className={styles.header}>
+    <div className={cx(styles.header, { blockElement: loading })}>
       <div className={styles.header__left}>
         <Select
           options={selectOptions}

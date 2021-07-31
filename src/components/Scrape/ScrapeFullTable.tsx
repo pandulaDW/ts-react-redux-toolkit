@@ -54,9 +54,6 @@ const ScrapeFullTable: React.FC<Props> = ({ data }) => {
   // formatting data according to the color
   formatData(arrangedData, fieldList);
 
-  console.log(arrangedData);
-  console.log(columns);
-
   return (
     <div className={styles.tableContainer}>
       <FlexTable

@@ -8,6 +8,7 @@ const initialState: DQState = {
   kfids: [],
   selectedKfid: undefined,
   view: "TableView",
+  loading: false,
 };
 
 export const populateKfids = createAction<string[]>("dq/populateKfids");
@@ -22,7 +23,11 @@ export const fetchData = createAsyncThunk("dq/fetchData", async (args: DQRequest
 
 const dqReducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(fetchData.pending, (state) => {
+      state.loading = true;
+    })
     .addCase(fetchData.fulfilled, (state, action) => {
+      state.loading = false;
       state.data = action.payload.data;
       state.timestamp = action.payload.timestamp;
     })
