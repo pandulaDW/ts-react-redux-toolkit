@@ -22,4 +22,6 @@ export interface ConcatState {
   fileType: ConcatFileTypes;
   value: string;
   data: ConcatRecord[];
+  loading: boolean;
+  isInitialState: boolean;
 }

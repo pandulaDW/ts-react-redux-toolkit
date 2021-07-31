@@ -13,5 +13,6 @@ DQ:
   ☐ Add clear all filter button
 
 Concat:
-  ☐ Fix fetching issue
+  ✔ Fix fetching issue
+  ✔ Add loading to concat
   ☐ Add initial data fetching lambda and fix the UI

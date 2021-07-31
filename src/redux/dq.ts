@@ -30,7 +30,7 @@ const dqReducer = createReducer(initialState, (builder) => {
       state.loading = true;
     })
     .addCase(fetchData.fulfilled, (state, action) => {
-      state.loading = false;
+      state = Object.assign(state, initialState);
       state.data = action.payload.data;
       state.timestamp = action.payload.timestamp;
       state.isInitialState = false;

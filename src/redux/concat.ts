@@ -7,6 +7,8 @@ const initialState: ConcatState = {
   fileType: ConcatFileTypes.rr,
   value: "",
   data: [],
+  loading: false,
+  isInitialState: true,
 };
 
 export const setFileType = createAction<ConcatFileTypes>("concat/setFileType");
@@ -26,8 +28,13 @@ const concatReducer = createReducer(initialState, (builder) => {
     .addCase(setValue, (state, action) => {
       state.value = action.payload;
     })
+    .addCase(fetchData.pending, (state) => {
+      state.loading = true;
+    })
     .addCase(fetchData.fulfilled, (state, action) => {
       state.data = action.payload.data;
+      state.loading = false;
+      state.isInitialState = false;
     })
     .addDefaultCase((state) => state);
 });

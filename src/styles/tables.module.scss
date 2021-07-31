@@ -49,6 +49,12 @@
 .concatTable {
   &__table {
     @include generalTable();
+
+    td,
+    th {
+      padding: 8px;
+      font-size: 1.1rem;
+    }
   }
 }
 

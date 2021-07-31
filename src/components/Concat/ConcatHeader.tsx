@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { RadioGroup, TextInputField } from "evergreen-ui";
 import { setFileType, setValue, fetchData } from "../../redux/concat";
@@ -9,7 +10,7 @@ import styles from "../../styles/concat.module.scss";
 
 const ConcatHeader = () => {
   const dispatch = useDispatch();
-  const { fileType } = useSelector((state: RootState) => state.concat);
+  const { fileType, loading } = useSelector((state: RootState) => state.concat);
 
   const radioOptions = [
     { label: "Level-2 Data", value: ConcatFileTypes.rr },
@@ -18,7 +19,7 @@ const ConcatHeader = () => {
   ];
 
   return (
-    <div className={styles.content__header}>
+    <div className={cx(styles.content__header, { blockElement: loading })}>
       <div className={styles["content__header-left"]}>
         <RadioGroup
           value={fileType}
