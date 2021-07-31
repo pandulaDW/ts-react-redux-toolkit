@@ -80,4 +80,5 @@ export interface DQState {
   view: DQView;
   loading: boolean;
   filterTableCols: FilterTableCols;
+  isInitialState: boolean;
 }

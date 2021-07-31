@@ -10,6 +10,7 @@ const initialState: DQState = {
   view: "TableView",
   loading: false,
   filterTableCols: {},
+  isInitialState: true,
 };
 
 export const populateKfids = createAction<string[]>("dq/populateKfids");
@@ -32,6 +33,7 @@ const dqReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.data = action.payload.data;
       state.timestamp = action.payload.timestamp;
+      state.isInitialState = false;
     })
     .addCase(populateKfids, (state, action) => {
       state.kfids = action.payload;

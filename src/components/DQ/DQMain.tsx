@@ -11,7 +11,7 @@ import styles from "../../styles/dq.module.scss";
 
 const DQMain = () => {
   const dispatch = useDispatch();
-  const { data, view, selectedKfid, loading } = useSelector(
+  const { data, view, selectedKfid, loading, isInitialState } = useSelector(
     (state: RootState) => state.dq
   );
 
@@ -32,8 +32,8 @@ const DQMain = () => {
     if (view === "TableView") contentNode = <DQTable data={data} />;
     if (view === "SingleKFIDView")
       contentNode = <DQSingleTable data={data} kfid={selectedKfid as string} />;
-  } else {
-    contentNode = null;
+  } else if (data.length === 0 && !isInitialState) {
+    contentNode = <h2 className={styles.noData}>No DQ Errors found!</h2>;
   }
 
   return (
