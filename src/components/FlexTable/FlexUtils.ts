@@ -1,5 +1,5 @@
 import { setIntersection, sortArrayIndex } from "../../helpers/utils";
-import { Column, TableData, FilterTableCols } from "../../models/flexTypes";
+import { Column, TableData, FilterTableCols, OptionsArray } from "../../models/flexTypes";
 
 export const filterData = (
   data: TableData<string>,
@@ -34,4 +34,14 @@ export const sortData = (data: TableData<string>, col: Column, desc: boolean) =>
     }
     data[key] = sortedArray;
   });
+};
+
+export const createOptions = (data: TableData<string>, cols: string[]) => {
+  return cols.reduce<OptionsArray>((acc, curr) => {
+    acc[curr] = Array.from(new Set(data[curr])).map((item) => ({
+      label: item,
+      value: item,
+    }));
+    return acc;
+  }, {});
 };

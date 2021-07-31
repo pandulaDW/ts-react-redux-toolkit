@@ -68,6 +68,10 @@ export interface DQRequestBody {
 
 export type DQView = "SingleKFIDView" | "TableView";
 
+export interface FilterTableCols {
+  [column: string]: string;
+}
+
 export interface DQState {
   timestamp: number | undefined;
   data: DQItem[];
@@ -75,4 +79,5 @@ export interface DQState {
   selectedKfid: string | undefined;
   view: DQView;
   loading: boolean;
+  filterTableCols: FilterTableCols;
 }

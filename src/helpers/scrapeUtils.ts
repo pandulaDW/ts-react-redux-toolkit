@@ -7,7 +7,7 @@ import {
   postScrapeRequest,
 } from "./apiCalls";
 import { ScrapeDataType } from "../models/scrapeTypes";
-import { Column, OptionsArray, TableData } from "../models/flexTypes";
+import { Column, TableData } from "../models/flexTypes";
 import { matchFunc } from "../components/Scrape/matchFunc";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
@@ -40,16 +40,6 @@ export const createColumns = (fieldList: string[]): Column[] => [
     ];
   }),
 ];
-
-export const createOptions = (data: TableData<string>, cols: string[]) => {
-  return cols.reduce<OptionsArray>((acc, curr) => {
-    acc[curr] = Array.from(new Set(data[curr])).map((item) => ({
-      label: item,
-      value: item,
-    }));
-    return acc;
-  }, {});
-};
 
 export const formatData = (
   arrangedData: TableData<string | React.ReactNode>,

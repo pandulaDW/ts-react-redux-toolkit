@@ -6,13 +6,8 @@ import styles from "../../styles/scrape.module.scss";
 import FlexTable from "../FlexTable/FlexTable";
 import { Column, HandleSelectFunc, HandleSortFunc } from "../../models/flexTypes";
 import { setFilterTableCol, setSortState } from "../../redux/scrape";
-import {
-  arrangeData,
-  createColumns,
-  createOptions,
-  formatData,
-} from "../../helpers/scrapeUtils";
-import { filterData, sortData } from "../FlexTable/FlexUtils";
+import { arrangeData, createColumns, formatData } from "../../helpers/scrapeUtils";
+import { filterData, sortData, createOptions } from "../FlexTable/FlexUtils";
 
 interface Props {
   data: ScrapeDataType[];

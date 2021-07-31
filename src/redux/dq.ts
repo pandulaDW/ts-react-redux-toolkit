@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
-import { DQState, DQView, DQRequestBody } from "../models/dqTypes";
+import { DQState, DQView, DQRequestBody, FilterTableCols } from "../models/dqTypes";
 import { fetchDQData } from "../helpers/apiCalls";
 
 const initialState: DQState = {
@@ -9,12 +9,14 @@ const initialState: DQState = {
   selectedKfid: undefined,
   view: "TableView",
   loading: false,
+  filterTableCols: {},
 };
 
 export const populateKfids = createAction<string[]>("dq/populateKfids");
 export const setView = createAction<DQView>("dq/setView");
 export const setKfid = createAction<string | undefined>("dq/setKfid");
 export const clearAll = createAction("dq/clearAll");
+export const setFilterTableCol = createAction<FilterTableCols>("dq/filterTableCols");
 
 export const fetchData = createAsyncThunk("dq/fetchData", async (args: DQRequestBody) => {
   const response = await fetchDQData(args);
@@ -39,6 +41,11 @@ const dqReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setKfid, (state, action) => {
       state.selectedKfid = action.payload;
+    })
+    .addCase(setFilterTableCol, (state, action) => {
+      if (Object.values(action.payload)[0] === "")
+        delete state.filterTableCols[Object.keys(action.payload)[0]];
+      else state.filterTableCols = { ...state.filterTableCols, ...action.payload };
     })
     .addCase(clearAll, (state) => {
       state = Object.assign(state, initialState);

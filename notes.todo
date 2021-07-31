@@ -7,7 +7,7 @@ DQ:
     ✔ Create kfid single view
     ✔ Add count column
     ✔ Add loading spinner
-  ☐ Add filtering capability to the table
+    ✔ Add filtering capability to the table
   ☐ Add empty table
   ☐ Add and test lambda handler to create excel file
 
