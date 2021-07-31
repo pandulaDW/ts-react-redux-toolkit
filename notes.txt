@@ -1,2 +1,15 @@
-Keep kfid as "kfid"
-address keep as "uv_value" and "scraped_value" as opposed to "uv_address"
+TODOS
+DQ
+- Add colors to the Error Impact column
+- Create Header correctly
+- Add button transition
+- Add loading spinner
+- Create kfid single view
+- Add count column
+- Add filtering capability to the table
+- Add empty table
+- Add and test lambda handler to create excel file
+
+Concat
+- Fix fetching issue
+- Add initial data fetching lambda and fix the UI

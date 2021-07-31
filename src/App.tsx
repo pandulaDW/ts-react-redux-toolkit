@@ -10,7 +10,7 @@ import routes from "./routes";
 import SignIn from "./components/Auth/SignIn";
 
 const App = () => {
-  const [showAuth, setShowAuth] = useState(true);
+  const [showAuth] = useState(false);
 
   const authComponent = (
     <div>
