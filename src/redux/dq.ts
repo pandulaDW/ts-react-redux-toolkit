@@ -1,14 +1,19 @@
 import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
-import { DQState, DQRequestBody } from "../models/dqTypes";
+import { DQState, DQView, DQRequestBody } from "../models/dqTypes";
 import { fetchDQData } from "../helpers/apiCalls";
 
 const initialState: DQState = {
   data: [],
   timestamp: undefined,
   kfids: [],
+  selectedKfid: undefined,
+  view: "TableView",
 };
 
 export const populateKfids = createAction<string[]>("dq/populateKfids");
+export const setView = createAction<DQView>("dq/setView");
+export const setKfid = createAction<string | undefined>("dq/setKfid");
+export const clearAll = createAction("dq/clearAll");
 
 export const fetchData = createAsyncThunk("dq/fetchData", async (args: DQRequestBody) => {
   const response = await fetchDQData(args);
@@ -23,6 +28,15 @@ const dqReducer = createReducer(initialState, (builder) => {
     })
     .addCase(populateKfids, (state, action) => {
       state.kfids = action.payload;
+    })
+    .addCase(setView, (state, action) => {
+      state.view = action.payload;
+    })
+    .addCase(setKfid, (state, action) => {
+      state.selectedKfid = action.payload;
+    })
+    .addCase(clearAll, (state) => {
+      state = Object.assign(state, initialState);
     })
     .addDefaultCase((state) => state);
 });

@@ -3,12 +3,12 @@ DQ:
     ✔ Create Header correctly
     ✔ Add button transition
     ✔ Add JIRA buttoon
+    ✔ Add clear all button functionality
   ☐ Create kfid single view
   ☐ Add loading spinner
   ☐ Add count column
   ☐ Add filtering capability to the table
   ☐ Add empty table
-  ☐ Add clear all button
   ☐ Add and test lambda handler to create excel file
 
 Concat:

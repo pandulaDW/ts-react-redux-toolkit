@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Select from "react-select";
+import Select, { ValueType } from "react-select";
 import { FilePicker } from "evergreen-ui";
-import { fetchData } from "../../redux/dq";
+import { fetchData, setKfid, setView, clearAll } from "../../redux/dq";
 import Button from "../Common/Button";
 import { fileToBase64 } from "../../helpers/utils";
 import { RootState } from "../../redux/_store";
@@ -26,13 +26,35 @@ const DQHeader = () => {
     }
   };
 
+  const selectHandler = (
+    e: ValueType<
+      {
+        value: string;
+        label: string;
+      },
+      false
+    >
+  ) => {
+    if (e?.value) {
+      dispatch(setKfid(e.value));
+      dispatch(setView("SingleKFIDView"));
+    } else {
+      dispatch(setView("TableView"));
+    }
+  };
+
   return (
     <div className={styles.header}>
       <div className={styles.header__left}>
-        <Select options={selectOptions} isClearable isSearchable />
+        <Select
+          options={selectOptions}
+          isClearable
+          isSearchable
+          onChange={selectHandler}
+        />
       </div>
       <div className={styles.header__right}>
-        <Button text="Clear All" type="Jira" />
+        <Button text="Clear All" type="Jira" clickHandler={() => dispatch(clearAll())} />
         <FilePicker
           multiple={false}
           width={250}

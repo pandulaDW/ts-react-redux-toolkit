@@ -63,8 +63,12 @@ export interface DQRequestBody {
   uploaded_file: string;
 }
 
+export type DQView = "SingleKFIDView" | "TableView";
+
 export interface DQState {
   timestamp: number | undefined;
   data: DQItem[];
   kfids: string[];
+  selectedKfid: string | undefined;
+  view: DQView;
 }
