@@ -66,4 +66,5 @@ export interface DQRequestBody {
 export interface DQState {
   timestamp: number | undefined;
   data: DQItem[];
+  kfids: string[];
 }
