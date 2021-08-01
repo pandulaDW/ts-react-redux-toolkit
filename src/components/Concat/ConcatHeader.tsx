@@ -6,17 +6,20 @@ import { setFileType, setValue, fetchData } from "../../redux/concat";
 import { ConcatFileTypes } from "../../models/concatTypes";
 import { RootState } from "../../redux/_store";
 import Button from "../Common/Button";
+import { convertDateToString } from "../../helpers/utils";
 import styles from "../../styles/concat.module.scss";
 
 const ConcatHeader = () => {
   const dispatch = useDispatch();
-  const { fileType, loading } = useSelector((state: RootState) => state.concat);
+  const { fileType, loading, initData } = useSelector((state: RootState) => state.concat);
 
   const radioOptions = [
     { label: "Level-2 Data", value: ConcatFileTypes.rr },
     { label: "Level-1 Data", value: ConcatFileTypes.lei },
     { label: "Reporting Exceptions", value: ConcatFileTypes.repex },
   ];
+
+  const placeholder = "###############";
 
   return (
     <div className={cx(styles.content__header, { blockElement: loading })}>
@@ -47,19 +50,35 @@ const ConcatHeader = () => {
       <div className={styles["content__header-right"]}>
         <div>
           <p>Last Processed time</p>
-          <p>{new Date().toLocaleString()}</p>
+          <p>
+            {initData
+              ? convertDateToString(new Date(initData["last_modified"]["repexFile"]))
+              : placeholder}
+          </p>
         </div>
         <div>
           <p>Level-2 Data</p>
-          <p>{"###############"}</p>
+          <p>
+            {initData
+              ? `${initData["counts"]["rrFile"].toLocaleString()} records`
+              : placeholder}
+          </p>
         </div>
         <div>
           <p>Level-1 Data</p>
-          <p>{"##################"}</p>
+          <p>
+            {initData
+              ? `${initData["counts"]["leiFile"].toLocaleString()} records`
+              : placeholder}
+          </p>
         </div>
         <div>
           <p>Reporting Exceptions</p>
-          <p>{"##################"}</p>
+          <p>
+            {initData
+              ? `${initData["counts"]["repexFile"].toLocaleString()} records`
+              : placeholder}
+          </p>
         </div>
       </div>
     </div>

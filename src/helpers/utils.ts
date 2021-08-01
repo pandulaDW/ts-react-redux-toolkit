@@ -2,6 +2,10 @@ export const convertToDTString = (d: number): string => {
   return new Date(+d).toDateString() + " " + new Date(+d).toLocaleTimeString();
 };
 
+export const convertDateToString = (d: Date): string => {
+  return d.toDateString() + " " + d.toLocaleTimeString();
+};
+
 export const capitalize = (s: String): string => {
   return s.slice(0, 1).toUpperCase() + s.slice(1);
 };

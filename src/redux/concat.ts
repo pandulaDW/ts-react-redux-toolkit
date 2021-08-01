@@ -1,6 +1,6 @@
 import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import { ConcatState, ConcatFileTypes } from "../models/concatTypes";
-import { fetchConcatData } from "../helpers/apiCalls";
+import { fetchConcatData, fetchConcatInitData } from "../helpers/apiCalls";
 import { RootState } from "./_store";
 
 const initialState: ConcatState = {
@@ -9,6 +9,7 @@ const initialState: ConcatState = {
   data: [],
   loading: false,
   isInitialState: true,
+  initData: null,
 };
 
 export const setFileType = createAction<ConcatFileTypes>("concat/setFileType");
@@ -18,6 +19,11 @@ export const fetchData = createAsyncThunk("concat/fetchData", async (_, { getSta
   const { fileType, value } = (getState() as RootState).concat;
   const response = await fetchConcatData({ fileType, value });
   return { data: response.data.records };
+});
+
+export const fetchInitData = createAsyncThunk("concat/fetchInitData", async () => {
+  const response = await fetchConcatInitData();
+  return response.data;
 });
 
 const concatReducer = createReducer(initialState, (builder) => {
@@ -35,6 +41,9 @@ const concatReducer = createReducer(initialState, (builder) => {
       state.data = action.payload.data;
       state.loading = false;
       state.isInitialState = false;
+    })
+    .addCase(fetchInitData.fulfilled, (state, action) => {
+      state.initData = action.payload;
     })
     .addDefaultCase((state) => state);
 });

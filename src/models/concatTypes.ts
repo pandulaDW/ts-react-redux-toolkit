@@ -18,10 +18,24 @@ export interface ResponseBody {
   records: ConcatRecord[];
 }
 
+export interface ConcatInitResponse {
+  counts: {
+    rrFile: number;
+    leiFile: number;
+    repexFile: number;
+  };
+  last_modified: {
+    leiFile: string;
+    repexFile: string;
+    rrFile: string;
+  };
+}
+
 export interface ConcatState {
   fileType: ConcatFileTypes;
   value: string;
   data: ConcatRecord[];
   loading: boolean;
   isInitialState: boolean;
+  initData: ConcatInitResponse | null;
 }

@@ -15,4 +15,4 @@ DQ:
 Concat:
   ✔ Fix fetching issue
   ✔ Add loading to concat
-  ☐ Add initial data fetching lambda and fix the UI
+  ✔ Add initial data fetching lambda and fix the UI

@@ -7,7 +7,7 @@ import {
   ValidationResponse,
 } from "../models/scrapeTypes";
 import { DQRequestBody, DQResponseBody } from "../models/dqTypes";
-import { RequestParams, ResponseBody } from "../models/concatTypes";
+import { RequestParams, ResponseBody, ConcatInitResponse } from "../models/concatTypes";
 
 const address = process.env.REACT_APP_URL;
 
@@ -45,4 +45,8 @@ export const fetchConcatData = (
   return axios.get(
     `${address}/lei/concat?fileType=${queryParams.fileType}&value=${queryParams.value}`
   );
+};
+
+export const fetchConcatInitData = (): Promise<AxiosResponse<ConcatInitResponse>> => {
+  return axios.get(`${address}/lei/concat/init`);
 };
