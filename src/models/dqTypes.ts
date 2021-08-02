@@ -82,3 +82,7 @@ export interface DQState {
   filterTableCols: FilterTableCols;
   isInitialState: boolean;
 }
+
+export interface DQExcelResponse {
+  file: string;
+}

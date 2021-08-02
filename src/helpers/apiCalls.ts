@@ -6,7 +6,7 @@ import {
   ValidationRequest,
   ValidationResponse,
 } from "../models/scrapeTypes";
-import { DQRequestBody, DQResponseBody } from "../models/dqTypes";
+import { DQRequestBody, DQResponseBody, DQExcelResponse } from "../models/dqTypes";
 import { RequestParams, ResponseBody, ConcatInitResponse } from "../models/concatTypes";
 
 const address = process.env.REACT_APP_URL;
@@ -37,6 +37,12 @@ export const fetchDQData = (
   data: DQRequestBody
 ): Promise<AxiosResponse<DQResponseBody>> => {
   return axios.post(`${address}/lei/dq`, data);
+};
+
+export const downloadDQExcel = (
+  timestamp: number
+): Promise<AxiosResponse<DQExcelResponse>> => {
+  return axios.get(`${address}/lei/dq/excel?timestamp=${timestamp}`);
 };
 
 export const fetchConcatData = (
