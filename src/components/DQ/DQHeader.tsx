@@ -60,7 +60,6 @@ const DQHeader = () => {
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
   };
 
   const selectHandler = (
