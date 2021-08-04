@@ -1,23 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./components/Common/Header";
 import ScrapeMain from "./components/Scrape/ScrapeMain";
 import DQMain from "./components/DQ/DQMain";
 import ConcatMain from "./components/Concat/ConcatMain";
 import Sidebar from "./components/Common/Sidebar";
-import SignUp from "./components/Auth/SignUp";
+import { getToken, isValidToken } from "./components/Auth/auth";
+import RedirectComponent from "./components/Auth/RedirectComponent";
 import routes from "./routes";
-import SignIn from "./components/Auth/SignIn";
 
 const App = () => {
-  const [showAuth] = useState(false);
-
-  const authComponent = (
-    <div>
-      <SignUp />
-      <SignIn />
-    </div>
-  );
+  const isValid = isValidToken(getToken());
 
   const mainComponent = (
     <BrowserRouter>
@@ -43,7 +36,7 @@ const App = () => {
     </BrowserRouter>
   );
 
-  return showAuth ? authComponent : mainComponent;
+  return isValid ? mainComponent : <RedirectComponent />;
 };
 
 export default App;
