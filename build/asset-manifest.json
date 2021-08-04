@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.cbd24ba5.chunk.css",
-    "main.js": "/static/js/main.697b75db.chunk.js",
-    "main.js.map": "/static/js/main.697b75db.chunk.js.map",
+    "main.css": "/static/css/main.18396d0b.chunk.css",
+    "main.js": "/static/js/main.d47bcb57.chunk.js",
+    "main.js.map": "/static/js/main.d47bcb57.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ef3fdb1a.js",
     "runtime-main.js.map": "/static/js/runtime-main.ef3fdb1a.js.map",
-    "static/js/2.b57dab57.chunk.js": "/static/js/2.b57dab57.chunk.js",
-    "static/js/2.b57dab57.chunk.js.map": "/static/js/2.b57dab57.chunk.js.map",
+    "static/js/2.bc4cd6fb.chunk.js": "/static/js/2.bc4cd6fb.chunk.js",
+    "static/js/2.bc4cd6fb.chunk.js.map": "/static/js/2.bc4cd6fb.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.cbd24ba5.chunk.css.map": "/static/css/main.cbd24ba5.chunk.css.map",
-    "static/js/2.b57dab57.chunk.js.LICENSE.txt": "/static/js/2.b57dab57.chunk.js.LICENSE.txt",
+    "static/css/main.18396d0b.chunk.css.map": "/static/css/main.18396d0b.chunk.css.map",
+    "static/js/2.bc4cd6fb.chunk.js.LICENSE.txt": "/static/js/2.bc4cd6fb.chunk.js.LICENSE.txt",
     "static/media/BSL_Labs_-_Aug_2019.e2e0f84a.png": "/static/media/BSL_Labs_-_Aug_2019.e2e0f84a.png",
     "static/media/LSEG_LOGO_RGB_GWB_0.05bc91bc.png": "/static/media/LSEG_LOGO_RGB_GWB_0.05bc91bc.png",
     "static/media/gleif-logo-full.734f0821.png": "/static/media/gleif-logo-full.734f0821.png",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.ef3fdb1a.js",
-    "static/js/2.b57dab57.chunk.js",
-    "static/css/main.cbd24ba5.chunk.css",
-    "static/js/main.697b75db.chunk.js"
+    "static/js/2.bc4cd6fb.chunk.js",
+    "static/css/main.18396d0b.chunk.css",
+    "static/js/main.d47bcb57.chunk.js"
   ]
 }
