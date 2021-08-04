@@ -1,44 +1,49 @@
 import jwt_decode from "jwt-decode";
 
+interface TokenBody {
+  token_use: string;
+  "cognito:groups": string[];
+}
+
 interface Tokens {
   accessToken: string | null;
   idToken: string | null;
 }
 
 export const getToken = (): Tokens => {
-  let accessToken: string | null;
-  let idToken: string | null;
-
-  try {
-    accessToken = new URLSearchParams(window.location.hash).get("access_token");
-    idToken = new URLSearchParams(window.location.hash).get("#id_token");
-  } catch {
-    accessToken = new URLSearchParams(window.location.hash).get("#access_token");
-    idToken = new URLSearchParams(window.location.hash).get("id_token");
-  }
-
-  console.log(accessToken, idToken);
+  const accessToken = new URLSearchParams(window.location.hash).get("#access_token");
+  const idToken = new URLSearchParams(window.location.hash).get("id_token");
   return { accessToken, idToken };
 };
 
 export const isValidToken = ({ accessToken, idToken }: Tokens): Boolean => {
-  let decodedAccessToken: any | null;
-  let decodedIdToken: any | null;
+  let decodedAccessToken: TokenBody | null;
 
   try {
     if (!accessToken || !idToken) {
       console.log("tokens not present");
       return false;
     }
-    decodedAccessToken = jwt_decode(accessToken);
-    decodedIdToken = jwt_decode(idToken);
+    decodedAccessToken = jwt_decode<TokenBody>(accessToken);
   } catch {
     console.log("malformed jwt token");
     return false;
   }
 
-  console.log(decodedAccessToken);
-  console.log(decodedIdToken);
+  if (!decodedAccessToken) {
+    console.log("access token null");
+    return false;
+  }
 
-  return true;
+  if (decodedAccessToken.token_use !== "access") {
+    console.log("not an access token");
+    return false;
+  }
+
+  if (decodedAccessToken["cognito:groups"].includes("Lei-Tools-ReadAccess")) {
+    console.log("access token valid");
+    return true;
+  }
+
+  return false;
 };

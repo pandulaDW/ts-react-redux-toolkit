@@ -12,7 +12,7 @@ import routes from "./routes";
 const App = () => {
   const isValid = isValidToken(getToken());
 
-  const mainComponent = (
+  const MainComponent = (
     <BrowserRouter>
       <div className="App">
         <div className="Header">
@@ -36,7 +36,7 @@ const App = () => {
     </BrowserRouter>
   );
 
-  return isValid ? mainComponent : <RedirectComponent />;
+  return isValid ? MainComponent : <RedirectComponent />;
 };
 
 export default App;
