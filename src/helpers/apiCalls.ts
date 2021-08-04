@@ -16,8 +16,6 @@ const authHeader = {
   Authorization: idToken,
 };
 
-console.log(authHeader);
-
 export const checkScrapeValidation = (
   data: ValidationRequest
 ): Promise<AxiosResponse<ValidationResponse>> => {
