@@ -1,0 +1,20 @@
+@import "./theme";
+
+.redirect {
+  padding: 3rem;
+  color: $color-grey-7;
+
+  h1 {
+    font-size: 2.7rem;
+  }
+
+  h3 {
+    margin-top: 2rem;
+    font-size: 2rem;
+    margin-bottom: 8rem;
+  }
+
+  a {
+    font-size: 2rem;
+  }
+}
