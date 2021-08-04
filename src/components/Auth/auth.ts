@@ -11,8 +11,13 @@ interface Tokens {
 }
 
 export const getToken = (): Tokens => {
-  const accessToken = new URLSearchParams(window.location.hash).get("#access_token");
-  const idToken = new URLSearchParams(window.location.hash).get("id_token");
+  const extract = (id: string) => new URLSearchParams(window.location.hash).get(id);
+  let accessToken = extract("#access_token");
+  let idToken = extract("id_token");
+
+  if (!accessToken) accessToken = extract("access_token");
+  if (!idToken) idToken = extract("#id_token");
+
   return { accessToken, idToken };
 };
 
