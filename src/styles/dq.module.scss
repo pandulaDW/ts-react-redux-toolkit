@@ -18,7 +18,33 @@
   margin: 2rem 0 3rem 3rem;
 
   &__left {
-    width: 15%;
+    width: 23%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div:first-child {
+      width: 150px;
+    }
+
+    &-clearButton {
+      background-color: white;
+      font-size: 1.1rem;
+      color: $color-grey-6;
+      border: none;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+      padding: 5px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      svg {
+        color: $color-grey-6;
+        margin-right: 5px;
+        font-size: 1.5rem;
+      }
+    }
   }
 
   &__right {

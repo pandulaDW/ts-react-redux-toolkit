@@ -3,7 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import Select, { ValueType } from "react-select";
 import cx from "classnames";
 import { FilePicker } from "evergreen-ui";
-import { fetchData, setKfid, setView, clearAll } from "../../redux/dq";
+import { FcClearFilters } from "react-icons/fc";
+import {
+  fetchData,
+  setKfid,
+  setView,
+  clearAll,
+  clearAllTableFilters,
+} from "../../redux/dq";
 import Button from "../Common/Button";
 import { fileToBase64 } from "../../helpers/utils";
 import { RootState } from "../../redux/_store";
@@ -12,10 +19,16 @@ import styles from "../../styles/dq.module.scss";
 
 const DQHeader = () => {
   const dispatch = useDispatch();
-  const { kfids, loading, timestamp } = useSelector((state: RootState) => state.dq);
+  const { kfids, loading, timestamp, filterTableCols } = useSelector(
+    (state: RootState) => state.dq
+  );
 
   const [file, setFile] = useState<File | null>(null);
   const selectOptions = kfids.map((kfid) => ({ value: kfid, label: kfid }));
+
+  const showClearFilterButton = () => {
+    return Object.keys(filterTableCols).length > 0;
+  };
 
   const clickHandler = async () => {
     if (!file) return;
@@ -84,11 +97,21 @@ const DQHeader = () => {
     <div className={cx(styles.header, { blockElement: loading })}>
       <div className={styles.header__left}>
         <Select
+          style={{ width: "20px" }}
           options={selectOptions}
           isClearable
           isSearchable
           onChange={selectHandler}
         />
+        {showClearFilterButton() && (
+          <button
+            className={styles["header__left-clearButton"]}
+            onClick={() => dispatch(clearAllTableFilters())}
+          >
+            <span>Clear Filters</span>
+            <FcClearFilters />
+          </button>
+        )}
       </div>
       <div className={styles.header__right}>
         <Button text="Clear All" type="Jira" clickHandler={() => dispatch(clearAll())} />

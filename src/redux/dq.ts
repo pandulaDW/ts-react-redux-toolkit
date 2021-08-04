@@ -18,6 +18,7 @@ export const setView = createAction<DQView>("dq/setView");
 export const setKfid = createAction<string | undefined>("dq/setKfid");
 export const clearAll = createAction("dq/clearAll");
 export const setFilterTableCol = createAction<FilterTableCols>("dq/filterTableCols");
+export const clearAllTableFilters = createAction("dq/clearAllTableFilters");
 
 export const fetchData = createAsyncThunk("dq/fetchData", async (args: DQRequestBody) => {
   const response = await fetchDQData(args);
@@ -48,6 +49,9 @@ const dqReducer = createReducer(initialState, (builder) => {
       if (Object.values(action.payload)[0] === "")
         delete state.filterTableCols[Object.keys(action.payload)[0]];
       else state.filterTableCols = { ...state.filterTableCols, ...action.payload };
+    })
+    .addCase(clearAllTableFilters, (state) => {
+      state.filterTableCols = {};
     })
     .addCase(clearAll, (state) => {
       state = Object.assign(state, initialState);
