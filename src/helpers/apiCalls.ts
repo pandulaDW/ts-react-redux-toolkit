@@ -8,13 +8,12 @@ import {
 } from "../models/scrapeTypes";
 import { DQRequestBody, DQResponseBody, DQExcelResponse } from "../models/dqTypes";
 import { RequestParams, ResponseBody, ConcatInitResponse } from "../models/concatTypes";
-import { getToken } from "../components/Auth/auth";
 
 const address = process.env.REACT_APP_URL;
 
 // adding authorization token to every request
 axios.interceptors.request.use((config) => {
-  const { idToken } = getToken();
+  const idToken = localStorage.getItem("idToken");
   if (process.env.NODE_ENV === "production") {
     config.headers.Authorization = idToken;
   }

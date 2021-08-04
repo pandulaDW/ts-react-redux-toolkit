@@ -5,12 +5,12 @@ import ScrapeMain from "./components/Scrape/ScrapeMain";
 import DQMain from "./components/DQ/DQMain";
 import ConcatMain from "./components/Concat/ConcatMain";
 import Sidebar from "./components/Common/Sidebar";
-import { getToken, isValidToken } from "./components/Auth/auth";
+import { setTokens } from "./components/Auth/auth";
 import RedirectComponent from "./components/Auth/RedirectComponent";
 import routes from "./routes";
 
 const App = () => {
-  let isValid = isValidToken(getToken());
+  let isValid = setTokens();
   if (!isValid && process.env.NODE_ENV === "development") isValid = true;
 
   const MainComponent = (

@@ -10,7 +10,7 @@ interface Tokens {
   idToken: string | null;
 }
 
-export const getToken = (): Tokens => {
+const getToken = (): Tokens => {
   const extract = (id: string) => new URLSearchParams(window.location.hash).get(id);
   let accessToken = extract("#access_token");
   let idToken = extract("id_token");
@@ -21,7 +21,7 @@ export const getToken = (): Tokens => {
   return { accessToken, idToken };
 };
 
-export const isValidToken = ({ accessToken, idToken }: Tokens): Boolean => {
+const isValidToken = ({ accessToken, idToken }: Tokens): Boolean => {
   let decodedAccessToken: TokenBody | null;
 
   try {
@@ -51,4 +51,14 @@ export const isValidToken = ({ accessToken, idToken }: Tokens): Boolean => {
   }
 
   return false;
+};
+
+// sets the tokens in localStorage and returns if its valid
+export const setTokens = (): Boolean => {
+  const { accessToken, idToken } = getToken();
+
+  if (accessToken) localStorage.setItem("accessToken", accessToken);
+  if (idToken) localStorage.setItem("idToken", idToken);
+
+  return isValidToken({ accessToken, idToken });
 };
