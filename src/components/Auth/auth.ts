@@ -1,5 +1,10 @@
 import jwt_decode from "jwt-decode";
 
+export enum tokenNames {
+  ACCESS = "accessToken",
+  ID = "idToken",
+}
+
 interface TokenBody {
   username: string;
   token_use: string;
@@ -12,6 +17,13 @@ interface Tokens {
 }
 
 const getToken = (): Tokens => {
+  if (localStorage.getItem(tokenNames.ACCESS) && localStorage.getItem(tokenNames.ID)) {
+    return {
+      accessToken: localStorage.getItem(tokenNames.ACCESS),
+      idToken: localStorage.getItem(tokenNames.ID),
+    };
+  }
+
   const extract = (id: string) => new URLSearchParams(window.location.hash).get(id);
   let accessToken = extract("#access_token");
   let idToken = extract("id_token");
@@ -58,8 +70,8 @@ const isValidToken = ({ accessToken, idToken }: Tokens): Boolean => {
 export const setTokens = (): Boolean => {
   const { accessToken, idToken } = getToken();
 
-  if (accessToken) localStorage.setItem("accessToken", accessToken);
-  if (idToken) localStorage.setItem("idToken", idToken);
+  if (accessToken) localStorage.setItem(tokenNames.ACCESS, accessToken);
+  if (idToken) localStorage.setItem(tokenNames.ID, idToken);
 
   return isValidToken({ accessToken, idToken });
 };
