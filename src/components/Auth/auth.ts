@@ -1,6 +1,7 @@
 import jwt_decode from "jwt-decode";
 
 interface TokenBody {
+  username: string;
   token_use: string;
   "cognito:groups": string[];
 }
@@ -61,4 +62,20 @@ export const setTokens = (): Boolean => {
   if (idToken) localStorage.setItem("idToken", idToken);
 
   return isValidToken({ accessToken, idToken });
+};
+
+export const getUserName = (): string => {
+  const regex = /_(.*?)@/;
+  const { accessToken } = getToken();
+
+  if (accessToken) {
+    const { username } = jwt_decode<TokenBody>(accessToken);
+    const match = regex.exec(username);
+    if (match) {
+      if (match.length < 2) return username;
+      return match[1].split(".").join(" ");
+    }
+  }
+
+  return "";
 };
